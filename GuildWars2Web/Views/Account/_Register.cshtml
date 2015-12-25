@@ -1,0 +1,79 @@
+﻿@model GuildWars2Web.Models.RegisterViewModel
+
+@{ 
+    bool registered = Convert.ToBoolean(ViewBag.Registered);
+}
+
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <i class="fa fa-pencil"></i>
+    <span class="hidden-xs">Register</span>
+</a>
+<ul class="dropdown-menu user-header-top-menu">
+    <li class="user-header user-header-top-menu">
+        <div class="register-box register-box-top-menu">
+            <div class="register-box-body register-box-top-menu">
+                @using(Ajax.BeginForm("Register", "Account", new AjaxOptions() {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "register-container"
+                })) {
+                    <div class="form-group has-feedback">
+                        @Html.TextBoxFor(Model => Model.Username, new { @class = "form-control", placeholder = "Username" })
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+                    @* <div class="form-group has-feedback">
+                        <input type="email" class="form-control" placeholder="Email">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div> *@
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(Model => Model.Password, new { @class = "form-control", placeholder = "Password" })
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(Model => Model.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                    </div>
+                    if(registered) {
+                        <div class="confirm-message">
+                            <p>You have succesfully registered your account</p>
+                        </div>
+                    }
+                    else { 
+                        <div class="error-message">
+                            @if(Html.ValidationMessage("Username") != null) {
+                                <p>@Html.ValidationMessageFor(Model => Model.Username)</p>
+                            }
+                            @if(Html.ValidationMessage("Password") != null) {
+                                <p>@Html.ValidationMessageFor(Model => Model.Password)</p>
+                            }
+                            @if(Html.ValidationMessage("ConfirmPassword") != null) {
+                                <p>@Html.ValidationMessageFor(Model => Model.ConfirmPassword)</p>
+                            }
+                            @*@if(Html.ValidationMessage("AcceptTerms") != null) {
+                                <p>@Html.ValidationMessageFor(Model => Model.AcceptTerms)</p>
+                            }*@
+                        </div>
+                    }
+                    <div class="row">
+                        @* <div class="col-xs-8">
+                            <div class="checkbox icheck checkbox-align-left">
+                                <label>
+                                    @Html.CheckBoxFor(Model => Model.AcceptTerms) Agree to <a href="#">terms</a>
+                                </label>
+                            </div>
+                        </div> *@
+                        <!-- /.col -->
+                        <div class="col-xs-offset-7 dropdown-top-menu">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                }
+            </div>
+            <!-- /.form-box -->
+        </div>
+        <!-- /.register-box -->
+    </li>
+</ul>
+
+

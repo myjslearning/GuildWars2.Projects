@@ -1,0 +1,46 @@
+﻿<Page x:Class="GuildWars2.Windows.Pages.Crafting"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:Display="clr-namespace:GuildWars2.Model"
+      mc:Ignorable="d" d:DesignHeight="550" d:DesignWidth="800" Title="Crafting">
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
+    <Grid>
+        <TreeView x:Name="Crafting_Treeview" HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="800" Background="{x:Null}" FontFamily="Cronos MM" FontSize="18" BorderBrush="{x:Null}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type Display:DisplayTreeItemRecipe}" ItemsSource="{Binding Items}">
+                    <DockPanel HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Stretch" Width="737" Grid.Column="0" Grid.ColumnSpan="1" Background="{x:Null}" Grid.Row="0">
+                        <Image HorizontalAlignment="Left" Height="40" Margin="0" VerticalAlignment="Stretch" Width="40" Source="{Binding Item.Icon}" />
+                        <DockPanel Height="24.54" LastChildFill="False" VerticalAlignment="Top" Width="697" HorizontalAlignment="Left" DockPanel.Dock="Top">
+                            <TextBlock HorizontalAlignment="Left" Margin="5,0.29,0,0.29" TextWrapping="Wrap" VerticalAlignment="Stretch" Height="23.96" Width="424" Text="{Binding Item.Name}" Foreground="White" FontSize="21.333" DockPanel.Dock="Left" FontFamily="Cronos MM" TextTrimming="CharacterEllipsis" />
+                            <TextBlock HorizontalAlignment="Left" Margin="0,2.5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20.061" Width="5" Foreground="White" Text="|" FontSize="16" FontFamily="Cronos MM" Visibility="{Binding Path=ShowCrafingProgress, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock HorizontalAlignment="Left" Margin="1,0,0,3.5" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="18.061" Width="50.51" Foreground="#FFA6A6A6" Text="Crafted:" FontSize="16" FontFamily="Cronos MM" Visibility="{Binding Path=ShowCratingProgress, Converter={StaticResource BoolToVis}}" />
+                            <TextBox Height="19" TextWrapping="Wrap" VerticalAlignment="Top" Width="88.5" FontFamily="Cronos MM" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding AmountCrafted}" Foreground="#FFCFCFCF" Margin="0,2,0,0" Visibility="{Binding Path=ShowCratingProgress, Converter={StaticResource BoolToVis}}" />
+                        </DockPanel>
+                        <DockPanel Height="26.5" LastChildFill="False" VerticalAlignment="Stretch" Width="697" HorizontalAlignment="Left" DockPanel.Dock="Bottom">
+                            <TextBlock HorizontalAlignment="Left" Margin="5,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="18.061" Width="33.51" Foreground="#FFA6A6A6" Text="Type:" FontSize="16" FontFamily="Cronos MM" />
+                            <TextBlock HorizontalAlignment="Left" Margin="3,0,0,8" TextWrapping="Wrap" VerticalAlignment="Bottom" Height="18.061" Width="151" Foreground="#FFCFCFCF" Text="{Binding DisplayType}" FontSize="16" DockPanel.Dock="Left" FontFamily="Cronos MM" />
+                            <TextBlock HorizontalAlignment="Left" Margin="0,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20.061" Width="5" Foreground="White" Text="|" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" />
+                            <TextBlock HorizontalAlignment="Left" Margin="1,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18.061" Width="34.076" Foreground="#FFA6A6A6" Text="Level:" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" />
+                            <TextBlock HorizontalAlignment="Left" Margin="3,2,0,8" TextWrapping="Wrap" VerticalAlignment="Top" Height="18.061" Width="23.242" Text="{Binding Item.Level}" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" Foreground="{Binding LevelColor}" />
+                            <TextBlock HorizontalAlignment="Left" Margin="0,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20.061" Width="5" Foreground="White" Text="|" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" />
+                            <TextBlock HorizontalAlignment="Left" Margin="1,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18.061" Width="38.992" Foreground="#FFA6A6A6" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" Text="Rarity:" />
+                            <TextBlock HorizontalAlignment="Left" Margin="3,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18.061" Width="85.242" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" Text="{Binding Item.Rarity}" Foreground="{Binding RarityColor}" />
+                            <TextBlock HorizontalAlignment="Left" Margin="0,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20.061" Width="4.821" Foreground="White" Text="|" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" />
+                            <TextBlock HorizontalAlignment="Left" Margin="1,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23.46" Width="91.5" Foreground="#FFA6A6A6" FontSize="16" DockPanel.Dock="Left" FontFamily="Cronos MM" TextTrimming="CharacterEllipsis" Text="Total Amount:" />
+                            <TextBlock HorizontalAlignment="Left" Margin="3,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23.46" Width="22.5" Foreground="#FFCFCFCF" FontSize="16" DockPanel.Dock="Left" FontFamily="Cronos MM" TextTrimming="CharacterEllipsis" Text="{Binding TotalAmountNeeded}" />
+                            <TextBlock HorizontalAlignment="Left" Margin="0,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="20.061" Width="4.821" Foreground="White" Text="|" FontSize="16" FontFamily="Cronos MM" DockPanel.Dock="Left" Visibility="{Binding Path=ShowSingleAmount, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock HorizontalAlignment="Left" Margin="1,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23.46" Width="95.5" Foreground="#FFA6A6A6" FontSize="16" DockPanel.Dock="Left" FontFamily="Cronos MM" TextTrimming="CharacterEllipsis" Text="Single Amount:" Visibility="{Binding Path=ShowSingleAmount, Converter={StaticResource BoolToVis}}" />
+                            <TextBlock HorizontalAlignment="Left" Margin="3,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23.46" Width="50" Foreground="#FFCFCFCF" FontSize="16" DockPanel.Dock="Left" FontFamily="Cronos MM" TextTrimming="CharacterEllipsis" Text="{Binding SingleAmountNeeded}" Visibility="{Binding Path=ShowSingleAmount, Converter={StaticResource BoolToVis}}" />
+                            <Image Height="20.061" VerticalAlignment="Top" Width="29" Source="{Binding CraftedCompletedIcon}" Margin="0" Visibility="{Binding Path=ShowCratingProgress, Converter={StaticResource BoolToVis}}" />
+                        </DockPanel>
+                    </DockPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <ProgressBar x:Name="Crafting_Progressbar" Margin="556,478,0,48" IsIndeterminate="True" Background="{x:Null}" BorderBrush="#FF707070" Foreground="#FF959595" Visibility="Hidden" />
+    </Grid>
+</Page>

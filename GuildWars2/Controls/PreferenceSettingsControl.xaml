@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="GuildWars2.Controls.PreferenceSettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:local="clr-namespace:GuildWars2.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid>
+        <Controls:MetroProgressBar x:Name="PrefSettings_ProgressBar" Height="20" IsIndeterminate="True"/>
+        <DockPanel x:Name="Pref_Dockpanel" Visibility="Hidden">
+            <Grid DockPanel.Dock="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MinWidth="120" Width="5*" />
+                    <ColumnDefinition MinWidth="5" MaxWidth="20" />
+                    <ColumnDefinition Width="6*" MinWidth="220" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition MinHeight="3" MaxHeight="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition MinHeight="3" MaxHeight="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition MinHeight="3" MaxHeight="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition MinHeight="3" MaxHeight="3"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Save worldboss tracking" FontFamily="Cronos MM" HorizontalAlignment="Right" TextAlignment="Right" Foreground="White" VerticalAlignment="Center">
+                </TextBlock>
+                <CheckBox x:Name="SaveTracking_Checkbox" Grid.Row="0" Grid.Column="2" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Use custom notification" FontFamily="Cronos MM" HorizontalAlignment="Right" TextAlignment="Right" Foreground="White" VerticalAlignment="Center" />
+                <CheckBox x:Name="CustomNotify_Checkbox" Grid.Row="2" Grid.Column="2" />
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Custom notification filepath" FontFamily="Cronos MM" HorizontalAlignment="Right" TextAlignment="Right" Foreground="White" VerticalAlignment="Center" />
+                <DockPanel Grid.Row="4" Grid.Column="2">
+                    <Button DockPanel.Dock="Right" Content="..." Width="25" Height="25" Margin="3,0,0,0" FontSize="12" Click="NotifyPathButton_Click"/>
+                    <TextBox x:Name="CustomNotify_Textbox" DockPanel.Dock="Left" Text="" Height="25" IsReadOnly="True"/>
+                </DockPanel>
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Guild Wars application path" FontFamily="Cronos MM" HorizontalAlignment="Right" TextAlignment="Right" Foreground="White" VerticalAlignment="Center" />
+                <DockPanel Grid.Row="6" Grid.Column="2">
+                    <Button DockPanel.Dock="Right" Content="..." Width="25" Height="25" Margin="3,0,0,0" FontSize="12" Click="MainGameButton_Click"/>
+                    <TextBox x:Name="MainGame_Textbox" DockPanel.Dock="Left" Text="" Height="25" IsReadOnly="True"/>
+                </DockPanel>
+            </Grid>
+        <Button DockPanel.Dock="Bottom" Content="Update Changes" MaxHeight="60" MaxWidth="160" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="UpdateButton_Click"/>
+    </DockPanel>
+    </Grid>
+</UserControl>

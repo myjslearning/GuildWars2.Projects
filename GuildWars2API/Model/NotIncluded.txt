@@ -1,0 +1,8 @@
+﻿Not Included:
+- PvP
+- Tokeninfo
+- Detailed Specializations
+- Detailed Traits
+- Map Information
+- Misc.
+- GW1 API

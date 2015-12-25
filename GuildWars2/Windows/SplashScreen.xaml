@@ -1,0 +1,26 @@
+﻿<Controls:MetroWindow x:Class="GuildWars2.Windows.SplashScreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        xmlns:local="clr-namespace:GuildWars2.Windows"
+        Title="Guild Wars 2" Height="210" Width="500" WindowStyle="ToolWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" Source="/GuildWars2;component/Resources/Images/Other/Warning_quaggan_icon.png" Margin="3,0,0,10" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <DockPanel Grid.Column="1" Margin="5">
+            <TextBlock DockPanel.Dock="Top" Text="There is no internet connection found! This application is designed for use with an internet connection." FontFamily="Cronos MM" FontSize="18.667" Foreground="{DynamicResource FadeColor}" TextWrapping="Wrap" Margin="0,0,0,-1" TextAlignment="Center"/>
+            <TextBlock DockPanel.Dock="Top" Text="You can continu and use it, but alot of features will be unavailable" FontFamily="Cronos MM" FontSize="18.667" Foreground="{DynamicResource FadeColor}" TextWrapping="Wrap" TextAlignment="Center"/>
+            <DockPanel DockPanel.Dock="Bottom" Margin="40,0,40,5" Width="Auto">
+                <Button Content="Yes please!" HorizontalAlignment="Left" Width="95" Foreground="{DynamicResource FadeColor}" Click="ButtonYes_Click"/>
+                <Button Content="No, I'll wait" HorizontalAlignment="Right" Width="95" Foreground="{DynamicResource FadeColor}" Click="ButtonNo_Click"/>
+            </DockPanel>
+            <TextBlock DockPanel.Dock="Bottom" Text="Would you like to continue?" FontFamily="Cronos MM" FontSize="20" Foreground="#CCFFFFFF" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,4" TextDecorations="Underline"/>
+        </DockPanel>
+    </Grid>
+</Controls:MetroWindow>
