@@ -17,18 +17,11 @@ namespace GuildWars2API.Tools.Value
                     return _totalBuyValue;
 
                 ItemPrice price = new ItemPrice();
-                Bank.Where(i => i.ItemListing != null)
-                    .ToList()
-                    .ForEach(i => {
-                        price.Add(i.ItemListing.Buys.UnitPrice * i.ItemStack.Count);
-                    });
-                Material.Where(i => i.ItemListing != null)
-                    .ToList()
-                    .ForEach(i => {
-                        price.Add(i.ItemListing.Buys.UnitPrice * i.ItemStack.Count);
-                    });
+                Bank.ForEach(i => { price.Add(i.BuyValue); });
+                Material.ForEach(i => { price.Add(i.BuyValue); });
                 Characters.ForEach(c => { price.Add(c.TotalBuyValue); });
                 price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
+
                 _totalBuyValue = price;
                 return _totalBuyValue;
             }
@@ -40,16 +33,8 @@ namespace GuildWars2API.Tools.Value
                     return _totalSellValue;
 
                 ItemPrice price = new ItemPrice();
-                Bank.Where(i => i.ItemListing != null)
-                    .ToList()
-                    .ForEach(i => {
-                        price.Add(i.ItemListing.Sells.UnitPrice * i.ItemStack.Count);
-                    });
-                Material.Where(i => i.ItemListing != null)
-                    .ToList()
-                    .ForEach(i => {
-                        price.Add(i.ItemListing.Sells.UnitPrice * i.ItemStack.Count);
-                    });
+                Bank.ForEach(i => { price.Add(i.SellValue); });
+                Material.ForEach(i => { price.Add(i.SellValue); });
                 Characters.ForEach(c => { price.Add(c.TotalSellValue); });
                 price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
                 _totalSellValue = price;

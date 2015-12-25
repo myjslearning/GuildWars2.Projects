@@ -27,10 +27,10 @@ namespace GuildWars2.Model
                     lock (_lockObj) {
                         if(_item == null) {
                             if(ItemID == 0 && Recipes.Count >= CurrentRecipeIndex + 1) {
-                                _item = GW2API.GetItem(Recipes[CurrentRecipeIndex].OutputItemID);
+                                _item = ItemAPI.GetItem(Recipes[CurrentRecipeIndex].OutputItemID);
                             }
                             else {
-                                _item = GW2API.GetItem(ItemID);
+                                _item = ItemAPI.GetItem(ItemID);
                             }
                         }
                     }
@@ -122,7 +122,7 @@ namespace GuildWars2.Model
         private void CreateChildren() {
             if(Recipes.Count >= CurrentRecipeIndex + 1) {
                 foreach(Ingredient ingredient in Recipes[CurrentRecipeIndex].Ingredients) {
-                    List<Recipe> results = GW2API.AvailableRecipes(ingredient.ID);
+                    List<Recipe> results = RecipeAPI.AvailableRecipes(ingredient.ID);
                     if(results != null && results.Count > 0) {
                         this.Items.Add(new DisplayTreeItemRecipe(results, ingredient.Count, ingredient.Count * this.TotalAmountNeeded));
                     }

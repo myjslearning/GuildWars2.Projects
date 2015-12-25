@@ -19,7 +19,7 @@ namespace GuildWars2.Windows.Pages
             treeviewItemSource = new TreeViewObservableCollection();
             Crafting_Treeview.ItemsSource = treeviewItemSource;
 
-            List<Item> items = GW2API.SearchItem("Gift of Spiders");
+            List<Item> items = ItemAPI.SearchItem("Gift of Spiders");
             StartCrafting(items.Find(a => a.Name.Contains("Recipe")));
         }
 

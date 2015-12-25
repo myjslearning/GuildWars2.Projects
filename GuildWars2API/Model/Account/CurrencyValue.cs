@@ -2,7 +2,7 @@
 
 namespace GuildWars2API.Model.Account
 {
-    internal class WalletCurrency
+    public class WalletCurrency
     {
         [JsonProperty("id")]
         public int ID { get; set; }

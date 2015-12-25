@@ -25,10 +25,10 @@ namespace GuildWars2.Collections
 
             DisplayTreeItemRecipe recipeToAdd;
             if(item.Details != null && item.Details.RecipeID != 0) {
-                recipeToAdd = new DisplayTreeItemRecipe(GW2API.GetRecipe(item.Details.RecipeID), 1, 1);
+                recipeToAdd = new DisplayTreeItemRecipe(RecipeAPI.GetRecipe(item.Details.RecipeID), 1, 1);
             }
             else {
-                recipeToAdd = new DisplayTreeItemRecipe(GW2API.AvailableRecipes(item.ID), 1, 1);
+                recipeToAdd = new DisplayTreeItemRecipe(RecipeAPI.AvailableRecipes(item.ID), 1, 1);
             }
 
             if(recipeToAdd != null) {

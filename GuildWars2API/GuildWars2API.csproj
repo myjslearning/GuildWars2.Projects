@@ -45,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GW2API.cs" />
+    <Compile Include="Endpoints\AccountAPI.cs" />
+    <Compile Include="Endpoints\RecipeAPI.cs" />
+    <Compile Include="Endpoints\ItemAPI.cs" />
     <Compile Include="Model\Account\WalletEntry.cs" />
     <Compile Include="Tools\Value\AccountValue.cs" />
     <Compile Include="Tools\Value\CharacterValue.cs" />
-    <Compile Include="Tools\Value\ValueManager.cs" />
+    <Compile Include="Endpoints\ValueAPI.cs" />
     <Compile Include="Model\Account\Account.cs" />
     <Compile Include="Model\Account\CurrencyInfo.cs" />
     <Compile Include="Model\Character\Bag.cs" />

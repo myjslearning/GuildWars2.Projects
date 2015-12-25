@@ -3,20 +3,21 @@ using GuildWars2API.Model.Character;
 using GuildWars2API.Model.Item;
 using GuildWars2API.Model.Items;
 using GuildWars2API.Model.Market;
+using GuildWars2API.Tools.Value;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GuildWars2API.Tools.Value
+namespace GuildWars2API
 {
-    internal static class ValueManager
+    public static class ValueAPI
     {
-        public static AccountValue GetAccountValue(string APIKey) {        //TODO Implement vendor price
+        public static AccountValue GetAccountValue(string APIKey) {        
             HashSet<int> itemIDs = new HashSet<int>();
-            List<Character> characters = GW2API.GetCharacters(APIKey);
+            List<Character> characters = AccountAPI.GetCharacters(APIKey);
 
             //Gather all Items and ID's, and add all ID's to the main collection
-            List<ItemStack> bank = GW2API.GetBank(APIKey);
-            List<ItemStack> materialStorage = GW2API.GetMaterialStorage(APIKey);
+            List<ItemStack> bank = AccountAPI.GetBank(APIKey);
+            List<ItemStack> materialStorage = AccountAPI.GetMaterialStorage(APIKey);
 
             Dictionary<Character, Dictionary<string, List<ItemStack>>> charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
             foreach(Character character in characters) {
@@ -32,27 +33,30 @@ namespace GuildWars2API.Tools.Value
             itemIDs.UnionWith(GetItemIDs(bank));
             itemIDs.UnionWith(GetItemIDs(materialStorage, true));
 
-            //Request ItemListing info for all gathered ID's
-            List<ItemListing> itemListings = GW2API.GetPrice(itemIDs);
+            //Request ItemListing and ItemObject info for all gathered ID's
+            List<Item> items = ItemAPI.GetItem(itemIDs);
+            List<ItemListing> itemListings = ItemAPI.GetPrice(itemIDs);
 
             //Parse them in AccountValue object
             AccountValue account = new AccountValue();
-            account.Bank = GetItemValues(bank, itemListings);
-            account.Material = GetItemValues(materialStorage, itemListings);
+            account.Bank = GetItemValues(bank, itemListings, items);
+            account.Material = GetItemValues(materialStorage, itemListings, items);
             account.Wallet = GetWallet(APIKey);
             foreach(KeyValuePair<Character, Dictionary<string, List<ItemStack>>> character in charactersInventory) {
                 account.Characters.Add(new CharacterValue() {
                     Name = character.Key.Name,
-                    Inventory = GetItemValues(character.Value["Inventory"], itemListings),
-                    Equipment = GetItemValues(character.Value["Equipment"], itemListings),
+                    Inventory = GetItemValues(character.Value["Inventory"], itemListings, items),
+                    Equipment = GetItemValues(character.Value["Equipment"], itemListings, items),
                 });
             }
             return account;
         }
 
+        #region Private Methods
+
         private static List<WalletEntry> GetWallet(string APIKey) {
-            List<WalletCurrency> currenciesValue = GW2API.GetWallet(APIKey);
-            List<WalletCurrencyInfo> currencies = GW2API.GetCurrencyInfo();
+            List<WalletCurrency> currenciesValue = AccountAPI.GetWallet(APIKey);
+            List<WalletCurrencyInfo> currencies = AccountAPI.GetCurrencyInfo();
 
             List<WalletEntry> wallet = new List<WalletEntry>();
             foreach(WalletCurrencyInfo currency in currencies) {
@@ -82,12 +86,6 @@ namespace GuildWars2API.Tools.Value
             return items;
         }
 
-        /// <summary>
-        /// Vendor value if account/soul bound.
-        /// If it's bind on use, it's considered NOT bound.
-        /// </summary>
-        /// <param name="equiment"></param>
-        /// <returns></returns>
         private static List<ItemStack> GetEquiment(List<Equipment> equiment) {
             List<ItemStack> items = new List<ItemStack>();
             foreach(Equipment item in equiment) {
@@ -114,6 +112,59 @@ namespace GuildWars2API.Tools.Value
             return itemIDs;
         }
 
+        private static List<ItemValue> GetItemValues(List<ItemStack> itemStacks, List<ItemListing> itemListings, List<Item> items) {
+            List<ItemValue> itemValues = new List<ItemValue>();
+            foreach(ItemStack itemStack in itemStacks) {
+                if(itemStack == null)
+                    continue;
+
+                //Retrieve item bound status and vendor price
+                bool isBound = false;
+                ItemPrice vendorPrice = null;
+
+                if(items.Any(i => i.ID == itemStack.ID)) {           
+                    Item item = items.Single(i => i.ID == itemStack.ID);
+                    if(IsBound(item)) {
+                        isBound = true;
+                    }
+                    if(items.Any(i => i.ID == item.ID)) {
+                        if(IsSellable(item)) {
+                            vendorPrice = new ItemPrice(items.Single(i => i.ID == item.ID).VendorValue);
+                        }
+                    }
+                }
+
+                //Retrieve itemListing
+                ItemListing itemListing = null;
+
+                if(itemListings.Any(i => i.ID == itemStack.ID)) {
+                    itemListing = itemListings.Single(i => i.ID == itemStack.ID);
+                }
+
+                itemValues.Add(new ItemValue() {
+                    IsBound = isBound,
+                    ItemStack = itemStack,
+                    VendorPrice = vendorPrice,
+                    ItemListing = itemListing
+                });
+            }
+            return itemValues;
+        }
+        
+        private static bool IsBound(Item item) {
+            if(item.Flags.Contains("AccountBound") || item.Flags.Contains("SoulbindOnAcquire")) {
+                return true;
+            }
+            return false;
+        }
+
+        private static bool IsSellable(Item item) {
+            if(item.Flags.Contains("NoSell")) {
+                return false;
+            }
+            return true;
+        }
+
         private static List<ItemValue> GetItemValues(List<ItemStack> items, List<ItemListing> itemListings) {
             List<ItemValue> itemValues = new List<ItemValue>();
             foreach(ItemStack item in items) {
@@ -132,5 +183,7 @@ namespace GuildWars2API.Tools.Value
             }
             return itemValues;
         }
+
+        #endregion Private Methods
     }
 }

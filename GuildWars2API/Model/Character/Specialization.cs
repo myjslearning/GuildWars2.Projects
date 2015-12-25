@@ -9,6 +9,6 @@ namespace GuildWars2API.Model.Character
         public int ID { get; set; }
 
         [JsonProperty("traits")]
-        public List<int> Traits { get; set; }
+        public List<string> Traits { get; set; }
     }
 }

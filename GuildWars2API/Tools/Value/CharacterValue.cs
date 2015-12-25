@@ -1,6 +1,5 @@
 ﻿using GuildWars2API.Model.Market;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GuildWars2API.Tools.Value
 {
@@ -15,16 +14,8 @@ namespace GuildWars2API.Tools.Value
                     return _totalBuyValue;
 
                 ItemPrice price = new ItemPrice();
-                Equipment.Where(i => i.ItemListing != null)
-                    .ToList()
-                    .ForEach(i => {
-                        price.Add(i.ItemListing.Buys.UnitPrice * i.ItemStack.Count);
-                    });
-                Inventory
-                    .Where(i => i.ItemListing != null)
-                    .ToList().ForEach(i => {
-                        price.Add(i.ItemListing.Buys.UnitPrice * i.ItemStack.Count);
-                    });
+                Equipment.ForEach(i => { price.Add(i.BuyValue); });
+                Inventory.ForEach(i => { price.Add(i.BuyValue); });
                 _totalBuyValue = price;
                 return price;
             }
@@ -36,15 +27,8 @@ namespace GuildWars2API.Tools.Value
                     return _totalSellValue;
 
                 ItemPrice price = new ItemPrice();
-                Equipment.Where(i => i.ItemListing != null)
-                    .ToList()
-                    .ForEach(i => {
-                        price.Add(i.ItemListing.Sells.UnitPrice * i.ItemStack.Count);
-                    });
-                Inventory.Where(i => i.ItemListing != null)
-                    .ToList().ForEach(i => {
-                        price.Add(i.ItemListing.Sells.UnitPrice * i.ItemStack.Count);
-                    });
+                Equipment.ForEach(i => { price.Add(i.SellValue); });
+                Inventory.ForEach(i => { price.Add(i.SellValue); });
                 _totalSellValue = price;
                 return price;
             }
