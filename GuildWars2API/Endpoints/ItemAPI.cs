@@ -1,5 +1,5 @@
-﻿using GuildWars2API.Model.Items;
-using GuildWars2API.Model.Market;
+﻿using GuildWars2API.Model.Commerce;
+using GuildWars2API.Model.Items;
 using GuildWars2API.Network;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace GuildWars2API
 
         public static List<Item> GetItem(HashSet<int> itemIDs) => NetworkManager.GetLargeRequest<Item>(new List<int>(itemIDs), "items");
 
-        public static ItemListing GetPrice(int itemID) {
+        public static ItemListing GetPriceListing(int itemID) {
             string response = NetworkManager.UnauthorizedRequest(URLBuilder.GetItemListing(itemID));
             if(response.Length > 0) {
                 return JsonConvert.DeserializeObject<ItemListing>(response);
@@ -39,7 +39,6 @@ namespace GuildWars2API
             return null;
         }
 
-        public static List<ItemListing> GetPrice(HashSet<int> itemIDs) => NetworkManager.GetLargeRequest<ItemListing>(new List<int>(itemIDs), "commerce/prices");
-        
+        public static List<ItemListing> GetPriceListing(HashSet<int> itemIDs) => NetworkManager.GetLargeRequest<ItemListing>(new List<int>(itemIDs), "commerce/prices");
     }
 }

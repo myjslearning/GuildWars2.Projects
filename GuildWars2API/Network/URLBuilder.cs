@@ -15,8 +15,9 @@ namespace GuildWars2API.Network
         private const string SEARCH = "search";
         private const string ACCOUNT = "account";
 
-        private const string PRICES = "prices";         //Returns highest TP listings
-        private const string LISTINGS = "listings";     //Returns all TP listings
+        private const string PRICES = "prices";                 //Returns highest TP listings
+        private const string LISTINGS = "listings";             //Returns all TP listings
+        private const string TRANSACTIONS = "transactions";     //Returns all current account TP listings
 
         private const string RECIPES = "recipes";
         private const string COMMERCE = "commerce";
@@ -50,12 +51,21 @@ namespace GuildWars2API.Network
 
         #endregion Recipes
 
+        #region Tradepost
+
         public static string GetItemListing(int itemID) => string.Format("{0}/{1}/{2}/{3}", ROOT_GW2, COMMERCE, PRICES, itemID);
 
         public static string GetItemListing(List<int> itemIDs) {
             string baseURL = string.Format("{0}/{1}/{2}?ids=", ROOT_GW2, COMMERCE, PRICES);
             return AddIds(baseURL, itemIDs);
         }
+
+        public static string GetCurrentSellListings() => string.Format("{0}/{1}/{2}/{3}/{4}", ROOT_GW2, COMMERCE, TRANSACTIONS, "current", "sells");
+        public static string GetCurrentBuyListings() => string.Format("{0}/{1}/{2}/{3}/{4}", ROOT_GW2, COMMERCE, TRANSACTIONS, "current", "buys");
+
+        #endregion Tradepost
+
+        #region Account
 
         public static string GetCharacters() => string.Format("{0}/{1}?page=0", ROOT_GW2, CHARACTERS);
 
@@ -66,6 +76,8 @@ namespace GuildWars2API.Network
         public static string GetWallet() => string.Format("{0}/{1}/{2}", ROOT_GW2, ACCOUNT, WALLET);
 
         public static string GetCurrencies() => string.Format("{0}/{1}?page=0", ROOT_GW2, CURRENCIES);
+
+        #endregion Account
 
         public static string GetAssetFromID(string assetID) => string.Format("{0}/{1}?ids={2}", ROOT_GW2, FILES, Encode(assetID));
 

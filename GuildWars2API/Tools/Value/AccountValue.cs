@@ -1,5 +1,5 @@
 ﻿using GuildWars2API.Model.Account;
-using GuildWars2API.Model.Market;
+using GuildWars2API.Model.Commerce;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,6 +20,7 @@ namespace GuildWars2API.Tools.Value
                 Bank.ForEach(i => { price.Add(i.BuyValue); });
                 Material.ForEach(i => { price.Add(i.BuyValue); });
                 Characters.ForEach(c => { price.Add(c.TotalBuyValue); });
+                SellListings.ForEach(s => { price.Add(s.Price * s.Quantity); });
                 price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
 
                 _totalBuyValue = price;
@@ -36,6 +37,7 @@ namespace GuildWars2API.Tools.Value
                 Bank.ForEach(i => { price.Add(i.SellValue); });
                 Material.ForEach(i => { price.Add(i.SellValue); });
                 Characters.ForEach(c => { price.Add(c.TotalSellValue); });
+                SellListings.ForEach(s => { price.Add(s.Price * s.Quantity); });
                 price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
                 _totalSellValue = price;
                 return _totalSellValue;
@@ -56,5 +58,7 @@ namespace GuildWars2API.Tools.Value
                 return _characters;
             }
         }
+
+        public List<Transaction> SellListings { get; set; }
     }
 }

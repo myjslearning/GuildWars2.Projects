@@ -1,8 +1,8 @@
 ﻿using GuildWars2API.Model.Account;
 using GuildWars2API.Model.Character;
+using GuildWars2API.Model.Commerce;
 using GuildWars2API.Model.Item;
 using GuildWars2API.Model.Items;
-using GuildWars2API.Model.Market;
 using GuildWars2API.Network;
 using GuildWars2API.Tools.Value;
 using Newtonsoft.Json;
@@ -15,11 +15,11 @@ namespace GuildWars2API
     {
         public static AccountValue GetAccountValue(string APIKey) {
             HashSet<int> itemIDs = new HashSet<int>();
-            List<Character> characters = AccountAPI.GetCharacters(APIKey);
+            List<Character> characters = GetCharacters(APIKey);
 
             //Gather all Items and ID's, and add all ID's to the main collection
-            List<ItemStack> bank = AccountAPI.GetBank(APIKey);
-            List<ItemStack> materialStorage = AccountAPI.GetMaterialStorage(APIKey);
+            List<ItemStack> bank = GetBank(APIKey);
+            List<ItemStack> materialStorage = GetMaterialStorage(APIKey);
 
             Dictionary<Character, Dictionary<string, List<ItemStack>>> charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
             foreach(Character character in characters) {
@@ -44,6 +44,7 @@ namespace GuildWars2API
             account.Bank = GetItemValues(bank, itemListings, items);
             account.Material = GetItemValues(materialStorage, itemListings, items);
             account.Wallet = GetWalletEntries(APIKey);
+            account.SellListings = GetCurrentSellListing(APIKey);
             foreach(KeyValuePair<Character, Dictionary<string, List<ItemStack>>> character in charactersInventory) {
                 account.Characters.Add(new CharacterValue() {
                     Name = character.Key.Name,
@@ -93,7 +94,25 @@ namespace GuildWars2API
             }
             return null;
         }
-        
+
+
+
+        public static List<Transaction> GetCurrentSellListing(string APIKey) {
+            string response = NetworkManager.AuthorizedRequest(URLBuilder.GetCurrentSellListings(), APIKey);
+            if(response.Length > 0) {
+                return JsonConvert.DeserializeObject<List<Transaction>>(response);
+            }
+            return null;
+        }
+
+        public static List<Transaction> GetCurrentBuyListing(string APIKey) {
+            string response = NetworkManager.AuthorizedRequest(URLBuilder.GetCurrentBuyListings(), APIKey);
+            if(response.Length > 0) {
+                return JsonConvert.DeserializeObject<List<Transaction>>(response);
+            }
+            return null;
+        }
+
         #region Private Methods
 
         private static List<WalletEntry> GetWalletEntries(string APIKey) {

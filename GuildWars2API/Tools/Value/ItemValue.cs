@@ -1,5 +1,5 @@
-﻿using GuildWars2API.Model.Items;
-using GuildWars2API.Model.Market;
+﻿using GuildWars2API.Model.Commerce;
+using GuildWars2API.Model.Items;
 
 namespace GuildWars2API.Tools.Value
 {
@@ -17,6 +17,9 @@ namespace GuildWars2API.Tools.Value
             get
             {
                 if(IsBound) {
+                    if(VendorPrice == null) {
+                        return new ItemPrice();
+                    }
                     return VendorPrice;
                 }
                 return new ItemPrice(ItemListing.Buys.UnitPrice * ItemStack.Count);

@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace GuildWars2API.Model.Market
+namespace GuildWars2API.Model.Commerce
 {
-    internal class Transaction
+    public class Transaction
     {
         [JsonProperty("id")]
         public int ID { get; set; }

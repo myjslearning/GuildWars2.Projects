@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GuildWars2API.Model.Market
+namespace GuildWars2API.Model.Commerce
 {
     public class ItemListing
     {
