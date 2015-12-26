@@ -80,10 +80,10 @@
     <Compile Include="Model\DisplayWorldBoss.cs" />
     <Compile Include="Model\DisplayTreeItemRecipe.cs" />
     <Compile Include="Other\ColorManager.cs" />
+    <Compile Include="Other\DBParser.cs" />
     <Compile Include="Other\ErrorHandler.cs" />
     <Compile Include="Other\Notification\NotifyEventArgs.cs" />
     <Compile Include="Other\Notification\NotifyHandler.cs" />
-    <Compile Include="Other\DBParser.cs" />
     <Compile Include="Other\SettingsManager.cs" />
     <Compile Include="Other\Sound\SoundDictionary.cs" />
     <Compile Include="Other\Sound\SoundHandler.cs" />
@@ -164,6 +164,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

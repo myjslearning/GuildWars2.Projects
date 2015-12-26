@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="ArrayOfDisplayWorldBoss">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element maxOccurs="unbounded" name="DisplayWorldBoss">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Name" type="xsd:string" />
+              <xsd:element name="Description" type="xsd:string" />
+              <xsd:element name="Waypoint" type="xsd:string" />
+              <xsd:element name="EventID" type="xsd:string" />
+              <xsd:element name="Level" type="xsd:unsignedByte" />
+              <xsd:element name="IsDone" type="xsd:boolean" />
+              <xsd:element name="Times">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element maxOccurs="unbounded" name="TimeSpanS" type="xsd:time" />
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+              <xsd:element name="DragoniteLootMinimum" type="xsd:unsignedByte" />
+              <xsd:element name="DragoniteLootMaximum" type="xsd:unsignedByte" />
+              <xsd:element name="ItemLoot" type="xsd:unsignedByte" />
+              <xsd:element name="BoxesLoot" type="xsd:unsignedByte" />
+              <xsd:element name="IsTracking" type="xsd:boolean" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>

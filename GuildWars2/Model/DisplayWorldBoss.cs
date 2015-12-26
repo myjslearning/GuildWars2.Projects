@@ -1,5 +1,7 @@
 ﻿using GuildWars2.Other;
 using GuildWars2API.Model.Event;
+using GuildWars2DB;
+using GuildWars2DB.Model;
 using System;
 using System.Linq;
 
@@ -18,10 +20,10 @@ namespace GuildWars2.Model
                     NotifyPropertyChanged("IsTrackingIcon");
                 }
                 else if(e.PropertyName.Equals("IsDoneIcon")) {
-                    //Update IsDone
+                    GW2DB.Update(GW2Entities.WorldBoss, "IsDone", IsDone, "EventID", EventID);
                 }
                 else if(e.PropertyName.Equals("IsTrackingIcon")) {
-                    //Update IsTracking
+                    GW2DB.Update(GW2Entities.WorldBoss, "IsTracking", IsTracking, "EventID", EventID);
                 }
             };
         }

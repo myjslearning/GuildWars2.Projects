@@ -1,4 +1,7 @@
 ﻿using GuildWars2.Model;
+using GuildWars2.Other;
+using GuildWars2DB;
+using GuildWars2DB.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +14,7 @@ namespace GuildWars2.Collections
         private static TimeSpan DAILY_RESET = new TimeSpan(2, 0, 0);    //2:00am
 
         public WorldBossObservableCollection() {
-            AddRange(null); //Retrieve WorldBosses
+            AddRange(DBParser.ParseWorldBosses(GW2DB.GetTable(GW2Entities.WorldBoss), GW2DB.GetTable(GW2Entities.WorldBossTime)));
 
             Tick();
 
