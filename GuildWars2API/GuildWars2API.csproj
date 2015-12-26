@@ -51,7 +51,6 @@
     <Compile Include="Model\Account\WalletEntry.cs" />
     <Compile Include="Tools\Value\AccountValue.cs" />
     <Compile Include="Tools\Value\CharacterValue.cs" />
-    <Compile Include="Endpoints\ValueAPI.cs" />
     <Compile Include="Model\Account\Account.cs" />
     <Compile Include="Model\Account\CurrencyInfo.cs" />
     <Compile Include="Model\Character\Bag.cs" />
