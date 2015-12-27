@@ -44,7 +44,7 @@ namespace GuildWars2Web.Classes
         public static Profile GetProfile(HttpResponse context) {
             string[] userData = GetAuthCookie(context).Split(';');
             if(userData?.Length >= 2) {
-                //TODO Retrieve from DB
+                //TODO Get from DB
                 return new Profile() { ID = Convert.ToInt32(userData[0]), Username = "Roytazz", AuthRole = ConvertRole(userData[1]) };
             }
             return null;

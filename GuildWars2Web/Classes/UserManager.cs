@@ -8,7 +8,7 @@
         }
 
         public static void RegisterUser(string username, string password) {
-            //TODO
+            //TODO Create in DB
         }
     }
 }
