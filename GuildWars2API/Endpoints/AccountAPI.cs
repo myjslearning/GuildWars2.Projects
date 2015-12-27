@@ -6,6 +6,7 @@ using GuildWars2API.Model.Items;
 using GuildWars2API.Model.Value;
 using GuildWars2API.Network;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,28 +22,28 @@ namespace GuildWars2API
         /// </summary>
         /// <param name="APIKey"></param>
         /// <returns></returns>
-        public static AccountValue GetAccountValue(string APIKey) => GetAccountValue(APIKey, new List<ItemListing>(), new List<Item>());
+        public static AccountValue GetAccountValue(string APIKey) => GetAccountValue(APIKey, new List<Item>());
 
         /// <summary>
-        /// Calculates Account Value. Uses known ItemListings and Items to calculate more quickly.
+        /// Calculates Account Value. Uses known Items to reduce amount of calls.
         /// Lighter API Call(Depends on the amount of known Itemlistings and Items).
         /// </summary>
         /// <param name="APIKey"></param>
         /// <param name="knownItemListings"></param>
         /// <param name="knownItems"></param>
         /// <returns></returns>
-        public static AccountValue GetAccountValue(string APIKey, List<ItemListing> knownItemListings, List<Item> knownItems) {
+        public static AccountValue GetAccountValue(string APIKey, List<Item> knownItems) {
             AccountInventory accountInv = GetAccountInventory(APIKey);  
             
             //Retrive all IDs that need to be called from the Official GWAPI    
             HashSet<int> itemIDs = GetAccountIDs(APIKey, accountInv);
-            itemIDs.ExceptWith(GetKnownItemIDs(knownItemListings, knownItems));   //Redesign GetKnownItemIDs method
-
-            //Combine known and newly found Items and ItemListings
-            List<Item> items = ItemAPI.GetItem(itemIDs);
+                                                                                                        Console.WriteLine("Count = " + itemIDs.Count);
+            //Determines what items are already known and are removed from the request
+            HashSet<int> unknownItemIDs = new HashSet<int>(itemIDs.Except(GetIDs(knownItems)).ToList());
+            List<Item> items = ItemAPI.GetItem(unknownItemIDs);
             items.AddRange(knownItems);
+                                                                                                        Console.WriteLine("Count = " + itemIDs.Count);
             List<ItemListing> itemListings = ItemAPI.GetPriceListing(itemIDs);
-            itemListings.AddRange(knownItemListings);
 
             //Parse it into object
             AccountValue account = new AccountValue();
@@ -234,16 +235,6 @@ namespace GuildWars2API
             return itemIDs;
         }
         
-        private static HashSet<int> GetIDs(List<ItemListing> itemListings) {
-            HashSet<int> itemIDs = new HashSet<int>();
-            foreach(ItemListing itemListing in itemListings) {
-                if(itemListing != null) {
-                    itemIDs.Add(itemListing.ID);
-                }
-            }
-            return itemIDs;
-        }
-        
         private static bool IsBound(Item item) {
             if(item.Flags.Contains("AccountBound") || item.Flags.Contains("SoulbindOnAcquire")) {
                 return true;
@@ -270,13 +261,6 @@ namespace GuildWars2API
             itemIDs.UnionWith(GetIDs(accountInv.MaterialStorage));
 
             return itemIDs;
-        }
-
-        private static HashSet<int> GetKnownItemIDs(List<ItemListing> knownItemListings, List<Item> knownItems) {
-            HashSet<int> knownItemListingsIDs = GetIDs(knownItemListings);
-            HashSet<int> knownItemsIDs = GetIDs(knownItems);
-            knownItemListingsIDs.IntersectWith(knownItemsIDs);
-            return knownItemListingsIDs;
         }
 
         #endregion Private Methods
