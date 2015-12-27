@@ -8,22 +8,22 @@ namespace GuildWars2API.Network
         private const string ROOT_GW2 = "https://api.guildwars2.com/v2";
         private const string ROOT_GW2TNO = "http://www.gw2shinies.com/api/json/idbyname";
 
-        private const string BANK = "bank";
+        //Second Endpoints
         private const string FILES = "files";
         private const string ITEMS = "items";
-        private const string WALLET = "wallet";
-        private const string SEARCH = "search";
         private const string ACCOUNT = "account";
-
-        private const string PRICES = "prices";                 //Returns highest TP listings
-        private const string LISTINGS = "listings";             //Returns all TP listings
-        private const string TRANSACTIONS = "transactions";     //Returns all current account TP listings
-
-        private const string RECIPES = "recipes";
         private const string COMMERCE = "commerce";
-        private const string MATERIALS = "materials";
         private const string CHARACTERS = "characters";
         private const string CURRENCIES = "currencies";
+
+        //Third Endpoints
+        private const string BANK = "bank";
+        private const string WALLET = "wallet";
+        private const string SEARCH = "search";                 //Used for searching recipes
+        private const string PRICES = "prices";                 //Returns highest TP listings
+        private const string RECIPES = "recipes";
+        private const string MATERIALS = "materials";
+        private const string TRANSACTIONS = "transactions";     //Returns all current account TP listings
 
         #region Items
 
