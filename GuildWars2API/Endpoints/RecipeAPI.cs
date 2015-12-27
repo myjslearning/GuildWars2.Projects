@@ -7,7 +7,7 @@ namespace GuildWars2API
 {
     public static class RecipeAPI
     {
-        public static List<Recipe> AvailableRecipes(int itemID) {
+        public static List<Recipe> RecipesForItem(int itemID) {
             string response = NetworkManager.UnauthorizedRequest(URLBuilder.GetRecipesByItemID(itemID));
             if(response.Length > 0) {
                 List<int> recipeIDs = JsonConvert.DeserializeObject<List<int>>(response);

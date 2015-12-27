@@ -122,7 +122,7 @@ namespace GuildWars2.Model
         private void CreateChildren() {
             if(Recipes.Count >= CurrentRecipeIndex + 1) {
                 foreach(Ingredient ingredient in Recipes[CurrentRecipeIndex].Ingredients) {
-                    List<Recipe> results = RecipeAPI.AvailableRecipes(ingredient.ID);
+                    List<Recipe> results = RecipeAPI.RecipesForItem(ingredient.ID);
                     if(results != null && results.Count > 0) {
                         this.Items.Add(new DisplayTreeItemRecipe(results, ingredient.Count, ingredient.Count * this.TotalAmountNeeded));
                     }
