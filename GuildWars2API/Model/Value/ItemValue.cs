@@ -1,7 +1,7 @@
 ﻿using GuildWars2API.Model.Commerce;
 using GuildWars2API.Model.Items;
 
-namespace GuildWars2API.Tools.Value
+namespace GuildWars2API.Model.Value
 {
     public class ItemValue
     {

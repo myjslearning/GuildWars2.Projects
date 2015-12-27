@@ -3,7 +3,7 @@ using GuildWars2API.Model.Commerce;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GuildWars2API.Tools.Value
+namespace GuildWars2API.Model.Value
 {
     public class AccountValue
     {

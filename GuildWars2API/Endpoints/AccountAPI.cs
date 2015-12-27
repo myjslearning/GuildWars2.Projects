@@ -3,8 +3,8 @@ using GuildWars2API.Model.Character;
 using GuildWars2API.Model.Commerce;
 using GuildWars2API.Model.Item;
 using GuildWars2API.Model.Items;
+using GuildWars2API.Model.Value;
 using GuildWars2API.Network;
-using GuildWars2API.Tools.Value;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,47 +13,64 @@ namespace GuildWars2API
 {
     public static class AccountAPI
     {
-        public static AccountValue GetAccountValue(string APIKey) {
-            HashSet<int> itemIDs = new HashSet<int>();
-            List<Character> characters = GetCharacters(APIKey);
+        #region Public Account Value
 
-            //Gather all Items and ID's, and add all ID's to the main collection
-            List<ItemStack> bank = GetBank(APIKey);
-            List<ItemStack> materialStorage = GetMaterialStorage(APIKey);
+        /// <summary>
+        /// Calculates Account Value. All-in-one method. 
+        /// Heavy API Call.
+        /// </summary>
+        /// <param name="APIKey"></param>
+        /// <returns></returns>
+        public static AccountValue GetAccountValue(string APIKey) => GetAccountValue(APIKey, new List<ItemListing>(), new List<Item>());
 
-            Dictionary<Character, Dictionary<string, List<ItemStack>>> charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
-            foreach(Character character in characters) {
-                List<ItemStack> Inventory = GetInventory(character.Bags);
-                List<ItemStack> Equipment = GetEquiment(character.Equipment);
-                charactersInventory.Add(character, new Dictionary<string, List<ItemStack>>() {
-                    { "Inventory", Inventory },
-                    { "Equipment", Equipment }
-                });
-                itemIDs.UnionWith(GetItemIDs(Inventory));
-                itemIDs.UnionWith(GetItemIDs(Equipment));
-            }
-            itemIDs.UnionWith(GetItemIDs(bank));
-            itemIDs.UnionWith(GetItemIDs(materialStorage, true));
+        /// <summary>
+        /// Calculates Account Value. Uses known ItemListings and Items to calculate more quickly.
+        /// Lighter API Call(Depends on the amount of known Itemlistings and Items).
+        /// </summary>
+        /// <param name="APIKey"></param>
+        /// <param name="knownItemListings"></param>
+        /// <param name="knownItems"></param>
+        /// <returns></returns>
+        public static AccountValue GetAccountValue(string APIKey, List<ItemListing> knownItemListings, List<Item> knownItems) {
+            AccountInventory accountInv = GetAccountInventory(APIKey);  
+            
+            //Retrive all IDs that need to be called from the Official GWAPI    
+            HashSet<int> itemIDs = GetAccountIDs(APIKey, accountInv);
+            itemIDs.ExceptWith(GetKnownItemIDs(knownItemListings, knownItems));   //Redesign GetKnownItemIDs method
 
-            //Request ItemListing and ItemObject info for all gathered ID's
+            //Combine known and newly found Items and ItemListings
             List<Item> items = ItemAPI.GetItem(itemIDs);
+            items.AddRange(knownItems);
             List<ItemListing> itemListings = ItemAPI.GetPriceListing(itemIDs);
+            itemListings.AddRange(knownItemListings);
 
-            //Parse them in AccountValue object
+            //Parse it into object
             AccountValue account = new AccountValue();
-            account.Bank = GetItemValues(bank, itemListings, items);
-            account.Material = GetItemValues(materialStorage, itemListings, items);
+            account.Bank = GetItemValues(accountInv.Bank, itemListings, items);
+            account.Material = GetItemValues(accountInv.MaterialStorage, itemListings, items);
             account.Wallet = GetWalletEntries(APIKey);
             account.SellListings = GetCurrentSellListing(APIKey);
-            foreach(KeyValuePair<Character, Dictionary<string, List<ItemStack>>> character in charactersInventory) {
+            foreach(Character character in accountInv.Characters) {
                 account.Characters.Add(new CharacterValue() {
-                    Name = character.Key.Name,
-                    Inventory = GetItemValues(character.Value["Inventory"], itemListings, items),
-                    Equipment = GetItemValues(character.Value["Equipment"], itemListings, items),
+                    Name = character.Name,
+                    Inventory = GetItemValues(GetInventory(character.Bags), itemListings, items),
+                    Equipment = GetItemValues(GetEquiment(character.Equipment), itemListings, items),
                 });
             }
             return account;
         }
+        
+        public static AccountInventory GetAccountInventory(string APIKey) {
+            return new AccountInventory() {
+                Characters = GetCharacters(APIKey),
+                Bank = GetBank(APIKey),
+                MaterialStorage = GetMaterialStorage(APIKey)
+            };
+        }
+
+        #endregion Public Account Value
+
+        #region Public API Getters
 
         public static List<Character> GetCharacters(string APIKey) {
             string response = NetworkManager.AuthorizedRequest(URLBuilder.GetCharacters(), APIKey);
@@ -94,9 +111,7 @@ namespace GuildWars2API
             }
             return null;
         }
-
-
-
+        
         public static List<Transaction> GetCurrentSellListing(string APIKey) {
             string response = NetworkManager.AuthorizedRequest(URLBuilder.GetCurrentSellListings(), APIKey);
             if(response.Length > 0) {
@@ -112,6 +127,8 @@ namespace GuildWars2API
             }
             return null;
         }
+
+        #endregion Public API Getters
 
         #region Private Methods
 
@@ -157,22 +174,7 @@ namespace GuildWars2API
             }
             return items;
         }
-
-        private static HashSet<int> GetItemIDs(List<ItemStack> items, bool onlyAvailableItems = false) {
-            HashSet<int> itemIDs = new HashSet<int>();
-            foreach(ItemStack itemStack in items) {
-                if(itemStack != null) {
-                    if(onlyAvailableItems && itemStack.Count > 0) {
-                        itemIDs.Add(itemStack.ID);
-                    }
-                    else {
-                        itemIDs.Add(itemStack.ID);
-                    }
-                }
-            }
-            return itemIDs;
-        }
-
+        
         private static List<ItemValue> GetItemValues(List<ItemStack> itemStacks, List<ItemListing> itemListings, List<Item> items) {
             List<ItemValue> itemValues = new List<ItemValue>();
             foreach(ItemStack itemStack in itemStacks) {
@@ -211,7 +213,37 @@ namespace GuildWars2API
             }
             return itemValues;
         }
+        
+        private static HashSet<int> GetIDs(List<Item> items) {
+            HashSet<int> itemIDs = new HashSet<int>();
+            foreach(Item item in items) {
+                if(item != null) {
+                    itemIDs.Add(item.ID);
+                }
+            }
+            return itemIDs;
+        }
 
+        private static HashSet<int> GetIDs(List<ItemStack> items) {
+            HashSet<int> itemIDs = new HashSet<int>();
+            foreach(ItemStack itemStack in items) {
+                if(itemStack != null) {
+                    itemIDs.Add(itemStack.ID);
+                }
+            }
+            return itemIDs;
+        }
+        
+        private static HashSet<int> GetIDs(List<ItemListing> itemListings) {
+            HashSet<int> itemIDs = new HashSet<int>();
+            foreach(ItemListing itemListing in itemListings) {
+                if(itemListing != null) {
+                    itemIDs.Add(itemListing.ID);
+                }
+            }
+            return itemIDs;
+        }
+        
         private static bool IsBound(Item item) {
             if(item.Flags.Contains("AccountBound") || item.Flags.Contains("SoulbindOnAcquire")) {
                 return true;
@@ -226,23 +258,25 @@ namespace GuildWars2API
             return true;
         }
 
-        private static List<ItemValue> GetItemValues(List<ItemStack> items, List<ItemListing> itemListings) {
-            List<ItemValue> itemValues = new List<ItemValue>();
-            foreach(ItemStack item in items) {
-                if(item == null)
-                    continue;
+        private static HashSet<int> GetAccountIDs(string APIKey, AccountInventory accountInv) {
+            HashSet<int> itemIDs = new HashSet<int>();
 
-                ItemListing listing = null;
-                if(itemListings.Any(i => i.ID == item.ID)) {
-                    listing = itemListings.Single(i => i.ID == item.ID);
-                }
-
-                itemValues.Add(new ItemValue() {
-                    ItemStack = item,
-                    ItemListing = listing
-                });
+            Dictionary<Character, Dictionary<string, List<ItemStack>>> charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
+            foreach(Character character in accountInv.Characters) {
+                itemIDs.UnionWith(GetIDs(GetInventory(character.Bags)));
+                itemIDs.UnionWith(GetIDs(GetEquiment(character.Equipment)));
             }
-            return itemValues;
+            itemIDs.UnionWith(GetIDs(accountInv.Bank));
+            itemIDs.UnionWith(GetIDs(accountInv.MaterialStorage));
+
+            return itemIDs;
+        }
+
+        private static HashSet<int> GetKnownItemIDs(List<ItemListing> knownItemListings, List<Item> knownItems) {
+            HashSet<int> knownItemListingsIDs = GetIDs(knownItemListings);
+            HashSet<int> knownItemsIDs = GetIDs(knownItems);
+            knownItemListingsIDs.IntersectWith(knownItemsIDs);
+            return knownItemListingsIDs;
         }
 
         #endregion Private Methods
