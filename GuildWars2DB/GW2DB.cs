@@ -7,61 +7,9 @@ using System.IO;
 
 namespace GuildWars2DB
 {
-    public class GW2DB
+    public static class GW2DB
     {
         private const string DATA_SOURCE = "GuildWars2DB.sqlite";
-
-        public static DataTable GetTable(GW2Entities table) {
-            DataTable result;
-
-            using(SQLiteConnection conn = GetDatabase()) {
-                using(SQLiteCommand cmd = new SQLiteCommand()) {
-                    cmd.Connection = conn;
-                    conn.Open();
-
-                    SQLiteHelper helper = new SQLiteHelper(cmd);
-
-                    if(!helper.IsTableCreated(table)) {
-                        TableFactory.CreateTable(table, helper);
-                    }
-                    result = helper.SelectAll(table);
-
-                    //conn.Close();
-                }
-            }
-
-            return result;
-        }
-
-        private static T GetValue<T>(GW2Entities table, string IDcolumName, string ID, string columToGet) {
-            DataTable result;
-
-            using(SQLiteConnection conn = GetDatabase()) {
-                using(SQLiteCommand cmd = new SQLiteCommand()) {
-                    cmd.Connection = conn;
-                    conn.Open();
-
-                    SQLiteHelper helper = new SQLiteHelper(cmd);
-
-                    if(!helper.IsTableCreated(table)) {
-                        TableFactory.CreateTable(table, helper);
-                    }
-
-                    result = helper.Select("select * from @table where @IDcolumName = @ID;", new Dictionary<string, object>() {
-                        { "@ID", ID },
-                        { "@IDcolumName", IDcolumName },
-                        { "@table", GuildWars2DBDictionary.EntityToName(table) }
-                    });
-                }
-            }
-
-            if(result?.Rows?.Count > 0) {
-                return TryToCast<T>(result.Rows[0]?[columToGet]);
-            }
-            else {
-                return default(T);
-            }
-        }
 
         public static void Insert(GW2Entities table, Dictionary<string, object> values) {
             using(SQLiteConnection conn = GetDatabase()) {
@@ -106,6 +54,28 @@ namespace GuildWars2DB
                     //conn.Close();
                 }
             }
+        }
+
+        public static DataTable GetTable(GW2Entities table) {
+            DataTable result;
+
+            using(SQLiteConnection conn = GetDatabase()) {
+                using(SQLiteCommand cmd = new SQLiteCommand()) {
+                    cmd.Connection = conn;
+                    conn.Open();
+
+                    SQLiteHelper helper = new SQLiteHelper(cmd);
+
+                    if(!helper.IsTableCreated(table)) {
+                        TableFactory.CreateTable(table, helper);
+                    }
+                    result = helper.SelectAll(table);
+
+                    //conn.Close();
+                }
+            }
+
+            return result;
         }
 
         #region Utility
