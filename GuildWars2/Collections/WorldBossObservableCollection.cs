@@ -1,9 +1,9 @@
 ﻿using GuildWars2.Model;
-using GuildWars2.Other;
 using GuildWars2DB;
 using GuildWars2DB.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Threading;
 
@@ -14,7 +14,7 @@ namespace GuildWars2.Collections
         private static TimeSpan DAILY_RESET = new TimeSpan(2, 0, 0);    //2:00am
 
         public WorldBossObservableCollection() {
-            AddRange(DBParser.ParseWorldBosses(GW2DB.GetTable(GW2Entities.WorldBoss), GW2DB.GetTable(GW2Entities.WorldBossTime)));
+            InitCollection();
 
             Tick();
 
@@ -44,7 +44,7 @@ namespace GuildWars2.Collections
 
             if(bosses[0]?.EventID != this[0]?.EventID) {
                 this.ClearItems();
-                AddRange(bosses);
+                bosses.ToList().ForEach(b => this.Add(b));
             }
         }
 
@@ -57,11 +57,80 @@ namespace GuildWars2.Collections
 
         #endregion Tick
 
-        private void AddRange(ICollection<DisplayWorldBoss> bosses) {
-            if(bosses == null)
-                return;
+        #region Initialization
 
+        private void InitCollection() {
+            List<DisplayWorldBoss> bosses = ParseWorldBosses(GW2DB.GetTable(GW2Entities.WorldBoss), GW2DB.GetTable(GW2Entities.WorldBossTime));
             bosses.ToList().ForEach(b => this.Add(b));
         }
+
+        public static List<DisplayWorldBoss> ParseWorldBosses(DataTable worldBosses, DataTable times) {
+            List<DisplayWorldBoss> bosses = new List<DisplayWorldBoss>();
+            Dictionary<string, List<TimeSpan>> bossesTimes = ParseWorldBossTimes(times);
+
+            foreach(DataRow row in worldBosses.Rows) {
+                bosses.Add(new DisplayWorldBoss() {
+                    Name = row["Name"].ToString(),
+                    Description = row["Description"].ToString(),
+                    Waypoint = row["Waypoint"].ToString(),
+                    EventID = row["EventID"].ToString(),
+                    Level = TryToCast<int>(row["Level"]),
+                    Times = bossesTimes[row["EventID"].ToString()],
+                    IsDoneNoNotify = TryToCast<bool>(row["IsDone"]),
+                    DragoniteLootMinimum = TryToCast<int>(row["DragoniteLootMinimum"]),
+                    DragoniteLootMaximum = TryToCast<int>(row["DragoniteLootMaximum"]),
+                    ItemLoot = TryToCast<int>(row["ItemLoot"]),
+                    BoxesLoot = TryToCast<int>(row["BoxesLoot"]),
+                    IsTrackingNoNotify = TryToCast<bool>(row["IsTracking"])
+                });
+            }
+
+            return bosses;
+        }
+
+        private static Dictionary<string, List<TimeSpan>> ParseWorldBossTimes(DataTable times) {
+            Dictionary<string, List<TimeSpan>> result = new Dictionary<string, List<TimeSpan>>();
+            bool DayLightSaving = TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.Now);
+
+            foreach(DataRow row in times.Rows) {
+                string eventID = row["EventID"].ToString();
+
+                if(!result.ContainsKey(eventID)) {
+                    result.Add(eventID, new List<TimeSpan>());
+                }
+
+                TimeSpan time = TimeSpan.Parse(row["Time"].ToString());
+                if(!DayLightSaving) {
+                    if(time.Hours == 0) {
+                        time = new TimeSpan(23, time.Minutes, 0);
+                    }
+                    else {
+                        time = new TimeSpan(time.Hours - 1, time.Minutes, 0);
+                    }
+                }
+                result[eventID].Add(time);
+            }
+
+            return result;
+        }
+
+        private static T TryToCast<T>(object value) {
+            if(value == null)
+                return default(T);
+
+            if(value is T) {
+                return (T)value;
+            }
+            else {
+                try {
+                    return (T)Convert.ChangeType(value, typeof(T));
+                }
+                catch(InvalidCastException) {
+                    return default(T);
+                }
+            }
+        }
+
+        #endregion Initialization
     }
 }

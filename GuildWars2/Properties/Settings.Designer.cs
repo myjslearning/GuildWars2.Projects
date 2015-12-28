@@ -22,5 +22,41 @@ namespace GuildWars2.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MainGamePath {
+            get {
+                return ((string)(this["MainGamePath"]));
+            }
+            set {
+                this["MainGamePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string APIKey {
+            get {
+                return ((string)(this["APIKey"]));
+            }
+            set {
+                this["APIKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SaveWorldBossTracking {
+            get {
+                return ((bool)(this["SaveWorldBossTracking"]));
+            }
+            set {
+                this["SaveWorldBossTracking"] = value;
+            }
+        }
     }
 }

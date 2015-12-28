@@ -10,9 +10,6 @@ namespace GuildWars2DB.Model
             if(entity == GW2Entities.WorldBoss || entity == GW2Entities.WorldBossTime) {
                 CreateWorldBossTable(helper);
             }
-            else if(entity == GW2Entities.Settings) {
-                CreateSettingsTable(helper);
-            }
             else if(entity == GW2Entities.Item) {
             }
         }
@@ -74,18 +71,5 @@ namespace GuildWars2DB.Model
         }
 
         #endregion WorldBosses
-
-        #region Settings
-
-        public static void CreateSettingsTable(SQLiteHelper helper) {
-            SQLiteTable timeTable = new SQLiteTable(GuildWars2DBDictionary.EntityToName(GW2Entities.Settings));
-            timeTable.Columns.Add(new SQLiteColumn("ID", true));
-            timeTable.Columns.Add(new SQLiteColumn("Identifier", ColType.Text));
-            timeTable.Columns.Add(new SQLiteColumn("Value", ColType.Text));
-
-            helper.CreateTable(timeTable);
-        }
-
-        #endregion Settings
     }
 }

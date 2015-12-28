@@ -130,7 +130,5 @@ namespace GuildWars2.Model
         public string NextTimeString => NextTime.ToString(@"hh\:mm");
 
         private TimeSpan Now => new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-
-        //TimeZoneInfo.Local.IsDaylightSavingTime(date)
     }
 }

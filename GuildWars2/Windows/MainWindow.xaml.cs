@@ -19,17 +19,6 @@ namespace GuildWars2.Windows
         private Dictionary<Type, Page> _pages;
 
         public MainWindow() {
-            var date = DateTime.Now;
-            Console.WriteLine("In the {0}, {1} is {2}ambiguous.",
-                  TimeZoneInfo.Local.DisplayName,
-                  date,
-                  TimeZoneInfo.Local.IsAmbiguousTime(date) ? "" : "not ");
-            // Test if time is DST.
-            Console.WriteLine("In the {0}, {1} is {2}daylight saving time.",
-                              TimeZoneInfo.Local.DisplayName,
-                              date,
-                              TimeZoneInfo.Local.IsDaylightSavingTime(date) ? "" : "not ");
-
             NotifyHandler.NotificationAdded += NotifyHandler_ShowNotification;
             _pages = new Dictionary<Type, Page>();
 

@@ -11,8 +11,6 @@ namespace GuildWars2DB
     {
         private const string DATA_SOURCE = "GuildWars2DB.sqlite";
 
-        public static T GetSetting<T>(GW2Settings setting) => GetValue<T>(GW2Entities.Settings, "Identifier", GuildWars2DBDictionary.SettingToName(setting), "Value");
-
         public static DataTable GetTable(GW2Entities table) {
             DataTable result;
 

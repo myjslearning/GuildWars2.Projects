@@ -80,13 +80,10 @@
     <Compile Include="Model\DisplayWorldBoss.cs" />
     <Compile Include="Model\DisplayTreeItemRecipe.cs" />
     <Compile Include="Other\ColorManager.cs" />
-    <Compile Include="Other\DBParser.cs" />
     <Compile Include="Other\ErrorHandler.cs" />
     <Compile Include="Other\Notification\NotifyEventArgs.cs" />
     <Compile Include="Other\Notification\NotifyHandler.cs" />
-    <Compile Include="Other\SettingsManager.cs" />
-    <Compile Include="Other\Sound\SoundDictionary.cs" />
-    <Compile Include="Other\Sound\SoundHandler.cs" />
+    <Compile Include="Other\SoundManager.cs" />
     <Compile Include="Windows\Pages\Crafting.xaml.cs">
       <DependentUpon>Crafting.xaml</DependentUpon>
     </Compile>
