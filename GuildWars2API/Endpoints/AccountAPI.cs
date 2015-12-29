@@ -50,7 +50,8 @@ namespace GuildWars2API
             account.Bank = GetItemValues(accountInv.Bank, itemListings, items);
             account.Material = GetItemValues(accountInv.MaterialStorage, itemListings, items);
             account.Wallet = GetWalletEntries(APIKey);
-            account.SellListings = GetCurrentSellListing(APIKey);
+            account.SellListings = GetTransactionValues(itemListings, accountInv.SellListings);
+            account.BuyListings = GetTransactionValues(itemListings, accountInv.BuyListings);
             foreach(Character character in accountInv.Characters) {
                 account.Characters.Add(new CharacterValue() {
                     Name = character.Name,
@@ -65,7 +66,9 @@ namespace GuildWars2API
             return new AccountInventory() {
                 Characters = GetCharacters(APIKey),
                 Bank = GetBank(APIKey),
-                MaterialStorage = GetMaterialStorage(APIKey)
+                MaterialStorage = GetMaterialStorage(APIKey),
+                BuyListings = GetCurrentBuyListing(APIKey),
+                SellListings = GetCurrentSellListing(APIKey)
             };
         }
 
@@ -214,7 +217,20 @@ namespace GuildWars2API
             }
             return itemValues;
         }
-        
+
+        private static List<TransactionValue> GetTransactionValues(List<ItemListing> itemListings, List<Transaction> transactions) {
+            List<TransactionValue> transactionValues = new List<TransactionValue>();
+            foreach(Transaction transaction in transactions) {
+                if(itemListings.Any(i => i.ID == transaction.ItemID)) {
+                    transactionValues.Add(new TransactionValue() {
+                        ItemListing = itemListings.Single(i => i.ID == transaction.ItemID),
+                        Transaction = transaction
+                    });
+                }
+            }
+            return transactionValues;
+        }
+
         private static HashSet<int> GetIDs(List<Item> items) {
             HashSet<int> itemIDs = new HashSet<int>();
             foreach(Item item in items) {
@@ -234,7 +250,17 @@ namespace GuildWars2API
             }
             return itemIDs;
         }
-        
+
+        private static HashSet<int> GetIDs(List<Transaction> transactions) {
+            HashSet<int> itemIDs = new HashSet<int>();
+            foreach(Transaction transaction in transactions) {
+                if(transaction != null) {
+                    itemIDs.Add(transaction.ItemID);
+                }
+            }
+            return itemIDs;
+        }
+
         private static bool IsBound(Item item) {
             if(item.Flags.Contains("AccountBound") || item.Flags.Contains("SoulbindOnAcquire")) {
                 return true;
@@ -260,9 +286,12 @@ namespace GuildWars2API
             itemIDs.UnionWith(GetIDs(accountInv.Bank));
             itemIDs.UnionWith(GetIDs(accountInv.MaterialStorage));
 
+            itemIDs.UnionWith(GetIDs(accountInv.SellListings));
+            itemIDs.UnionWith(GetIDs(accountInv.BuyListings));   
+
             return itemIDs;
         }
-
+        
         #endregion Private Methods
     }
 }

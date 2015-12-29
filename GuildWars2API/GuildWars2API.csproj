@@ -79,6 +79,7 @@
     <Compile Include="Model\Recipes\Ingredient.cs" />
     <Compile Include="Model\Recipes\Recipe.cs" />
     <Compile Include="Model\Event\WorldBoss.cs" />
+    <Compile Include="Model\Value\TransactionValue.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\URLBuilder.cs" />

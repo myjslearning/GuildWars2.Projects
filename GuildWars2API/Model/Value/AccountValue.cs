@@ -7,9 +7,26 @@ namespace GuildWars2API.Model.Value
 {
     public class AccountValue
     {
+        private ItemPrice _baseValue;
         private ItemPrice _totalBuyValue;
         private ItemPrice _totalSellValue;
         private List<CharacterValue> _characters;
+
+        private ItemPrice BaseValue
+        {
+            get {
+                if(_baseValue != null)
+                    return _baseValue;
+
+                ItemPrice price = new ItemPrice();
+                SellListings.ForEach(s => { price.Add(s.Transaction.Quantity * s.Transaction.Price); });
+                BuyListings.ForEach(b => { price.Add(b.Transaction.Quantity * b.Transaction.Price); });
+                price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
+
+                _baseValue = price;
+                return price;
+            }
+        }
 
         public ItemPrice TotalBuyValue {
             get {
@@ -17,16 +34,15 @@ namespace GuildWars2API.Model.Value
                     return _totalBuyValue;
 
                 ItemPrice price = new ItemPrice();
+                price.Add(BaseValue);
                 Bank.ForEach(i => { price.Add(i.BuyValue); });
                 Material.ForEach(i => { price.Add(i.BuyValue); });
                 Characters.ForEach(c => { price.Add(c.TotalBuyValue); });
-                SellListings.ForEach(s => { price.Add(s.Price * s.Quantity); });
-                price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
 
                 _totalBuyValue = price;
                 return _totalBuyValue;
             }
-        }
+        }       
 
         public ItemPrice TotalSellValue {
             get {
@@ -34,11 +50,11 @@ namespace GuildWars2API.Model.Value
                     return _totalSellValue;
 
                 ItemPrice price = new ItemPrice();
+                price.Add(BaseValue);
                 Bank.ForEach(i => { price.Add(i.SellValue); });
                 Material.ForEach(i => { price.Add(i.SellValue); });
                 Characters.ForEach(c => { price.Add(c.TotalSellValue); });
-                SellListings.ForEach(s => { price.Add(s.Price * s.Quantity); });
-                price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
+
                 _totalSellValue = price;
                 return _totalSellValue;
             }
@@ -59,6 +75,8 @@ namespace GuildWars2API.Model.Value
             }
         }
 
-        public List<Transaction> SellListings { get; set; }
+        public List<TransactionValue> SellListings { get; set; }
+
+        public List<TransactionValue> BuyListings { get; set; }
     }
 }
