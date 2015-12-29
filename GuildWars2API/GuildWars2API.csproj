@@ -48,9 +48,11 @@
     <Compile Include="Endpoints\AccountAPI.cs" />
     <Compile Include="Endpoints\RecipeAPI.cs" />
     <Compile Include="Endpoints\ItemAPI.cs" />
+    <Compile Include="Endpoints\ValueAPI.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Account\AccountInventory.cs" />
     <Compile Include="Model\Account\WalletEntry.cs" />
+    <Compile Include="Model\Recipes\RecipeTree.cs" />
     <Compile Include="Model\Value\AccountValue.cs" />
     <Compile Include="Model\Value\CharacterValue.cs" />
     <Compile Include="Model\Account\Account.cs" />
