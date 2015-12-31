@@ -19,8 +19,8 @@ namespace GuildWars2API.Model.Value
                     return _baseValue;
 
                 ItemPrice price = new ItemPrice();
-                SellListings.ForEach(s => { price.Add(s.Transaction.Quantity * s.Transaction.Price); });
-                BuyListings.ForEach(b => { price.Add(b.Transaction.Quantity * b.Transaction.Price); });
+                OwnSellListings.ForEach(s => { price.Add(s.Transaction.Quantity * s.Transaction.Price); });
+                OwnBuyListings.ForEach(b => { price.Add(b.Transaction.Quantity * b.Transaction.Price); });
                 price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
 
                 _baseValue = price;
@@ -75,8 +75,8 @@ namespace GuildWars2API.Model.Value
             }
         }
 
-        public List<TransactionValue> SellListings { get; set; }
+        public List<TransactionValue> OwnSellListings { get; set; }         
 
-        public List<TransactionValue> BuyListings { get; set; }
+        public List<TransactionValue> OwnBuyListings { get; set; }
     }
 }

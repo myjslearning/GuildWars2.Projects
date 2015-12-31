@@ -11,8 +11,8 @@ namespace GuildWars2API.Model.Account
 
         public List<ItemStack> MaterialStorage { get; set; }
 
-        public List<Transaction> BuyListings { get; set; }
+        public List<Transaction> OwnBuyListings { get; set; }
 
-        public List<Transaction> SellListings { get; set; }
+        public List<Transaction> OwnSellListings { get; set; }
     }
 }

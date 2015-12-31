@@ -49,8 +49,8 @@ namespace GuildWars2API
             account.Bank = GetItemValues(accountInv.Bank, itemListings, items);
             account.Material = GetItemValues(accountInv.MaterialStorage, itemListings, items);
             account.Wallet = GetWalletEntries(APIKey);
-            account.SellListings = GetTransactionValues(itemListings, accountInv.SellListings);
-            account.BuyListings = GetTransactionValues(itemListings, accountInv.BuyListings);
+            account.OwnSellListings = GetTransactionValues(itemListings, accountInv.OwnSellListings);
+            account.OwnBuyListings = GetTransactionValues(itemListings, accountInv.OwnBuyListings);
             foreach(Character character in accountInv.Characters) {
                 account.Characters.Add(new CharacterValue() {
                     Name = character.Name,
@@ -66,8 +66,8 @@ namespace GuildWars2API
                 Characters = GetCharacters(APIKey),
                 Bank = GetBank(APIKey),
                 MaterialStorage = GetMaterialStorage(APIKey),
-                BuyListings = GetCurrentBuyListing(APIKey),
-                SellListings = GetCurrentSellListing(APIKey)
+                OwnBuyListings = GetCurrentBuyListing(APIKey),
+                OwnSellListings = GetCurrentSellListing(APIKey)
             };
         }
 
@@ -223,8 +223,8 @@ namespace GuildWars2API
             itemIDs.UnionWith(GetIDs(accountInv.Bank));
             itemIDs.UnionWith(GetIDs(accountInv.MaterialStorage));
 
-            itemIDs.UnionWith(GetIDs(accountInv.SellListings));
-            itemIDs.UnionWith(GetIDs(accountInv.BuyListings));
+            itemIDs.UnionWith(GetIDs(accountInv.OwnSellListings));
+            itemIDs.UnionWith(GetIDs(accountInv.OwnBuyListings));
 
             return itemIDs;
         }
