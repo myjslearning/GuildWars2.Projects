@@ -2,14 +2,13 @@
 using GuildWars2API.Model.Items;
 using GuildWars2API.Network;
 using System.Collections.Generic;
-
+using System.Linq;
 using static GuildWars2API.Network.NetworkManager;
 using static Newtonsoft.Json.JsonConvert;
 
 namespace GuildWars2API
 {
-    public static class ItemAPI
-    {
+    public static class ItemAPI {
         public static List<Item> SearchItem(string itemName) {
             string response = UnauthorizedRequest(URLBuilder.GetItemByName(itemName));
             if(response.Length > 0) {
@@ -30,6 +29,8 @@ namespace GuildWars2API
             }
             return null;
         }
+
+        public static List<Item> GetItem(List<ItemStack> items) => GetItem(new HashSet<int>(items.Select(i => i.ID)));
 
         public static List<Item> GetItem(HashSet<int> itemIDs) => GetLargeRequest<Item>(new List<int>(itemIDs), "items");
 
