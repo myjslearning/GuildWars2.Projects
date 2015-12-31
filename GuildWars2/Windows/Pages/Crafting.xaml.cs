@@ -27,7 +27,7 @@ namespace GuildWars2.Windows.Pages
             Thread thread = new Thread(new ThreadStart(delegate {
                 if(item.GetType() == typeof(Item)) {
                     //SHOW LOADING ICON
-                    treeviewItemSource.PopulateTree(item as Item);
+                    //treeviewItemSource.PopulateTree(item as Item);
                     //HIDE LOADING ICON
                 }
             }));

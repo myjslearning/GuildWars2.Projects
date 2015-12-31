@@ -11,7 +11,7 @@ using System.Text;
 
 namespace GuildWars2.Model
 {
-    public class DisplayTreeItemRecipe : INotifyPropertyChanged
+    public class OldDisplayTreeItemRecipe : INotifyPropertyChanged
     {
         private Item _item;
         private string _amountCrafted;
@@ -90,23 +90,23 @@ namespace GuildWars2.Model
 
         public int CurrentRecipeIndex { get; set; }
 
-        public PropChangeObservableCollection<DisplayTreeItemRecipe> Items { get; set; }
+        public PropChangeObservableCollection<OldDisplayTreeItemRecipe> Items { get; set; }
 
-        public DisplayTreeItemRecipe() {
+        public OldDisplayTreeItemRecipe() {
         }
 
-        public DisplayTreeItemRecipe(int itemID, int singleAmount, int totalAmount) {
+        public OldDisplayTreeItemRecipe(int itemID, int singleAmount, int totalAmount) {
             this.ItemID = itemID;
             this.SingleAmountNeeded = singleAmount;
             this.TotalAmountNeeded = totalAmount;
             this.AmountCrafted = "0";
         }
 
-        public DisplayTreeItemRecipe(Recipe recipe, int singleAmount, int totalAmount)
+        public OldDisplayTreeItemRecipe(Recipe recipe, int singleAmount, int totalAmount)
             : this(new List<Recipe>() { recipe }, singleAmount, totalAmount) { }
 
-        public DisplayTreeItemRecipe(List<Recipe> recipes, int singleAmount, int totalAmount) {
-            this.Items = new PropChangeObservableCollection<DisplayTreeItemRecipe>();
+        public OldDisplayTreeItemRecipe(List<Recipe> recipes, int singleAmount, int totalAmount) {
+            this.Items = new PropChangeObservableCollection<OldDisplayTreeItemRecipe>();
             this.Recipes = recipes;
             this.CurrentRecipeIndex = 0;
             this.SingleAmountNeeded = singleAmount;
@@ -122,12 +122,12 @@ namespace GuildWars2.Model
         private void CreateChildren() {
             if(Recipes.Count >= CurrentRecipeIndex + 1) {
                 foreach(Ingredient ingredient in Recipes[CurrentRecipeIndex].Ingredients) {
-                    List<Recipe> results = RecipeAPI.RecipesForItem(ingredient.ID);
+                    List<Recipe> results = null;//RecipeAPI.RecipesForItem(ingredient.ItemID);
                     if(results != null && results.Count > 0) {
-                        this.Items.Add(new DisplayTreeItemRecipe(results, ingredient.Count, ingredient.Count * this.TotalAmountNeeded));
+                        this.Items.Add(new OldDisplayTreeItemRecipe(results, ingredient.Count, ingredient.Count * this.TotalAmountNeeded));
                     }
                     else {
-                        this.Items.Add(new DisplayTreeItemRecipe(ingredient.ID, ingredient.Count, ingredient.Count * this.TotalAmountNeeded));
+                        this.Items.Add(new OldDisplayTreeItemRecipe(ingredient.ItemID, ingredient.Count, ingredient.Count * this.TotalAmountNeeded));
                     }
                 }
             }

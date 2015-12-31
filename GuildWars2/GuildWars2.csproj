@@ -77,8 +77,9 @@
     </Compile>
     <Compile Include="Model\DisplayCharacter.cs" />
     <Compile Include="Model\DisplayItem.cs" />
+    <Compile Include="Model\DisplayRecipeTree.cs" />
     <Compile Include="Model\DisplayWorldBoss.cs" />
-    <Compile Include="Model\DisplayTreeItemRecipe.cs" />
+    <Compile Include="Model\OldDisplayTreeItemRecipe.cs" />
     <Compile Include="Other\ColorManager.cs" />
     <Compile Include="Other\ErrorHandler.cs" />
     <Compile Include="Other\Notification\NotifyEventArgs.cs" />

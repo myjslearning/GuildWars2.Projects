@@ -1,4 +1,5 @@
-﻿using GuildWars2API.Model.Recipes;
+﻿using GuildWars2API.Model.Items;
+using GuildWars2API.Model.Recipes;
 using GuildWars2API.Network;
 using System.Collections.Generic;
 
@@ -9,11 +10,10 @@ namespace GuildWars2API
 {
     public static class RecipeAPI
     {
-        public static List<Recipe> RecipesForItem(int itemID) {
+        public static HashSet<int> RecipesForItem(int itemID) {
             string response = UnauthorizedRequest(URLBuilder.GetRecipesByItemID(itemID));
             if(response.Length > 0) {
-                List<int> recipeIDs = DeserializeObject<List<int>>(response);
-                return GetRecipe(new HashSet<int>(recipeIDs));
+                DeserializeObject<HashSet<int>>(response);
             }
             return null;
         }
@@ -25,7 +25,9 @@ namespace GuildWars2API
             }
             return null;
         }
-        
+
         public static List<Recipe> GetRecipe(HashSet<int> recipeIDs) => GetLargeRequest<Recipe>(new List<int>(recipeIDs), "recipes");
+
+        public static RecipeTreeNode GetRecipeTree(Item item) => new RecipeTreeNode(item);
     }
 }
