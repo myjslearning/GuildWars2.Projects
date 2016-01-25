@@ -48,6 +48,8 @@ namespace GuildWars2API.Model.Recipes
             PopulateChildren();
         }
 
+        protected RecipeTreeNode() { }
+
         private void PopulateRecipes() {
             //First check RecipeAPI for recipe
             //Check if its not a promotion Item and check mystic forge

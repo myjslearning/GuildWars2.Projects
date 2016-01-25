@@ -1,4 +1,6 @@
 ﻿using GuildWars2.Collections;
+using GuildWars2.Model;
+using GuildWars2API;
 using GuildWars2API.Model.Items;
 using System.Threading;
 using System.Windows.Controls;
@@ -6,19 +8,15 @@ using System.Windows.Controls;
 namespace GuildWars2.Windows.Pages
 {
     /// <summary>
-    /// Interaction logic for Craftin1g.xaml
+    /// Interaction logic for Crafting.xaml
     /// </summary>
     public partial class Crafting : Page
     {
-        private TreeViewObservableCollection treeviewItemSource;
-
         public Crafting() {
             InitializeComponent();
-            treeviewItemSource = new TreeViewObservableCollection();
-            //Crafting_Treeview.ItemsSource = treeviewItemSource;
-            
-            /*RecipeTreeNode tree = new RecipeTreeNode(ItemAPI.SearchItem("Tempered Spinal Blades")[0].ID);
-            treeviewItemSource.Add(tree as DisplayRecipeTree);*/
+            PropChangeObservableCollection<DisplayRecipeTree> itemSource = new PropChangeObservableCollection<DisplayRecipeTree>();
+            itemSource.Add(new DisplayRecipeTree(ItemAPI.SearchItem("Arachnophobia")[0]));
+            Crafting_Treeview.ItemsSource = itemSource;
         }
 
         public void StartCrafting(Item item) {

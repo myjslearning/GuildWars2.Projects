@@ -20,7 +20,7 @@ namespace GuildWars2.Collections
                 RegisterPropertyChanged(e.NewItems);
             }
 
-            //base.OnCollectionChanged(e);
+            base.OnCollectionChanged(e);
         }
 
         protected override void ClearItems() {
