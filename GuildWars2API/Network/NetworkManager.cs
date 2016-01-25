@@ -18,7 +18,8 @@ namespace GuildWars2API.Network
 
         public static string AuthorizedRequest(string url, string apiKey) => GetResponse(url, apiKey);
 
-        public static List<T> GetLargeRequest<T>(List<int> IDs, string APIEndpoint, int itemsPerRequest = MAX_ITEMS_PER_REQUEST, string APIKey = null) {
+        public static List<T> GetLargeRequest<T>(HashSet<int> IDCollection, string APIEndpoint, int itemsPerRequest = MAX_ITEMS_PER_REQUEST, string APIKey = null) {
+            List<int> IDs = new List<int>(IDCollection);
             List<T> results = new List<T>();
             if(IDs.Count <= 0) {
                 return results;
@@ -31,16 +32,16 @@ namespace GuildWars2API.Network
                 selected.AddRange(IDs.GetRange(itemsPerRequest, IDs.Count - itemsPerRequest));
                 IDs.RemoveRange(itemsPerRequest, IDs.Count - itemsPerRequest);
 
-                results.AddRange(GetLargeRequest<T>(selected, APIEndpoint));
+                results.AddRange(GetLargeRequest<T>(new HashSet<int>(selected), APIEndpoint));
             }
 
             //Authorized or Unauthorized Request
             string response = "";
             if(APIKey == null) {
-                response = UnauthorizedRequest(URLBuilder.LargeRequestURL(APIEndpoint, IDs));
+                response = UnauthorizedRequest(URLBuilder.LargeRequestURL(APIEndpoint, new HashSet<int>(IDs)));
             }
             else {
-                response = AuthorizedRequest(URLBuilder.LargeRequestURL(APIEndpoint, IDs), APIKey);
+                response = AuthorizedRequest(URLBuilder.LargeRequestURL(APIEndpoint, new HashSet<int>(IDs)), APIKey);
             }
 
             //Read response

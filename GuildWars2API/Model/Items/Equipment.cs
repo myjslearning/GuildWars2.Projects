@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace GuildWars2API.Model.Item
+namespace GuildWars2API.Model.Items
 {
     public class Equipment
     {

@@ -13,11 +13,12 @@ namespace GuildWars2API
             string response = UnauthorizedRequest(URLBuilder.GetItemByName(itemName));
             if(response.Length > 0) {
                 List<ItemSearch> itemsFound = DeserializeObject<List<ItemSearch>>(response);
+                if(itemsFound != null) {
+                    HashSet<int> itemIDs = new HashSet<int>();
+                    itemsFound.ForEach(i => itemIDs.Add(i.ItemID));
 
-                HashSet<int> itemIDs = new HashSet<int>();
-                itemsFound.ForEach(i => itemIDs.Add(i.ItemID));
-
-                return GetItem(itemIDs);
+                    return GetItem(itemIDs);
+                }
             }
             return null;
         }
@@ -32,7 +33,7 @@ namespace GuildWars2API
 
         public static List<Item> GetItem(List<ItemStack> items) => GetItem(new HashSet<int>(items.Select(i => i.ID)));
 
-        public static List<Item> GetItem(HashSet<int> itemIDs) => GetLargeRequest<Item>(new List<int>(itemIDs), "items");
+        public static List<Item> GetItem(HashSet<int> itemIDs) => GetLargeRequest<Item>(itemIDs, "items");
 
         public static ItemListing GetPriceListing(int itemID) {
             string response = UnauthorizedRequest(URLBuilder.GetItemListing(itemID));
@@ -42,6 +43,6 @@ namespace GuildWars2API
             return null;
         }
 
-        public static List<ItemListing> GetPriceListing(HashSet<int> itemIDs) => GetLargeRequest<ItemListing>(new List<int>(itemIDs), "commerce/prices");
+        public static List<ItemListing> GetPriceListing(HashSet<int> itemIDs) => GetLargeRequest<ItemListing>(itemIDs, "commerce/prices");
     }
 }

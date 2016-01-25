@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace GuildWars2API.Network
 {
-    internal class URLBuilder
-    {
+    internal class URLBuilder {
         private const string ROOT_GW2 = "https://api.guildwars2.com/v2";
-        private const string ROOT_GW2TNO = "http://www.gw2shinies.com/api/json/idbyname";
+        private const string ROOT_GW2PRO = "http://gw2profits.com/json/v2/forge";
+        private const string ROOT_GW2SHI = "http://www.gw2shinies.com/api/json/idbyname";
 
         //Second Endpoints
         private const string FILES = "files";
@@ -27,11 +27,11 @@ namespace GuildWars2API.Network
 
         #region Items
 
-        public static string GetItemByName(string itemName) => string.Format("{0}/{1}", ROOT_GW2TNO, Encode(itemName.ToLower()).Replace("+", "%20"));
+        public static string GetItemByName(string itemName) => string.Format("{0}/{1}", ROOT_GW2SHI, Encode(itemName.ToLower()).Replace("+", "%20"));
 
         public static string GetItemByID(int itemID) => string.Format("{0}/{1}/{2}", ROOT_GW2, ITEMS, itemID);
 
-        public static string GetItemByID(List<int> itemIDs) {
+        public static string GetItemByID(HashSet<int> itemIDs) {
             string baseURL = string.Format("{0}/{1}?ids=", ROOT_GW2, ITEMS);
             return AddIds(baseURL, itemIDs);
         }
@@ -40,14 +40,38 @@ namespace GuildWars2API.Network
 
         #region Recipes
 
-        public static string GetRecipeByID(List<int> recipeIDs) {
+        public static string GetRecipeByID(int recipeID) => string.Format("{0}/{1}/{2}", ROOT_GW2, RECIPES, recipeID);
+
+        public static string GetRecipeByID(HashSet<int> recipeIDs) {
             string baseURL = string.Format("{0}/{1}?ids=", ROOT_GW2, RECIPES);
             return AddIds(baseURL, recipeIDs);
         }
 
-        public static string GetRecipeByRecipeID(int recipeID) => string.Format("{0}/{1}/{2}", ROOT_GW2, RECIPES, recipeID);
-
         public static string GetRecipesByItemID(int itemID) => string.Format("{0}/{1}/{2}?output={3}", ROOT_GW2, RECIPES, SEARCH, itemID);
+
+        #region Mystic Forge
+
+        public static string GetMysticForgeRecipes() => ROOT_GW2PRO;
+
+        [Obsolete]
+        public static string GetMysticForgeRecipeByItemID(int itemID) => string.Format("{0}?output_ids={1}", ROOT_GW2PRO, itemID);
+
+        [Obsolete]
+        public static string GetMysticForgeRecipeByItemID(HashSet<int> itemIDs) {
+            string baseURL = string.Format("{0}?output_ids=", ROOT_GW2PRO);
+            return AddIds(baseURL, itemIDs);
+        }
+
+        [Obsolete]
+        public static string GetMysticForgeRecipeByName(string name) => string.Format("{0}?names={1}", ROOT_GW2PRO, name);
+
+        /*[Obsolete]
+        public static string GetMysticForgeRecipeByName(HashSet<string> names) {
+            string baseURL = string.Format("{0}?names=", ROOT_GW2PRO);
+            return AddIds(baseURL, names);
+        }*/
+
+        #endregion Mystic Forge
 
         #endregion Recipes
 
@@ -55,7 +79,7 @@ namespace GuildWars2API.Network
 
         public static string GetItemListing(int itemID) => string.Format("{0}/{1}/{2}/{3}", ROOT_GW2, COMMERCE, PRICES, itemID);
 
-        public static string GetItemListing(List<int> itemIDs) {
+        public static string GetItemListing(HashSet<int> itemIDs) {
             string baseURL = string.Format("{0}/{1}/{2}?ids=", ROOT_GW2, COMMERCE, PRICES);
             return AddIds(baseURL, itemIDs);
         }
@@ -88,7 +112,7 @@ namespace GuildWars2API.Network
             return result;
         }
 
-        private static string AddIds(string baseURL, List<int> IDs) {
+        private static string AddIds(string baseURL, HashSet<int> IDs) {
             foreach(int id in IDs) {
                 baseURL = baseURL + id + ",";
             }
@@ -96,7 +120,7 @@ namespace GuildWars2API.Network
             return baseURL;
         }
 
-        public static string LargeRequestURL(string category, List<int> IDs) {
+        public static string LargeRequestURL(string category, HashSet<int> IDs) {
             string baseURL = string.Format("{0}/{1}?ids=", ROOT_GW2, category);
             return AddIds(baseURL, IDs);
         }

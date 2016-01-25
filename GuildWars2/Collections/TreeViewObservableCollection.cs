@@ -2,7 +2,7 @@
 
 namespace GuildWars2.Collections
 {
-    public class TreeViewObservableCollection : PropChangeObservableCollection<OldDisplayTreeItemRecipe>
+    public class TreeViewObservableCollection
     {
     }
 }

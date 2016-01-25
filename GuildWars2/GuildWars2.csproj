@@ -64,8 +64,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Collections\PropChangedObservableCollection.cs" />
-    <Compile Include="Collections\WorldBossObservableCollection.cs" />
     <Compile Include="Collections\TreeViewObservableCollection.cs" />
+    <Compile Include="Collections\WorldBossObservableCollection.cs" />
     <Compile Include="Controls\AccountSettingsControl.xaml.cs">
       <DependentUpon>AccountSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -77,7 +77,6 @@
     </Compile>
     <Compile Include="Model\DisplayCharacter.cs" />
     <Compile Include="Model\DisplayItem.cs" />
-    <Compile Include="Model\DisplayRecipeTree.cs" />
     <Compile Include="Model\DisplayWorldBoss.cs" />
     <Compile Include="Model\OldDisplayTreeItemRecipe.cs" />
     <Compile Include="Other\ColorManager.cs" />

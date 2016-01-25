@@ -1,59 +1,99 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using GuildWars2API.Model.Items;
+using GuildWars2API.Other;
+using System.Collections.Generic;
 
 namespace GuildWars2API.Model.Recipes
 {
     public class RecipeTreeNode
     {
-        public List<Recipe> Recipes { get; set; }
+        private int _tempItemID;
 
-        public int CurrentRecipeIndex { get; set; }
-
-        private Recipe CurrentRecipe {
+        private Recipe _currentRecipe;
+        private int _currentRecipeIndex = 0;
+        
+        public List<int> RecipeIDs { get; set; }
+        public Recipe Recipe {
             get {
-                if(Recipes == null || Recipes.Count <= 0)
-                    return null;
+                if(_currentRecipe == null && _currentRecipeIndex < RecipeIDs.Count)
+                    Recipe = RecipeAPI.GetRecipe(RecipeIDs[_currentRecipeIndex]);
 
-                if(CurrentRecipeIndex >= Recipes.Count) {
-                    return Recipes[0];
-                }
-                return Recipes[CurrentRecipeIndex];
+                return _currentRecipe;
             }
+            set { _currentRecipe = value; }
         }
+
+        public Item Item { get; set; }
+        public int Count { get; set; }
 
         public List<RecipeTreeNode> Children { get; set; }
 
-        public RecipeTreeNode(Items.Item item) {
-            CurrentRecipeIndex = 0;
+        public RecipeTreeNode(Item item, int count = 1) {
+            Item = item;
+            Count = count;
 
-            PopulateRecipes(item);
+            PopulateRecipes();
             PopulateChildren();
         }
 
-        private void PopulateRecipes(Items.Item item) {
-            if(item.Details != null && item.Details.RecipeID != 0) {
-                Recipes = new List<Recipe>() { RecipeAPI.GetRecipe(item.Details.RecipeID) };
+        public RecipeTreeNode(int itemID, int count = 1) : this(ItemAPI.GetItem(itemID), count) 
+        {
+            _tempItemID = itemID; 
+        }
+
+        private void PopulateRecipes() {
+            if(Item.Details != null && Item.Details.RecipeID != 0) {
+                Recipe = RecipeAPI.GetRecipe(Item.Details.RecipeID);
+                if(Recipe != null)
+                    RecipeIDs = new List<int>() { Recipe.ID };
             }
             else {
-                HashSet<int> recipeIDs = RecipeAPI.RecipesForItem(item.ID);
-                if(recipeIDs != null)                          
-                    Recipes = RecipeAPI.GetRecipe(recipeIDs);
+                RecipeIDs = new List<int>(RecipeAPI.RecipesForItem(Item.ID));
+                if(RecipeIDs != null && RecipeIDs.Count > 0) {
+                    var test = Recipe; //Cheaty way to load recipe for debugging purpose
+                }
+                else if((RecipeIDs == null || RecipeIDs.Count <= 0) && !MysticForgeManager.IsPromotionItem(Item.ID)) {
+                    List<Recipe> mysticForgeRecipes = RecipeAPI.GetMysticForgeRecipe(Item.ID);
+                    if(mysticForgeRecipes.Count <= 0)
+                        return;
+
+                    foreach(Recipe recipe in mysticForgeRecipes) {
+                        RecipeIDs.Add(recipe.ID);
+                    }
+                    Recipe = mysticForgeRecipes[0];
+                }
             }
         }
 
         private void PopulateChildren() {
-            if(CurrentRecipe == null || CurrentRecipe.Ingredients == null)
+            if(Recipe == null || Recipe.Ingredients == null)
                 return;
 
-            HashSet<int> ingredientsIDs = new HashSet<int>(CurrentRecipe.Ingredients.Select(i => i.ItemID).ToList());
-            if(ingredientsIDs != null) {
-                Children = new List<RecipeTreeNode>();
-                List<Items.Item> items = ItemAPI.GetItem(ingredientsIDs);
+            foreach(Ingredient ingredient in Recipe.Ingredients) {
+                if(ingredient.ItemID < 0) 
+                    return;
 
-                foreach(Items.Item item in items) {
-                    Children.Add(new RecipeTreeNode(item));
-                }
+                if(Children == null)
+                    Children = new List<RecipeTreeNode>();
+
+                Children.Add(new RecipeTreeNode(ingredient.ItemID, ingredient.Count));
             }
+        }
+
+        public void ChangeRecipe() {
+            if(RecipeIDs == null || RecipeIDs.Count <= 1)
+                return;
+
+            if(_currentRecipeIndex + 1 < RecipeIDs.Count) {
+                _currentRecipeIndex = _currentRecipeIndex + 1;
+                _currentRecipe = null;
+            }
+            else if(_currentRecipeIndex + 1 == RecipeIDs.Count) {
+                _currentRecipeIndex = 0;
+                _currentRecipe = null;
+            }
+
+            Children.Clear();
+            PopulateChildren();
         }
     }
 }

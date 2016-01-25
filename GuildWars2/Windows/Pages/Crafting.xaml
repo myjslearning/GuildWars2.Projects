@@ -11,7 +11,7 @@
     <Grid>
         <TreeView x:Name="Crafting_Treeview" HorizontalAlignment="Left" Height="550" VerticalAlignment="Top" Width="800" Background="{x:Null}" FontFamily="Cronos MM" FontSize="18" BorderBrush="{x:Null}">
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type Display:OldDisplayTreeItemRecipe}" ItemsSource="{Binding Items}">
+                <HierarchicalDataTemplate DataType="{x:Type Display:DisplayRecipeTree}" ItemsSource="{Binding Items}">
                     <DockPanel HorizontalAlignment="Stretch" Height="50" LastChildFill="False" VerticalAlignment="Stretch" Width="737" Grid.Column="0" Grid.ColumnSpan="1" Background="{x:Null}" Grid.Row="0">
                         <Image HorizontalAlignment="Left" Height="40" Margin="0" VerticalAlignment="Stretch" Width="40" Source="{Binding Item.Icon}" />
                         <DockPanel Height="24.54" LastChildFill="False" VerticalAlignment="Top" Width="697" HorizontalAlignment="Left" DockPanel.Dock="Top">

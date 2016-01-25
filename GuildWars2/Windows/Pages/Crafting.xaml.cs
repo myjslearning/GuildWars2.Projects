@@ -1,7 +1,5 @@
 ﻿using GuildWars2.Collections;
-using GuildWars2API;
 using GuildWars2API.Model.Items;
-using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Controls;
 
@@ -17,10 +15,10 @@ namespace GuildWars2.Windows.Pages
         public Crafting() {
             InitializeComponent();
             treeviewItemSource = new TreeViewObservableCollection();
-            Crafting_Treeview.ItemsSource = treeviewItemSource;
-
-            List<Item> items = ItemAPI.SearchItem("Gift of Spiders");
-            StartCrafting(items.Find(a => a.Name.Contains("Recipe")));
+            //Crafting_Treeview.ItemsSource = treeviewItemSource;
+            
+            /*RecipeTreeNode tree = new RecipeTreeNode(ItemAPI.SearchItem("Tempered Spinal Blades")[0].ID);
+            treeviewItemSource.Add(tree as DisplayRecipeTree);*/
         }
 
         public void StartCrafting(Item item) {

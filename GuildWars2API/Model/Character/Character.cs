@@ -1,4 +1,4 @@
-﻿using GuildWars2API.Model.Item;
+﻿using GuildWars2API.Model.Items;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 

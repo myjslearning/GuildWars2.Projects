@@ -25,7 +25,7 @@ namespace GuildWars2API.Model.Recipes
         public int OutputItemID { get; set; }
 
         [JsonProperty("output_item_count")]
-        public int OutputItemCount { get; set; }
+        public string OutputItemCount { get; set; }
 
         [JsonProperty("time_to_craft_ms")]
         public int TimeToCraftInMs { get; set; }
@@ -34,6 +34,7 @@ namespace GuildWars2API.Model.Recipes
         /// Possible values:
         /// Artificer, Armorsmith, Chef, Huntsman
         /// Jeweler, Leatherworker, Tailor, Weaponsmith
+        /// !!! In case of external request(http://gw2profits.com/json/): Mystic Forge, Buy, Double Click, Salvage, Charge, Achievement
         /// </summary>
         [JsonProperty("disciplines")]
         public List<string> Disciplines { get; set; }
@@ -45,11 +46,18 @@ namespace GuildWars2API.Model.Recipes
         /// Possible value (value, explanation):
         /// AutoLearned – Indicates that a recipe automatically unlocks upon reaching the required discipline rating.
         /// LearnedFromItem – Indicates that a recipe is unlocked by consuming a recipe sheet.
+        /// /// !!! In case of external request(http://gw2profits.com/json/): Promotion - Indicates that is item is able to be crafted by promoting lower tier ingredients.
         /// </summary>
         [JsonProperty("flags")]
         public List<string> Flags { get; set; }
 
         [JsonProperty("ingredients")]
         public List<Ingredient> Ingredients { get; set; }
+
+        /// <summary>
+        /// Optional property. This only is used when getting mystic forge recipes from an external site (http://gw2profits.com/json/)
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 }

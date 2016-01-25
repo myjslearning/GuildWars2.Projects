@@ -1,7 +1,6 @@
 ﻿using GuildWars2API.Model.Account;
 using GuildWars2API.Model.Character;
 using GuildWars2API.Model.Commerce;
-using GuildWars2API.Model.Item;
 using GuildWars2API.Model.Items;
 using GuildWars2API.Model.Value;
 using System;
@@ -61,6 +60,7 @@ namespace GuildWars2API
             return account;
         }
 
+#pragma warning disable CSE0003
         public static AccountInventory GetAccountInventory(string APIKey) {
             return new AccountInventory() {
                 Characters = GetCharacters(APIKey),
@@ -70,6 +70,7 @@ namespace GuildWars2API
                 OwnSellListings = GetCurrentSellListing(APIKey)
             };
         }
+#pragma warning restore CSE0003
 
         #region Private Methods
 

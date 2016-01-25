@@ -49,7 +49,6 @@
     <Compile Include="Endpoints\RecipeAPI.cs" />
     <Compile Include="Endpoints\ItemAPI.cs" />
     <Compile Include="Endpoints\ValueAPI.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\Account\AccountInventory.cs" />
     <Compile Include="Model\Account\WalletEntry.cs" />
     <Compile Include="Model\Recipes\RecipeTreeNode.cs" />
@@ -83,15 +82,29 @@
     <Compile Include="Model\Event\WorldBoss.cs" />
     <Compile Include="Model\Value\TransactionValue.cs" />
     <Compile Include="Network\NetworkManager.cs" />
+    <Compile Include="Other\MysticForgeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\URLBuilder.cs" />
     <Compile Include="Model\Value\ItemValue.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\NotIncluded.txt" />
+    <None Include="Resources\MysticForgeRecipes.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Resource Include="Resources\MysticForgeRecipes.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
