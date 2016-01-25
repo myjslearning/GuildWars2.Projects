@@ -65,7 +65,7 @@
     <Compile Include="Model\Character\SpecializationGroups.cs" />
     <Compile Include="Model\Account\CurrencyValue.cs" />
     <Compile Include="Model\Event\Event.cs" />
-    <Compile Include="Model\Commerce\ItemPrice.cs" />
+    <Compile Include="Model\Value\ItemPrice.cs" />
     <Compile Include="Model\Items\Buff.cs" />
     <Compile Include="Model\Items\Details.cs" />
     <Compile Include="Model\Items\Infix.cs" />
