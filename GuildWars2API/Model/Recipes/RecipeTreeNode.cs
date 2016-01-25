@@ -6,8 +6,7 @@ namespace GuildWars2API.Model.Recipes
 {
     public class RecipeTreeNode
     {
-        private int _tempItemID;
-
+        private Item _item;
         private Recipe _currentRecipe;
         private int _currentRecipeIndex = 0;
         
@@ -22,44 +21,57 @@ namespace GuildWars2API.Model.Recipes
             set { _currentRecipe = value; }
         }
 
-        public Item Item { get; set; }
+        public int ItemID { get; set; }
+        public Item Item {
+            get {
+                if(_item == null)
+                    Item = ItemAPI.GetItem(ItemID);
+
+                return _item;
+            }
+            set { _item = value; }
+        }
         public int Count { get; set; }
 
         public List<RecipeTreeNode> Children { get; set; }
 
-        public RecipeTreeNode(Item item, int count = 1) {
+        public RecipeTreeNode(Item item, int count = 1) : this(item.ID, count) {
             Item = item;
+        }
+
+        public RecipeTreeNode(int itemID, int count = 1) 
+        {
             Count = count;
+            ItemID = itemID;
 
             PopulateRecipes();
             PopulateChildren();
         }
 
-        public RecipeTreeNode(int itemID, int count = 1) : this(ItemAPI.GetItem(itemID), count) 
-        {
-            _tempItemID = itemID; 
-        }
-
         private void PopulateRecipes() {
-            if(Item.Details != null && Item.Details.RecipeID != 0) {
-                Recipe = RecipeAPI.GetRecipe(Item.Details.RecipeID);
-                if(Recipe != null)
-                    RecipeIDs = new List<int>() { Recipe.ID };
+            //First check RecipeAPI for recipe
+            //Check if its not a promotion Item and check mystic forge
+            //Get Item object and search for recipe in item
+
+            RecipeIDs = new List<int>(RecipeAPI.RecipesForItem(ItemID));
+            if(RecipeIDs != null && RecipeIDs.Count > 0) {
+                var test = Recipe; //Cheaty way to load recipe for debugging purpose
+            }
+            else if((RecipeIDs == null || RecipeIDs.Count <= 0) && !MysticForgeManager.IsPromotionItem(ItemID)) {
+                List<Recipe> mysticForgeRecipes = RecipeAPI.GetMysticForgeRecipe(ItemID);
+                if(mysticForgeRecipes.Count <= 0)
+                    return;
+
+                foreach(Recipe recipe in mysticForgeRecipes) {
+                    RecipeIDs.Add(recipe.ID);
+                }
+                Recipe = mysticForgeRecipes[0];
             }
             else {
-                RecipeIDs = new List<int>(RecipeAPI.RecipesForItem(Item.ID));
-                if(RecipeIDs != null && RecipeIDs.Count > 0) {
-                    var test = Recipe; //Cheaty way to load recipe for debugging purpose
-                }
-                else if((RecipeIDs == null || RecipeIDs.Count <= 0) && !MysticForgeManager.IsPromotionItem(Item.ID)) {
-                    List<Recipe> mysticForgeRecipes = RecipeAPI.GetMysticForgeRecipe(Item.ID);
-                    if(mysticForgeRecipes.Count <= 0)
-                        return;
-
-                    foreach(Recipe recipe in mysticForgeRecipes) {
-                        RecipeIDs.Add(recipe.ID);
-                    }
-                    Recipe = mysticForgeRecipes[0];
+                if(Item.Details != null && Item.Details.RecipeID != 0) {
+                    Recipe = RecipeAPI.GetRecipe(Item.Details.RecipeID);
+                    if(Recipe != null)
+                        RecipeIDs = new List<int>() { Recipe.ID };
                 }
             }
         }
