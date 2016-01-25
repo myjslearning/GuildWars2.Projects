@@ -1,4 +1,6 @@
-﻿namespace GuildWars2API.Model.Commerce
+﻿using System;
+
+namespace GuildWars2API.Model.Commerce
 {
     public class ItemPrice
     {
@@ -23,6 +25,11 @@
         public void Add(int coins) {
             TotalCoins = TotalCoins + coins;
             CalculateCoins();
+        }
+
+        internal void Add(int coins, int procentDeduction) {
+            double multiplier = 1 - (procentDeduction / 100.0);
+            Add(Convert.ToInt32(coins * multiplier));
         }
 
         private int[] CalculateCoins() {

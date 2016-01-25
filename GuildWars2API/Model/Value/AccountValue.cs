@@ -19,10 +19,14 @@ namespace GuildWars2API.Model.Value
                     return _baseValue;
 
                 ItemPrice price = new ItemPrice();
-                OwnSellListings.ForEach(s => { price.Add(s.Transaction.Quantity * s.Transaction.Price); });
-                OwnBuyListings.ForEach(b => { price.Add(b.Transaction.Quantity * b.Transaction.Price); });
-                price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold
-
+                
+                /*
+                Sell listing is a different story than buylisting, because the value is added in raw gold to your account. So the buy/sell listing value of the item 
+                does not matter, because it will sell for the amount of gold you listed it for.
+                */
+                OwnSellListings.ForEach(s => { price.Add(s.Transaction.Quantity * s.Transaction.Price, 10); });
+                price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold                            
+                                                                                                                    
                 _baseValue = price;
                 return price;
             }
@@ -39,6 +43,10 @@ namespace GuildWars2API.Model.Value
                 Material.ForEach(i => { price.Add(i.BuyValue); });
                 Characters.ForEach(c => { price.Add(c.TotalBuyValue); });
 
+                /* The gold to buy these items is already deducted from your account. 
+                So we just imagine you already have these items in your account and just calculate the TP price as if you tried to sell them. */
+                OwnBuyListings.ForEach(b => { price.Add(b.Transaction.Quantity * b.ItemListing.Buys.UnitPrice); });
+
                 _totalBuyValue = price;
                 return _totalBuyValue;
             }
@@ -54,6 +62,10 @@ namespace GuildWars2API.Model.Value
                 Bank.ForEach(i => { price.Add(i.SellValue); });
                 Material.ForEach(i => { price.Add(i.SellValue); });
                 Characters.ForEach(c => { price.Add(c.TotalSellValue); });
+
+                /* The gold to buy these items is already deducted from your account. 
+                So we just imagine you already have these items in your account and just calculate the TP price as if you tried to sell them. */
+                OwnBuyListings.ForEach(b => { price.Add(b.Transaction.Quantity * b.ItemListing.Sells.UnitPrice); });
 
                 _totalSellValue = price;
                 return _totalSellValue;
