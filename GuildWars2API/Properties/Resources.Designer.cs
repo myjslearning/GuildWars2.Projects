@@ -61,7 +61,35 @@ namespace GuildWars2API.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [{&quot;name&quot;:&quot;Iron Ore&quot;,&quot;type&quot;:&quot;CraftingMaterial&quot;,&quot;output_item_id&quot;:19699,&quot;output_item_count&quot;:88,&quot;disciplines&quot;:[&quot;Mystic Forge&quot;],&quot;ingredients&quot;:[{&quot;item_id&quot;:19697,&quot;count&quot;:250},{&quot;item_id&quot;:19699,&quot;count&quot;:1},{&quot;item_id&quot;:24273,&quot;count&quot;:5},{&quot;item_id&quot;:20796,&quot;count&quot;:1}]},{&quot;name&quot;:&quot;Gold Ore&quot;,&quot;type&quot;:&quot;CraftingMaterial&quot;,&quot;output_item_id&quot;:19698,&quot;output_item_count&quot;:88,&quot;disciplines&quot;:[&quot;Mystic Forge&quot;],&quot;ingredients&quot;:[{&quot;item_id&quot;:19703,&quot;count&quot;:250},{&quot;item_id&quot;:19698,&quot;count&quot;:1},{&quot;item_id&quot;:24274,&quot;count&quot;:5},{&quot;item_id&quot;:20796,&quot;count&quot;:2}]},{&quot;nam [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to [
+        ///  {
+        ///    &quot;name&quot;: &quot;Iron Ore&quot;,
+        ///    &quot;type&quot;: &quot;CraftingMaterial&quot;,
+        ///    &quot;output_item_id&quot;: 19699,
+        ///    &quot;output_item_count&quot;: 88,
+        ///    &quot;disciplines&quot;: [ &quot;Mystic Forge&quot; ],
+        ///    &quot;ingredients&quot;: [
+        ///      {
+        ///        &quot;item_id&quot;: 19697,
+        ///        &quot;count&quot;: 250
+        ///      },
+        ///      {
+        ///        &quot;item_id&quot;: 19699,
+        ///        &quot;count&quot;: 1
+        ///      },
+        ///      {
+        ///        &quot;item_id&quot;: 24273,
+        ///        &quot;count&quot;: 5
+        ///      },
+        ///      {
+        ///        &quot;item_id&quot;: 20796,
+        ///        &quot;count&quot;: 1
+        ///      }
+        ///    ]
+        ///  },
+        ///  {
+        ///    &quot;name&quot;: &quot;Gold Ore&quot;,
+        ///    &quot;type&quot;: &quot;Cra [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MysticForgeRecipes {
             get {

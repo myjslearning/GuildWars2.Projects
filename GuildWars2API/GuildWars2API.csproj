@@ -82,7 +82,6 @@
     <Compile Include="Model\Event\WorldBoss.cs" />
     <Compile Include="Model\Value\TransactionValue.cs" />
     <Compile Include="Network\NetworkManager.cs" />
-    <Compile Include="Other\MysticForgeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\URLBuilder.cs" />
     <Compile Include="Model\Value\ItemValue.cs" />
@@ -98,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Resource Include="Resources\MysticForgeRecipes.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

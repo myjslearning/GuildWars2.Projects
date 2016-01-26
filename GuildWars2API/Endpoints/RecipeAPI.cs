@@ -4,7 +4,6 @@ using GuildWars2API.Network;
 using System.Collections.Generic;
 using System.Linq;
 using static GuildWars2API.Network.NetworkManager;
-using static GuildWars2API.Other.MysticForgeManager;
 using static Newtonsoft.Json.JsonConvert;
 
 namespace GuildWars2API
@@ -46,6 +45,23 @@ namespace GuildWars2API
         public static List<Recipe> GetMysticForgeRecipe(string name) {
             List<Recipe> mysticForgeRecipes = ReadMysticForgeRecipes();
             return mysticForgeRecipes.Where(r => r.Name.Equals(name)).ToList();
+        }
+
+        private static List<Recipe> ReadMysticForgeRecipes(bool useLocalRecipes = true) {
+            try {
+                if(useLocalRecipes) {
+                    string test = Properties.Resources.MysticForgeRecipes;
+                    return DeserializeObject<List<Recipe>>(Properties.Resources.MysticForgeRecipes);
+                }
+                else {
+                    string response = NetworkManager.UnauthorizedRequest(URLBuilder.GetMysticForgeRecipes());
+                    if(response.Length > 0) {
+                        return DeserializeObject<List<Recipe>>(response);
+                    }
+                }
+            }
+            catch { }
+            return new List<Recipe>();
         }
 
         #endregion Mystic Forge

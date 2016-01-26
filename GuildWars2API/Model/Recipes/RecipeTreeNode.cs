@@ -1,5 +1,4 @@
 ﻿using GuildWars2API.Model.Items;
-using GuildWars2API.Other;
 using System.Collections.Generic;
 
 namespace GuildWars2API.Model.Recipes
@@ -59,7 +58,7 @@ namespace GuildWars2API.Model.Recipes
             if(RecipeIDs != null && RecipeIDs.Count > 0) {
                 var test = Recipe; //Cheaty way to load recipe for debugging purpose
             }
-            else if((RecipeIDs == null || RecipeIDs.Count <= 0) && !MysticForgeManager.IsPromotionItem(ItemID)) {
+            else if((RecipeIDs == null || RecipeIDs.Count <= 0) && !ItemAPI.IsPromotionItem(ItemID)) {
                 List<Recipe> mysticForgeRecipes = RecipeAPI.GetMysticForgeRecipe(ItemID);
                 if(mysticForgeRecipes.Count <= 0)
                     return;
