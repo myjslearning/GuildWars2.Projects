@@ -35,14 +35,6 @@ namespace GuildWars2API
             return null;
         }
 
-        public static List<WalletCurrencyInfo> GetCurrencyInfo() {
-            string response = UnauthorizedRequest(URLBuilder.GetCurrencies());
-            if(response.Length > 0) {
-                return DeserializeObject<List<WalletCurrencyInfo>>(response);
-            }
-            return null;
-        }
-
         public static List<WalletCurrency> GetWallet(string APIKey) {
             string response = AuthorizedRequest(URLBuilder.GetWallet(), APIKey);
             if(response.Length > 0) {

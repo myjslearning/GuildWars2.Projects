@@ -46,16 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Endpoints\AccountAPI.cs" />
+    <Compile Include="Endpoints\MarketAPI.cs" />
     <Compile Include="Endpoints\RecipeAPI.cs" />
     <Compile Include="Endpoints\ItemAPI.cs" />
     <Compile Include="Endpoints\ValueAPI.cs" />
     <Compile Include="Model\Account\AccountInventory.cs" />
     <Compile Include="Model\Account\WalletEntry.cs" />
+    <Compile Include="Model\Commerce\GemExchange.cs" />
     <Compile Include="Model\Recipes\RecipeTreeNode.cs" />
     <Compile Include="Model\Value\AccountValue.cs" />
     <Compile Include="Model\Value\CharacterValue.cs" />
     <Compile Include="Model\Account\Account.cs" />
-    <Compile Include="Model\Account\CurrencyInfo.cs" />
+    <Compile Include="Model\Commerce\CurrencyInfo.cs" />
     <Compile Include="Model\Character\Bag.cs" />
     <Compile Include="Model\Character\Character.cs" />
     <Compile Include="Model\Character\Discipline.cs" />
@@ -63,7 +65,7 @@
     <Compile Include="Model\Items\ItemStack.cs" />
     <Compile Include="Model\Character\Specialization.cs" />
     <Compile Include="Model\Character\SpecializationGroups.cs" />
-    <Compile Include="Model\Account\CurrencyValue.cs" />
+    <Compile Include="Model\Commerce\CurrencyValue.cs" />
     <Compile Include="Model\Event\Event.cs" />
     <Compile Include="Model\Value\ItemPrice.cs" />
     <Compile Include="Model\Items\Buff.cs" />
@@ -80,6 +82,9 @@
     <Compile Include="Model\Recipes\Ingredient.cs" />
     <Compile Include="Model\Recipes\Recipe.cs" />
     <Compile Include="Model\Event\WorldBoss.cs" />
+    <Compile Include="Model\Value\PriceEvent\PriceTrigger.cs" />
+    <Compile Include="Model\Value\PriceEvent\PriceTriggerEventArgs.cs" />
+    <Compile Include="Model\Value\PriceEvent\PriceTriggerManager.cs" />
     <Compile Include="Model\Value\TransactionValue.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

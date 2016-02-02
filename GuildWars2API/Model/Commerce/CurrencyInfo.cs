@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace GuildWars2API.Model.Account
+namespace GuildWars2API.Model.Commerce
 {
     public class WalletCurrencyInfo
     {

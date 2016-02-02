@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using static GuildWars2API.AccountAPI;
+using static GuildWars2API.MarketAPI;
 
 namespace GuildWars2API
 {
@@ -41,13 +42,14 @@ namespace GuildWars2API
             List<Item> items = ItemAPI.GetItem(unknownItemIDs);
             items.AddRange(knownItems);
             Console.WriteLine("Count = " + itemIDs.Count);
-            List<ItemListing> itemListings = ItemAPI.GetPriceListing(itemIDs);
+            List<ItemListing> itemListings = ItemAPI.GetItemListing(itemIDs);
 
             //Parse it into object
             AccountValue account = new AccountValue();
             account.Bank = GetItemValues(accountInv.Bank, itemListings, items);
             account.Material = GetItemValues(accountInv.MaterialStorage, itemListings, items);
             account.Wallet = GetWalletEntries(APIKey);
+            account.GemConversion = GetGemToGoldConversion();
             account.OwnSellListings = GetTransactionValues(itemListings, accountInv.OwnSellListings);
             account.OwnBuyListings = GetTransactionValues(itemListings, accountInv.OwnBuyListings);
             foreach(Character character in accountInv.Characters) {
@@ -189,7 +191,7 @@ namespace GuildWars2API
             return itemIDs;
         }
 
-        private static HashSet<int> GetIDs(List<Transaction> transactions) {
+        internal static HashSet<int> GetIDs(List<Transaction> transactions) {
             HashSet<int> itemIDs = new HashSet<int>();
             foreach(Transaction transaction in transactions) {
                 if(transaction != null) {

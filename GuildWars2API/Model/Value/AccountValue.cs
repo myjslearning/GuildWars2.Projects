@@ -1,7 +1,6 @@
 ﻿using GuildWars2API.Model.Account;
 using GuildWars2API.Model.Commerce;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GuildWars2API.Model.Value
 {
@@ -25,7 +24,8 @@ namespace GuildWars2API.Model.Value
                 does not matter, because it will sell for the amount of gold you listed it for.
                 */
                 OwnSellListings.ForEach(s => { price.Add(s.Transaction.Quantity * s.Transaction.Price); });
-                price.Add(Wallet.Single(e => e.ID == 1).Value);     //ID 1 is coins/gold                            
+                price.Add(Wallet.Find(e => e.ID == 1).Value);                               //ID 1 = gold  
+                price.Add(GemConversion.CoinsPerGem * Wallet.Find(e => e.ID == 4).Value);   //ID 4 = gems                    
                                                                                                                     
                 _baseValue = price;
                 return price;
@@ -90,5 +90,7 @@ namespace GuildWars2API.Model.Value
         public List<TransactionValue> OwnSellListings { get; set; }         
 
         public List<TransactionValue> OwnBuyListings { get; set; }
+
+        public GemExchange GemConversion { get; set; }
     }
 }

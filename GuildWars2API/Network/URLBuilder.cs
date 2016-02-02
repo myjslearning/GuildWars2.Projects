@@ -53,29 +53,11 @@ namespace GuildWars2API.Network
 
         public static string GetMysticForgeRecipes() => ROOT_GW2PRO;
 
-        [Obsolete]
-        public static string GetMysticForgeRecipeByItemID(int itemID) => string.Format("{0}?output_ids={1}", ROOT_GW2PRO, itemID);
-
-        [Obsolete]
-        public static string GetMysticForgeRecipeByItemID(HashSet<int> itemIDs) {
-            string baseURL = string.Format("{0}?output_ids=", ROOT_GW2PRO);
-            return AddIds(baseURL, itemIDs);
-        }
-
-        [Obsolete]
-        public static string GetMysticForgeRecipeByName(string name) => string.Format("{0}?names={1}", ROOT_GW2PRO, name);
-
-        /*[Obsolete]
-        public static string GetMysticForgeRecipeByName(HashSet<string> names) {
-            string baseURL = string.Format("{0}?names=", ROOT_GW2PRO);
-            return AddIds(baseURL, names);
-        }*/
-
         #endregion Mystic Forge
 
         #endregion Recipes
 
-        #region Tradepost
+        #region Market
 
         public static string GetItemListing(int itemID) => string.Format("{0}/{1}/{2}/{3}", ROOT_GW2, COMMERCE, PRICES, itemID);
 
@@ -87,7 +69,10 @@ namespace GuildWars2API.Network
         public static string GetCurrentSellListings() => string.Format("{0}/{1}/{2}/{3}/{4}", ROOT_GW2, COMMERCE, TRANSACTIONS, "current", "sells");
         public static string GetCurrentBuyListings() => string.Format("{0}/{1}/{2}/{3}/{4}", ROOT_GW2, COMMERCE, TRANSACTIONS, "current", "buys");
 
-        #endregion Tradepost
+        public static string GetGoldToGemConversion => string.Format("{0}/{1}/{2}", ROOT_GW2, COMMERCE, "coins");
+        public static string GetGemToGoldConversion => string.Format("{0}/{1}/{2}", ROOT_GW2, COMMERCE, "gems");
+
+        #endregion Market
 
         #region Account
 
