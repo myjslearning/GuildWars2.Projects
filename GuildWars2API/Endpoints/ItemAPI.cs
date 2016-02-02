@@ -35,7 +35,7 @@ namespace GuildWars2API
 
         public static List<Item> GetItem(HashSet<int> itemIDs) => GetLargeRequest<Item>(itemIDs, "items");
 
-        public static ItemListing GetPriceListing(int itemID) {
+        public static ItemListing GetItemListing(int itemID) {
             string response = UnauthorizedRequest(URLBuilder.GetItemListing(itemID));
             if(response.Length > 0) {
                 return DeserializeObject<ItemListing>(response);
@@ -43,7 +43,7 @@ namespace GuildWars2API
             return null;
         }
 
-        public static List<ItemListing> GetPriceListing(HashSet<int> itemIDs) => GetLargeRequest<ItemListing>(itemIDs, "commerce/prices");
+        public static List<ItemListing> GetItemListing(HashSet<int> itemIDs) => GetLargeRequest<ItemListing>(itemIDs, "commerce/prices");
 
         public static bool IsPromotionItem(int itemID) {
             List<int> promotionItemIDs = new List<int>() {

@@ -2,7 +2,7 @@
 
 namespace GuildWars2API.Model.Value
 {
-    public class ItemPrice
+    public class ItemPrice : IComparable<ItemPrice>
     {
         private int TotalCoins { get; set; }
 
@@ -43,5 +43,23 @@ namespace GuildWars2API.Model.Value
             double multiplier = 1 - (procentDeduction / 100.0);
             Add(Convert.ToInt32(coins * multiplier));
         }
+
+        public int CompareTo(ItemPrice other) {
+            if(other == null)
+                return 1;
+
+            if(TotalCoins > other.TotalCoins) {
+                return 1;
+            }
+            else if(TotalCoins < other.TotalCoins) {
+                return -1;
+            }
+
+            return 0;
+        }
+
+        public static bool operator <(ItemPrice e1, ItemPrice e2) => e1.CompareTo(e2) < 0;
+
+        public static bool operator >(ItemPrice e1, ItemPrice e2) => e1.CompareTo(e2) > 0;
     }
 }
