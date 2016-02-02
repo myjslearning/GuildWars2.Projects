@@ -1,10 +1,11 @@
 ﻿using GuildWars2API.Model.Commerce;
+using GuildWars2API.Model.Value;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
 
-namespace GuildWars2API.Model.Value.PriceEvent
+namespace GuildWars2API.Event.PriceEvent
 {
     public class PriceTriggerManager
     {

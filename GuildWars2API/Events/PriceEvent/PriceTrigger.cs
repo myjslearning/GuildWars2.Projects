@@ -1,4 +1,6 @@
-﻿namespace GuildWars2API.Model.Value.PriceEvent
+﻿using GuildWars2API.Model.Value;
+
+namespace GuildWars2API.Event.PriceEvent
 {
     internal class PriceTrigger
     {

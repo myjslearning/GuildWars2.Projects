@@ -82,9 +82,9 @@
     <Compile Include="Model\Recipes\Ingredient.cs" />
     <Compile Include="Model\Recipes\Recipe.cs" />
     <Compile Include="Model\Event\WorldBoss.cs" />
-    <Compile Include="Model\Value\PriceEvent\PriceTrigger.cs" />
-    <Compile Include="Model\Value\PriceEvent\PriceTriggerEventArgs.cs" />
-    <Compile Include="Model\Value\PriceEvent\PriceTriggerManager.cs" />
+    <Compile Include="Events\PriceEvent\PriceTrigger.cs" />
+    <Compile Include="Events\PriceEvent\PriceTriggerEventArgs.cs" />
+    <Compile Include="Events\PriceEvent\PriceTriggerManager.cs" />
     <Compile Include="Model\Value\TransactionValue.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
