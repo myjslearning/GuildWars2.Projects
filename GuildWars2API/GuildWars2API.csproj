@@ -52,6 +52,15 @@
     <Compile Include="Endpoints\ValueAPI.cs" />
     <Compile Include="Model\Account\AccountInventory.cs" />
     <Compile Include="Model\Account\WalletEntry.cs" />
+    <Compile Include="Model\Achievements\Achievement.cs" />
+    <Compile Include="Model\Achievements\Category.cs" />
+    <Compile Include="Model\Achievements\Dailies.cs" />
+    <Compile Include="Model\Achievements\Daily.cs" />
+    <Compile Include="Model\Achievements\Group.cs" />
+    <Compile Include="Model\Achievements\LevelRequirement.cs" />
+    <Compile Include="Model\Achievements\ProgressBit.cs" />
+    <Compile Include="Model\Achievements\Reward.cs" />
+    <Compile Include="Model\Achievements\Tier.cs" />
     <Compile Include="Model\Commerce\GemExchange.cs" />
     <Compile Include="Model\Guild\Emblem.cs" />
     <Compile Include="Model\Guild\LogEntry.cs" />

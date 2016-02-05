@@ -1,6 +1,5 @@
 ﻿Not Included:
 
-- Achievements
 - WvW
 - Game Mechanics
 - Map Information
