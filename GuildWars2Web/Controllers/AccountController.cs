@@ -1,4 +1,5 @@
-﻿using GuildWars2Web.Classes;
+﻿using GuildWars2DB;
+using GuildWars2Web.Classes;
 using GuildWars2Web.Models;
 using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace GuildWars2Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model) {
             if(ModelState.IsValid && UserManager.IsValid(model.Username, model.Password)) {
-                Profile profile = new Profile() { ID = 1, Username = model.Username, AuthRole = AuthRoles.Admin };  //TODO Get from DB
+                Profile profile = new Profile(UserDB.GetUser(model.Username));
                 Authorization.SetAuthCookie(HttpContext.ApplicationInstance.Response, profile, model.RememberMe);          
 
                 ViewBag.LoggedIn = true;

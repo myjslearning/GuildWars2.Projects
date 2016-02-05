@@ -7,7 +7,7 @@ using System.IO;
 
 namespace GuildWars2DB
 {
-    public static class GW2DB
+    internal static class GW2DB
     {
         private const string DATA_SOURCE = "GuildWars2DB.sqlite";
 

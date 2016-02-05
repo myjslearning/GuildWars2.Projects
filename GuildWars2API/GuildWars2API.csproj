@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -53,6 +53,16 @@
     <Compile Include="Model\Account\AccountInventory.cs" />
     <Compile Include="Model\Account\WalletEntry.cs" />
     <Compile Include="Model\Commerce\GemExchange.cs" />
+    <Compile Include="Model\Guild\Emblem.cs" />
+    <Compile Include="Model\Guild\LogEntry.cs" />
+    <Compile Include="Model\Guild\Member.cs" />
+    <Compile Include="Model\Guild\Permission.cs" />
+    <Compile Include="Model\Guild\Rank.cs" />
+    <Compile Include="Model\Guild\Stash.cs" />
+    <Compile Include="Model\Guild\Treasury.cs" />
+    <Compile Include="Model\Guild\Upgrade.cs" />
+    <Compile Include="Model\Guild\UpgradeCost.cs" />
+    <Compile Include="Model\Guild\UpgradeItem.cs" />
     <Compile Include="Model\Recipes\RecipeTreeNode.cs" />
     <Compile Include="Model\Value\AccountValue.cs" />
     <Compile Include="Model\Value\CharacterValue.cs" />
@@ -98,10 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\NotIncluded.txt" />
-    <None Include="Resources\MysticForgeRecipes.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\MysticForgeRecipes.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

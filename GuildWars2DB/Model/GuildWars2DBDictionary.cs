@@ -9,8 +9,11 @@
             else if(entity == GW2Entities.WorldBossTime) {
                 return "WorldBossTime";
             }
-            else if(entity == GW2Entities.Item) {
-                return "Item";
+            else if(entity == GW2Entities.AccountValue) {
+                return "AccountValue";
+            }
+            else if(entity == GW2Entities.User) {
+                return "User";
             }
             return null;
         }
@@ -20,6 +23,7 @@
     {
         WorldBoss,
         WorldBossTime,
-        Item
+        User,
+        AccountValue
     }
 }

@@ -1,6 +1,5 @@
 ﻿using GuildWars2.Model;
 using GuildWars2DB;
-using GuildWars2DB.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -60,7 +59,7 @@ namespace GuildWars2.Collections
         #region Initialization
 
         private void InitCollection() {
-            List<DisplayWorldBoss> bosses = ParseWorldBosses(GW2DB.GetTable(GW2Entities.WorldBoss), GW2DB.GetTable(GW2Entities.WorldBossTime));
+            List<DisplayWorldBoss> bosses = ParseWorldBosses(WorldBossDB.WorldBossTable, WorldBossDB.WorldBossTimeTable);
             bosses.ToList().ForEach(b => this.Add(b));
         }
 

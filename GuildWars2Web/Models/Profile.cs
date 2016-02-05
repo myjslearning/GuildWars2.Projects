@@ -1,5 +1,6 @@
 ﻿using GuildWars2Web.Classes;
 using System;
+using System.Collections.Generic;
 
 namespace GuildWars2Web.Models
 {
@@ -21,6 +22,27 @@ namespace GuildWars2Web.Models
         
         public DateTime SubDate { get; set; }
 
-        public string Serialize() => ID + ";" + AuthRole.ToString();
+        public Profile() { }
+
+        public Profile(Dictionary<string, object> dictionary) {
+            Role = TryGetValue<string>(dictionary, "Role");
+            Level = TryGetValue<int>(dictionary, "Level");
+            Rank = TryGetValue<string>(dictionary, "Rank");
+            Username = TryGetValue<string>(dictionary, "Username");
+            Avatar = TryGetValue<string>(dictionary, "Avatar");
+            SubDate = TryGetValue<DateTime>(dictionary, "SubDate");
+
+            AuthRole = Authorization.ConvertRole(TryGetValue<int>(dictionary, "Authrole"));
+        }
+
+        private T TryGetValue<T>(Dictionary<string, object> dictionary, string key) {
+            if(dictionary.ContainsKey(key)) {
+                object value = dictionary[key];
+                if(value.GetType() == typeof(T)) {
+                    return (T)value;
+                }
+            }
+            return default(T);
+        }
     }
 }

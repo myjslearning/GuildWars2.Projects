@@ -1,4 +1,5 @@
-﻿using GuildWars2Web.Models;
+﻿using GuildWars2DB;
+using GuildWars2Web.Models;
 using System;
 using System.Web;
 using System.Web.Security;
@@ -30,7 +31,7 @@ namespace GuildWars2Web.Classes
               DateTime.Now,
               DateTime.Now.AddDays(7),
               isPersistent,
-              profile.Serialize(),
+              profile.ID.ToString(),
               FormsAuthentication.FormsCookiePath);
 
             string encTicket = FormsAuthentication.Encrypt(ticket);
@@ -42,24 +43,20 @@ namespace GuildWars2Web.Classes
         }
 
         public static Profile GetProfile(HttpResponse context) {
-            string[] userData = GetAuthCookie(context).Split(';');
-            if(userData?.Length >= 2) {
-                //TODO Get from DB
-                return new Profile() { ID = Convert.ToInt32(userData[0]), Username = "Roytazz", AuthRole = ConvertRole(userData[1]) };
+            string userData = GetAuthCookie(context);
+            if(userData?.Length > 0) {
+                return new Profile(UserDB.GetUser(userData));
             }
             return null;
         }
 
-        private static AuthRoles ConvertRole(string role) {
-            if(role.Equals("Admin")) {
-                return AuthRoles.Admin;
+        public static AuthRoles ConvertRole(int roleNum) {
+            foreach(AuthRoles role in Enum.GetValues(typeof(AuthRoles))) {
+                if((int)role == roleNum)
+                    return role;
             }
-            else if(role.Equals("User")) {
-                return AuthRoles.User;
-            }
-            else {
-                return AuthRoles.Unknown;
-            }
+
+            return AuthRoles.Unknown;
         }
     }
 

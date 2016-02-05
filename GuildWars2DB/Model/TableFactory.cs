@@ -10,7 +10,11 @@ namespace GuildWars2DB.Model
             if(entity == GW2Entities.WorldBoss || entity == GW2Entities.WorldBossTime) {
                 CreateWorldBossTable(helper);
             }
-            else if(entity == GW2Entities.Item) {
+            else if(entity == GW2Entities.AccountValue) {
+                CreateAccountValueTable(helper);
+            }
+            else if(entity == GW2Entities.User) {
+                CreateUserTable(helper);
             }
         }
 
@@ -30,7 +34,7 @@ namespace GuildWars2DB.Model
 
         private static SQLiteTable GetWorldBossTable() {
             SQLiteTable worldBossTable = new SQLiteTable(GuildWars2DBDictionary.EntityToName(GW2Entities.WorldBoss));
-            worldBossTable.Columns.Add(new SQLiteColumn("ID", true));
+            worldBossTable.Columns.Add(new SQLiteColumn("ID", ColType.Integer, true, true, true, "-1"));
             worldBossTable.Columns.Add(new SQLiteColumn("Name", ColType.Text));
             worldBossTable.Columns.Add(new SQLiteColumn("Description", ColType.Text));
             worldBossTable.Columns.Add(new SQLiteColumn("Waypoint", ColType.Text));
@@ -71,5 +75,40 @@ namespace GuildWars2DB.Model
         }
 
         #endregion WorldBosses
+
+        #region AccountValue
+
+        public static void CreateAccountValueTable(SQLiteHelper helper) {
+            helper.CreateTable(GetAccountValueTable());
+        }
+
+        private static SQLiteTable GetAccountValueTable() {
+            SQLiteTable accountValueTable = new SQLiteTable(GuildWars2DBDictionary.EntityToName(GW2Entities.AccountValue));
+            //Define Columns
+            return accountValueTable;
+        }
+
+        #endregion AccountValue
+
+        #region User
+
+        public static void CreateUserTable(SQLiteHelper helper) {
+            helper.CreateTable(GetUserTable());
+        }
+
+        private static SQLiteTable GetUserTable() {
+            SQLiteTable userTable = new SQLiteTable(GuildWars2DBDictionary.EntityToName(GW2Entities.User));
+            userTable.Columns.Add(new SQLiteColumn("ID", ColType.Integer, true, true, true, "-1"));
+            userTable.Columns.Add(new SQLiteColumn("Name", ColType.Text));
+            userTable.Columns.Add(new SQLiteColumn("Password", ColType.Text));
+            userTable.Columns.Add(new SQLiteColumn("Role", ColType.Integer));
+            userTable.Columns.Add(new SQLiteColumn("Rank", ColType.Text));
+            userTable.Columns.Add(new SQLiteColumn("Level", ColType.Integer));
+            userTable.Columns.Add(new SQLiteColumn("SubDate", ColType.DateTime));
+            //userTable.Columns.Add(new SQLiteColumn("Avatar", ColType.Text));
+            return userTable;
+        }
+
+        #endregion User
     }
 }
