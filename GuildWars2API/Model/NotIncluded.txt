@@ -1,8 +1,14 @@
 ﻿Not Included:
-- PvP
-- Tokeninfo
-- Detailed Specializations
-- Detailed Traits
+
+- Achievements
+- WvW
+- Game Mechanics
 - Map Information
 - Misc.
 - GW1 API
+
+Authenticated
+	- PvP
+	- Tokeninfo 
+
+See: https://wiki.guildwars2.com/wiki/API:Main
