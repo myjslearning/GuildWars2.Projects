@@ -40,8 +40,8 @@ namespace GuildWars2Web.Controllers
             return RedirectToAction("Index", "Event");
         }
 
-        public ActionResult _UserAccount() => View(GetProfile());
+        public ActionResult _UserAccount() => View(GetViewModelProfile());
 
-        public ActionResult _UserSidebar() => View(GetProfile());
+        public ActionResult _UserSidebar() => View(GetViewModelProfile());
     }
 }

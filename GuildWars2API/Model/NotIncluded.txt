@@ -3,11 +3,16 @@
 - WvW
 - Game Mechanics
 - Map Information
-- Misc.
-- GW1 API
+- v1 API
+
+Miscellaneous
+	- Build
+	- Colors
+	- Files
+	- Quaggans
+	- Minis
 
 Authenticated
 	- PvP
-	- Tokeninfo 
 
 See: https://wiki.guildwars2.com/wiki/API:Main

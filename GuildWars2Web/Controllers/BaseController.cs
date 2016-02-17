@@ -8,14 +8,30 @@ using System.Web.Mvc;
 
 namespace GuildWars2Web.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController : Controller        //TODO Top-right profile button dissapears in mobile-layout
     {
         public BaseController() {
             ViewBag.Title = "Guild Wars 2 Web";
             ViewBag.Version = GetApplicationVersion();
         }
 
-        public Profile GetProfile() {
+        public ProfileViewModel GetViewModelProfile() {
+            return GetDefaultProfile();
+
+#pragma warning disable CS0162 // Unreachable code detected
+            Profile profile = GetProfile();
+#pragma warning restore CS0162 // Unreachable code detected
+            return new ProfileViewModel {
+                Username = profile.Username,
+                Role = profile.Role,
+                Level = profile.Level,
+                Rank = profile.Rank,
+                SubDate = profile.SubDate
+                //Avatar = profile.Avatar,
+            };
+        }
+
+        private Models.Profile GetProfile() {
             if(Session["Profile"]?.GetType() != typeof(Profile)) {
                 Session["Profile"] = Authorization.GetProfile(HttpContext.ApplicationInstance.Response);
             }
@@ -29,8 +45,8 @@ namespace GuildWars2Web.Controllers
         }
 
         [SuppressMessage("", "CSE0003")]
-        private Profile GetDefaultProfile() {
-            return new Profile() {
+        private ProfileViewModel GetDefaultProfile() {
+            return new ProfileViewModel() {
                 Username = "Roytazz.5932",
                 Avatar = "~/Content/stock_img/user4-128x128.jpg",
                 Role = "Website Developer",

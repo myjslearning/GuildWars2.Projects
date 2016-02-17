@@ -8,7 +8,7 @@ namespace GuildWars2.Model
 {
     class DisplayRecipeTree : RecipeTreeNode, INotifyPropertyChanged
     {
-        //TODO Add display properties
+        //Add display properties
         //Also optimize the loading of the Item Objects. Maybe do this in batch?
         public PropChangeObservableCollection<DisplayRecipeTree> Items { get; set; }
 

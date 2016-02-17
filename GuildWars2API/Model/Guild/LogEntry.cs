@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace GuildWars2API.Model.Guild
 {
@@ -7,8 +8,11 @@ namespace GuildWars2API.Model.Guild
         [JsonProperty("id")]
         public int ID { get; set; }
 
+        /// <summary>
+        /// ISO-8601 format
+        /// </summary>
         [JsonProperty("time")]
-        public string Time { get; set; }    //TODO ISO-8601
+        public DateTime Time { get; set; }   
 
         [JsonProperty("user")]
         public string User { get; set; }

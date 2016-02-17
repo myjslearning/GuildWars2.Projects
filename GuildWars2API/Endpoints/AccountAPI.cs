@@ -58,5 +58,17 @@ namespace GuildWars2API
             }
             return null;
         }
+
+#pragma warning disable CSE0003
+        public static AccountInventory GetAccountInventory(string APIKey) {
+            return new AccountInventory() {
+                Characters = GetCharacters(APIKey),
+                Bank = GetBank(APIKey),
+                MaterialStorage = GetMaterialStorage(APIKey),
+                OwnBuyListings = GetCurrentBuyListing(APIKey),
+                OwnSellListings = GetCurrentSellListing(APIKey)
+            };
+        }
+#pragma warning restore CSE0003
     }
 }

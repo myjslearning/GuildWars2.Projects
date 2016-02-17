@@ -73,6 +73,7 @@
     <Compile Include="Model\Guild\UpgradeCost.cs" />
     <Compile Include="Model\Guild\UpgradeItem.cs" />
     <Compile Include="Model\Recipes\RecipeTreeNode.cs" />
+    <Compile Include="Model\TokenInfo.cs" />
     <Compile Include="Model\Value\AccountValue.cs" />
     <Compile Include="Model\Value\CharacterValue.cs" />
     <Compile Include="Model\Account\Account.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Events\PriceEvent\PriceTriggerEventArgs.cs" />
     <Compile Include="Events\PriceEvent\PriceTriggerManager.cs" />
     <Compile Include="Model\Value\TransactionValue.cs" />
+    <Compile Include="Model\World.cs" />
     <Compile Include="Network\NetworkManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\URLBuilder.cs" />
