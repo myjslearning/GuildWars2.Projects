@@ -22,6 +22,7 @@ namespace GuildWars2API.Network
         private const string SEARCH = "search";                 //Used for searching recipes
         private const string PRICES = "prices";                 //Returns highest TP listings
         private const string RECIPES = "recipes";
+        private const string EXCHANGE = "exchange";
         private const string MATERIALS = "materials";
         private const string TRANSACTIONS = "transactions";     //Returns all current account TP listings
 
@@ -69,8 +70,8 @@ namespace GuildWars2API.Network
         public static string GetCurrentSellListings() => string.Format("{0}/{1}/{2}/{3}/{4}", ROOT_GW2, COMMERCE, TRANSACTIONS, "current", "sells");
         public static string GetCurrentBuyListings() => string.Format("{0}/{1}/{2}/{3}/{4}", ROOT_GW2, COMMERCE, TRANSACTIONS, "current", "buys");
 
-        public static string GetGoldToGemConversion => string.Format("{0}/{1}/{2}", ROOT_GW2, COMMERCE, "coins");
-        public static string GetGemToGoldConversion => string.Format("{0}/{1}/{2}", ROOT_GW2, COMMERCE, "gems");
+        public static string GetGoldToGemConversion => string.Format("{0}/{1}/{2}/{3}", ROOT_GW2, COMMERCE, EXCHANGE, "coins");
+        public static string GetGemToGoldConversion => string.Format("{0}/{1}/{2}/{3}", ROOT_GW2, COMMERCE, EXCHANGE, "gems");
 
         #endregion Market
 
