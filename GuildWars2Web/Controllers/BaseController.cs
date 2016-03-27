@@ -8,13 +8,14 @@ using System.Web.Mvc;
 
 namespace GuildWars2Web.Controllers
 {
-    public class BaseController : Controller        //TODO Top-right profile button dissapears in mobile-layout
+    public class BaseController : Controller        //Top-right profile button dissapears in mobile-layout
     {
         public BaseController() {
             ViewBag.Title = "Guild Wars 2 Web";
             ViewBag.Version = GetApplicationVersion();
         }
 
+#pragma warning disable CSE0003 // Use expression-bodied members
         public ProfileViewModel GetViewModelProfile() {
             return GetDefaultProfile();
 
@@ -30,6 +31,7 @@ namespace GuildWars2Web.Controllers
                 //Avatar = profile.Avatar,
             };
         }
+#pragma warning restore CSE0003 // Use expression-bodied members
 
         private Models.Profile GetProfile() {
             if(Session["Profile"]?.GetType() != typeof(Profile)) {
