@@ -1,27 +1,41 @@
-﻿<Controls:MetroWindow x:Class="GuildWars2.Windows.MainMenu"
+﻿<Controls:MetroWindow   x:Class="GuildWars2.Windows.MainMenu"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:UserControls="clr-namespace:GuildWars2.Controls"
         GlowBrush="{DynamicResource AccentColorBrush}" BorderThickness="0"
         WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" Title="Guild Wars Vault"
         Height="576" Width="1024" UseLayoutRounding="True">
+    <Window.Resources>
+        <VisualBrush x:Key="PlayIcon" Visual="{DynamicResource appbar_control_play}" />
+        <VisualBrush x:Key="GitHubIcon" Stretch="Uniform" Visual="{DynamicResource appbar_github}" />
+
+        <VisualBrush x:Key="ToolsIcon" Stretch="Uniform" Visual="{StaticResource appbar_tools}" />
+        <VisualBrush x:Key="TimerIcon" Stretch="Uniform" Visual="{StaticResource appbar_timer}" />
+        <VisualBrush x:Key="MarketIcon" Stretch="Uniform" Visual="{StaticResource appbar_scale}" />
+        <VisualBrush x:Key="CraftingIcon" Stretch="Uniform" Visual="{StaticResource appbar_scissor}" />
+        <VisualBrush x:Key="CharacterIcon" Stretch="Uniform" Visual="{StaticResource appbar_people}" />
+    </Window.Resources>
     <Controls:MetroWindow.IconTemplate>
         <DataTemplate>
-            <Grid Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                <Image Margin="10,2,2,2" Source="/GuildWars2;component\Resources\Images\Icons\guild_wars_icon.png"
-                       RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
-            </Grid>
+            <Image Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Margin="25,2,6,2" 
+                   Source="/GuildWars2;component\Resources\Images\Icons\guild_wars_icon.png"
+                    RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
         </DataTemplate>
     </Controls:MetroWindow.IconTemplate>
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Rectangle />   <!--Used to trick the system to draw a seperator-->
+            <Button ToolTip="Guild Wars Vault on GitHub">
+                <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" OpacityMask="{DynamicResource GitHubIcon}"/>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
             <Button>
                 <StackPanel Orientation="Horizontal">
-                    <Rectangle Width="8" Height="8" Margin="0,0,3,0" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_control_play}" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
+                    <Rectangle Width="8" Height="8" Margin="0,0,3,0" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" OpacityMask="{DynamicResource PlayIcon}"/>
                     <Label Content="LAUNCH GW2" Margin="0,0,8,0">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="White" />
@@ -33,22 +47,20 @@
     </Controls:MetroWindow.RightWindowCommands>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="10*" MaxWidth="75" />
             <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Background="{DynamicResource BackgroundDark}">
+            <Frame x:Name="ContentFrame" />
+        </Grid>
         <Grid Grid.Column="0" Background="{DynamicResource AccentColorBrush}">
             <StackPanel>
-                <Viewbox VerticalAlignment="Top">
-                    <Grid Background="{StaticResource Gw2RedAccent}">
-                        <Rectangle Fill="White" Margin="10" Width="25" Height="25">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_lines_horizontal_4}" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </Grid>
-                </Viewbox>
+                <UserControls:MenuItem Margin="6,4,6,4" Text="Account" Icon="{DynamicResource CharacterIcon}"/>
+                <UserControls:MenuItem Margin="6,4,6,4" Text="Crafting" Icon="{DynamicResource CraftingIcon}"/>
+                <UserControls:MenuItem Margin="6,4,6,4" Text="Market" Icon="{DynamicResource MarketIcon}"/>
+                <UserControls:MenuItem Margin="6,4,6,4" Text="Tools" Icon="{DynamicResource ToolsIcon}"/>
+                <UserControls:MenuItem Margin="6,4,6,4" Text="Event Timers" Icon="{DynamicResource TimerIcon}"/>
             </StackPanel>
         </Grid>
-        <Rectangle Grid.Column="1"/>
     </Grid>
 </Controls:MetroWindow>

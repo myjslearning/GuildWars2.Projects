@@ -76,6 +76,9 @@
     <Compile Include="Controls\CurrentWorldBossControl.xaml.cs">
       <DependentUpon>CurrentWorldBossControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MenuItem.xaml.cs">
+      <DependentUpon>MenuItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PreferenceSettingsControl.xaml.cs">
       <DependentUpon>PreferenceSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\CurrentWorldBossControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MenuItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,10 +193,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Menu\menu_gradient.png" />
+    <Resource Include="Resources\Images\Obsolete\menu_gradient.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Menu\menu_background.png" />
+    <Resource Include="Resources\Images\Obsolete\menu_background.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\copper_coin.png" />
@@ -197,7 +204,7 @@
     <Resource Include="Resources\Images\Icons\silver_coin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Menu\menu_selector.png" />
+    <Resource Include="Resources\Images\Obsolete\menu_selector.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GuildWars2API\GuildWars2API.csproj">
@@ -210,11 +217,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Menu\header_top.png" />
+    <Resource Include="Resources\Images\Obsolete\header_top.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Buttons\button_exit_hover.png" />
-    <Resource Include="Resources\Images\Buttons\button_exit.png" />
+    <Resource Include="Resources\Images\Obsolete\button_exit_hover.png" />
+    <Resource Include="Resources\Images\Obsolete\button_exit.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\check_green.png" />
@@ -231,11 +238,13 @@
       <SubType>Designer</SubType>
     </Resource>
     <Resource Include="Resources\Images\Icons\fighting.png" />
-    <Resource Include="Resources\Images\Icons\guild_wars_icon.ico" />
     <Resource Include="Resources\Images\Icons\guild_wars_icon.png" />
     <Resource Include="Resources\Images\Icons\dragonite_ore.png" />
     <Resource Include="Resources\Images\Icons\gilded_strongbox.png" />
-    <Resource Include="Resources\Images\Other\Warning_quaggan_icon.png" />
+    <Resource Include="Resources\Images\Obsolete\Warning_quaggan_icon.png" />
+    <Resource Include="Resources\Images\Icons\guild_wars_icon_bg.ico" />
+    <Resource Include="Resources\Images\Icons\guild_wars_icon_bg.png" />
+    <Resource Include="Resources\Images\Icons\guild_wars_icon.ico" />
     <Content Include="Resources\Images\Icons\guild_wars_logo.svg" />
     <Content Include="Resources\Sounds\Notification1.wav" />
     <Content Include="Resources\Sounds\Notification2.mp3" />
