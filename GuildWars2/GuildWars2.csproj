@@ -241,7 +241,7 @@
     <Resource Include="Resources\Images\Icons\guild_wars_icon.png" />
     <Resource Include="Resources\Images\Icons\dragonite_ore.png" />
     <Resource Include="Resources\Images\Icons\gilded_strongbox.png" />
-    <Resource Include="Resources\Images\Obsolete\Warning_quaggan_icon.png" />
+    <Resource Include="Resources\Images\Other\Warning_quaggan_icon.png" />
     <Resource Include="Resources\Images\Icons\guild_wars_icon_bg.ico" />
     <Resource Include="Resources\Images\Icons\guild_wars_icon_bg.png" />
     <Resource Include="Resources\Images\Icons\guild_wars_icon.ico" />

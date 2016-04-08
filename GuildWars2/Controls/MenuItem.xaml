@@ -106,7 +106,11 @@
                     </TransformGroup>
                 </Ellipse.RenderTransform>
             </Ellipse>
-            <Ellipse x:Name="EllipseIcon" Fill="Red" Width="40" Height="40" />
+            <Ellipse x:Name="EllipseIcon" Fill="Red" Width="40" Height="40">
+                <Ellipse.Effect>
+                    <DropShadowEffect Direction="360" ShadowDepth="2" Opacity="0.6"/>
+                </Ellipse.Effect>
+            </Ellipse>
             <Rectangle x:Name="RectIcon"  Fill="White" OpacityMask="{Binding Path=Icon, ElementName=MenuItemWindow}" Margin="8" />
             <TextBlock x:Name="Textbox" Margin="0,0,-100,2" TextWrapping="Wrap" Text="{Binding Path=Text, ElementName=MenuItemWindow}" Width="91" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Right" Visibility="Collapsed" FontSize="16"/>
             <Ellipse x:Name="EllipseClick" Fill="Transparent" Width="40" Height="40" />
