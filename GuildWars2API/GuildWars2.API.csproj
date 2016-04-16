@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Model\NotIncluded.txt" />
+    <Content Include="TODO.txt" />
     <None Include="packages.config" />
     <None Include="Resources\MysticForgeRecipes.txt" />
   </ItemGroup>
