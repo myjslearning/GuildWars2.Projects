@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace GuildWars2.Collections
+namespace GuildWars2.Classes.Collections
 {
     public class PropChangeObservableCollection<T> :
            ObservableCollection<T> where T : INotifyPropertyChanged

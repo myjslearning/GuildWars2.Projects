@@ -207,8 +207,6 @@ namespace GuildWars2API
 
         private static HashSet<int> GetAccountIDs(string APIKey, AccountInventory accountInv) {
             var itemIDs = new HashSet<int>();
-
-            var charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
             foreach(Character character in accountInv.Characters) {
                 itemIDs.UnionWith(GetIDs(GetInventory(character.Bags)));
                 itemIDs.UnionWith(GetIDs(GetEquiment(character.Equipment)));

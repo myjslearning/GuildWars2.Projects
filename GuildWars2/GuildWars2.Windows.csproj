@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GuildWars2</RootNamespace>
     <AssemblyName>GuildWars2</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -79,11 +79,8 @@
     <Compile Include="Classes\Logger\FileLogger.cs" />
     <Compile Include="Classes\Logger\ILogger.cs" />
     <Compile Include="Classes\Palette\SwatchesProvider.cs" />
-    <Compile Include="Collections\PropChangedObservableCollection.cs" />
-    <Compile Include="Collections\WorldBossObservableCollection.cs" />
-    <Compile Include="Controls\AccountSettingsControl.xaml.cs">
-      <DependentUpon>AccountSettingsControl.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Classes\Collections\PropChangedObservableCollection.cs" />
+    <Compile Include="Classes\Collections\WorldBossObservableCollection.cs" />
     <Compile Include="Controls\CurrentWorldBossControl.xaml.cs">
       <DependentUpon>CurrentWorldBossControl.xaml</DependentUpon>
     </Compile>
@@ -99,9 +96,6 @@
     <Compile Include="Controls\PaletteSelector.xaml.cs">
       <DependentUpon>PaletteSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PreferenceSettingsControl.xaml.cs">
-      <DependentUpon>PreferenceSettingsControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
@@ -115,7 +109,6 @@
     <Compile Include="Classes\Logger\LogManager.cs" />
     <Compile Include="Classes\NotifyHandler.cs" />
     <Compile Include="Classes\Palette\CommandImplementation.cs" />
-    <Compile Include="Classes\SoundManager.cs" />
     <Compile Include="Windows\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -128,10 +121,6 @@
     <Compile Include="Windows\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\AccountSettingsControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\CurrentWorldBossControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,10 +138,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\PaletteSelector.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Controls\PreferenceSettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,26 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

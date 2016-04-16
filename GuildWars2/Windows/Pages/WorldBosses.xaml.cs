@@ -1,4 +1,4 @@
-﻿using GuildWars2.Collections;
+﻿using GuildWars2.Classes.Collections;
 using System;
 using System.ComponentModel;
 using System.Linq;

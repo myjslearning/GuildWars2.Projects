@@ -1,4 +1,4 @@
-﻿using GuildWars2.Collections;
+﻿using GuildWars2.Classes.Collections;
 using GuildWars2.Model;
 using GuildWars2API;
 using GuildWars2API.Model.Items;

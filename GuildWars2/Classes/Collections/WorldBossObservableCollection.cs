@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Threading;
 
-namespace GuildWars2.Collections
+namespace GuildWars2.Classes.Collections
 {
     internal class WorldBossObservableCollection : PropChangeObservableCollection<DisplayWorldBoss>
     {
