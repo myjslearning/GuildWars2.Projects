@@ -72,9 +72,9 @@
     <Resource Include="Resources\WorldBosses.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GuildWars2API\GuildWars2API.csproj">
+    <ProjectReference Include="..\GuildWars2API\GuildWars2.API.csproj">
       <Project>{69df77df-55f8-4af2-9e2a-8d3c4b565a1b}</Project>
-      <Name>GuildWars2API</Name>
+      <Name>GuildWars2.API</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

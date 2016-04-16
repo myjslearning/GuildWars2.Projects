@@ -1022,13 +1022,13 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GuildWars2API\GuildWars2API.csproj">
+    <ProjectReference Include="..\GuildWars2API\GuildWars2.API.csproj">
       <Project>{69df77df-55f8-4af2-9e2a-8d3c4b565a1b}</Project>
-      <Name>GuildWars2API</Name>
+      <Name>GuildWars2.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GuildWars2DB\GuildWars2DB.csproj">
+    <ProjectReference Include="..\GuildWars2DB\GuildWars2.DB.csproj">
       <Project>{1cbe8ea2-e5ff-454f-9af6-365cc15eec31}</Project>
-      <Name>GuildWars2DB</Name>
+      <Name>GuildWars2.DB</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2", "GuildWars2\GuildWars2.csproj", "{1CED44F1-A8A6-415D-9D56-5530E9A4247F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2.Windows", "GuildWars2\GuildWars2.Windows.csproj", "{1CED44F1-A8A6-415D-9D56-5530E9A4247F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2API", "GuildWars2API\GuildWars2API.csproj", "{69DF77DF-55F8-4AF2-9E2A-8D3C4B565A1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2.API", "GuildWars2API\GuildWars2.API.csproj", "{69DF77DF-55F8-4AF2-9E2A-8D3C4B565A1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAPI", "TestAPI\TestAPI.csproj", "{0451E038-5E65-411E-BE88-11A6DEA8F62C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2Web", "GuildWars2Web\GuildWars2Web.csproj", "{3F22D15D-1223-4648-8F9E-D336D68BFC30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2.Web", "GuildWars2Web\GuildWars2.Web.csproj", "{3F22D15D-1223-4648-8F9E-D336D68BFC30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2DB", "GuildWars2DB\GuildWars2DB.csproj", "{1CBE8EA2-E5FF-454F-9AF6-365CC15EEC31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2.DB", "GuildWars2DB\GuildWars2.DB.csproj", "{1CBE8EA2-E5FF-454F-9AF6-365CC15EEC31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
