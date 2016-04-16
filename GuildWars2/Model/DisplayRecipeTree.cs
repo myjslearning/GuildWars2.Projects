@@ -1,4 +1,4 @@
-﻿using GuildWars2.Collections;
+﻿using GuildWars2.Classes.Collections;
 using GuildWars2API.Model.Items;
 using GuildWars2API.Model.Recipes;
 using System.ComponentModel;
