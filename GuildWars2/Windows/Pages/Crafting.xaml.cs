@@ -14,13 +14,13 @@ namespace GuildWars2.Windows.Pages
     {
         public Crafting() {
             InitializeComponent();
-            PropChangeObservableCollection<DisplayRecipeTree> itemSource = new PropChangeObservableCollection<DisplayRecipeTree>();
+            var itemSource = new PropChangeObservableCollection<DisplayRecipeTree>();
             itemSource.Add(new DisplayRecipeTree(ItemAPI.SearchItem("Arachnophobia")[0]));
             Crafting_Treeview.ItemsSource = itemSource;
         }
 
         public void StartCrafting(Item item) {
-            Thread thread = new Thread(new ThreadStart(delegate {
+            var thread = new Thread(new ThreadStart(delegate {
                 if(item.GetType() == typeof(Item)) {
                     //SHOW LOADING ICON
                     //treeviewItemSource.PopulateTree(item as Item);

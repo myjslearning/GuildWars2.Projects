@@ -10,23 +10,16 @@ namespace GuildWars2API
 {
     public static class RecipeAPI
     {
+#pragma warning disable CSE0003 
         public static HashSet<int> RecipesForItem(int itemID) {
-            string response = UnauthorizedRequest(URLBuilder.GetRecipesByItemID(itemID));
-            if(response.Length > 0) {
-                return DeserializeObject<HashSet<int>>(response);
-            }
-            return null;
+            return UnauthorizedRequest<HashSet<int>>(URLBuilder.GetRecipesByItemID(itemID));
         }
-
+        
         public static Recipe GetRecipe(int recipeID) {
-            string response = UnauthorizedRequest(URLBuilder.GetRecipeByID(recipeID));
-            if(response.Length > 0) {
-                return DeserializeObject<Recipe>(response);
-            }
-            return null;
+            return UnauthorizedRequest<Recipe>(URLBuilder.GetRecipeByID(recipeID));
         }
-
-        public static List<Recipe> GetRecipe(HashSet<int> recipeIDs) => GetLargeRequest<Recipe>(recipeIDs, "recipes");
+#pragma warning restore CSE0003 
+        public static List<Recipe> GetRecipe(HashSet<int> recipeIDs) => LargeRequest<Recipe>(recipeIDs, "recipes");
 
         public static RecipeTreeNode GetRecipeTree(Item item) => new RecipeTreeNode(item.ID);
 
@@ -54,10 +47,7 @@ namespace GuildWars2API
                     return DeserializeObject<List<Recipe>>(Properties.Resources.MysticForgeRecipes);
                 }
                 else {
-                    string response = NetworkManager.UnauthorizedRequest(URLBuilder.GetMysticForgeRecipes());
-                    if(response.Length > 0) {
-                        return DeserializeObject<List<Recipe>>(response);
-                    }
+                    return UnauthorizedRequest<List<Recipe>>(URLBuilder.GetMysticForgeRecipes());
                 }
             }
             catch { }

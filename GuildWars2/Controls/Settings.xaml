@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="GuildWars2.Controls.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GuildWars2.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="450" Focusable="False"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <StackPanel>
+        <CheckBox Content='"Notify me when a event starts"' Margin="10,10,10,5" />
+        <CheckBox Content='"Remember my saved event trackings"' Margin="10,5" />
+        <StackPanel Orientation="Horizontal">
+            <TextBox x:Name="TextBox_MainGame" Margin="10,10,5,10" Width="345" Height="40" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.IsWaitingForData="True" VerticalContentAlignment="Center"
+                         Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Guild Wars 2 Application path" Style="{StaticResource MetroTextBox}" />
+            <Button Content=". . ." Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Background="{DynamicResource SecondaryAccentBrush}" BorderBrush="{DynamicResource SecondaryAccentBrush}"
+                    BorderThickness="1" Click="MainGameButton_Click" Controls:ControlsHelper.ContentCharacterCasing="Normal" Width="55" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"/>
+        </StackPanel>
+        <Separator Height="30" Margin="15,0" Background="{DynamicResource SecondaryAccentBrush}"/>
+        <GroupBox Margin="10" Grid.Row="1" Header="API Keys" Height="180" BorderBrush="{DynamicResource SecondaryAccentBrush}" Background="{DynamicResource SecondaryAccentBrush}"
+                  Foreground="{DynamicResource SecondaryAccentForegroundBrush}">
+            <DataGrid x:Name="ListView_Keys" Margin="-4" ItemsSource="{Binding Keys}" CanUserAddRows="False" MinColumnWidth="160" 
+                       materialDesign:DataGridAssist.CellPadding="4,2,2,2" materialDesign:DataGridAssist.ColumnHeaderPadding="4,2,2,2"/>
+        </GroupBox>
+        <TextBox x:Name="Textbox_KeyName" Margin="10,5" Height="40" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.IsWaitingForData="True"
+                         Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="API Key Name" VerticalContentAlignment="Center" Style="{StaticResource MetroTextBox}" />
+        <StackPanel Orientation="Horizontal" Margin="10,5">
+            <TextBox x:Name="Textbox_Key" Margin="0,0,5,0" Width="315" Height="40" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.IsWaitingForData="True"
+                    Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="API Key Value" VerticalContentAlignment="Center" Style="{StaticResource MetroTextBox}" />
+            <Button Content="Add Key" Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Background="{DynamicResource SecondaryAccentBrush}" BorderBrush="{DynamicResource SecondaryAccentBrush}"
+                    BorderThickness="1" Click="Button_KeyAdd_Click" Controls:ControlsHelper.ContentCharacterCasing="Normal" Width="85" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

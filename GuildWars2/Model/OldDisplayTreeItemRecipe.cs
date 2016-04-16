@@ -1,5 +1,5 @@
-﻿using GuildWars2.Collections;
-using GuildWars2.Other;
+﻿using GuildWars2.Classes;
+using GuildWars2.Collections;
 using GuildWars2API;
 using GuildWars2API.Model.Items;
 using GuildWars2API.Model.Recipes;
@@ -143,7 +143,7 @@ namespace GuildWars2.Model
             if(string.IsNullOrWhiteSpace(text)) {
                 return string.Empty;
             }
-            StringBuilder newText = new StringBuilder(text.Length * 2);
+            var newText = new StringBuilder(text.Length * 2);
             newText.Append(text[0]);
             for(int i = 1; i < text.Length; i++) {
                 if(char.IsUpper(text[i])) {

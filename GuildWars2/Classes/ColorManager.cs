@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace GuildWars2.Other
+namespace GuildWars2.Classes
 {
     public class ColorManager
     {

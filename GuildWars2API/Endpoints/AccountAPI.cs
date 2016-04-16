@@ -5,61 +5,36 @@ using GuildWars2API.Model.Items;
 using GuildWars2API.Network;
 using System.Collections.Generic;
 using static GuildWars2API.Network.NetworkManager;
-using static Newtonsoft.Json.JsonConvert;
 
 namespace GuildWars2API
 {
     public static class AccountAPI
     {
+#pragma warning disable CSE0003
         public static List<Character> GetCharacters(string APIKey) {
-            string response = AuthorizedRequest(URLBuilder.GetCharacters(), APIKey);
-            if(response.Length > 0) {
-                return DeserializeObject<List<Character>>(response);
-            }
-            return null;
+            return AuthorizedRequest<List<Character>>(URLBuilder.GetCharacters(), APIKey);
         }
 
         public static List<ItemStack> GetMaterialStorage(string APIKey) {
-            string response = AuthorizedRequest(URLBuilder.GetMaterialStorage(), APIKey);
-            if(response.Length > 0) {
-                return DeserializeObject<List<ItemStack>>(response);
-            }
-            return null;
+            return AuthorizedRequest<List<ItemStack>>(URLBuilder.GetMaterialStorage(), APIKey);
         }
 
         public static List<ItemStack> GetBank(string APIKey) {
-            string response = AuthorizedRequest(URLBuilder.GetBank(), APIKey);
-            if(response.Length > 0) {
-                return DeserializeObject<List<ItemStack>>(response);
-            }
-            return null;
+            return AuthorizedRequest<List<ItemStack>>(URLBuilder.GetBank(), APIKey);
         }
 
         public static List<WalletCurrency> GetWallet(string APIKey) {
-            string response = AuthorizedRequest(URLBuilder.GetWallet(), APIKey);
-            if(response.Length > 0) {
-                return DeserializeObject<List<WalletCurrency>>(response);
-            }
-            return null;
+            return AuthorizedRequest<List<WalletCurrency>>(URLBuilder.GetWallet(), APIKey);
         }
         
         public static List<Transaction> GetCurrentSellListing(string APIKey) {
-            string response = AuthorizedRequest(URLBuilder.GetCurrentSellListings(), APIKey);
-            if(response.Length > 0) {
-                return DeserializeObject<List<Transaction>>(response);
-            }
-            return null;
+            return AuthorizedRequest<List<Transaction>>(URLBuilder.GetCurrentSellListings(), APIKey);
         }
 
         public static List<Transaction> GetCurrentBuyListing(string APIKey) {
-            string response = AuthorizedRequest(URLBuilder.GetCurrentBuyListings(), APIKey);
-            if(response.Length > 0) {
-                return DeserializeObject<List<Transaction>>(response);
-            }
-            return null;
+            return AuthorizedRequest<List<Transaction>>(URLBuilder.GetCurrentBuyListings(), APIKey);
         }
 
-#pragma warning disable CSE0003
         public static AccountInventory GetAccountInventory(string APIKey) {
             return new AccountInventory() {
                 Characters = GetCharacters(APIKey),

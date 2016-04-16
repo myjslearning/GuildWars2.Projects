@@ -70,7 +70,7 @@ namespace GuildWars2API
             List<WalletCurrency> currenciesValue = GetWallet(APIKey);
             List<WalletCurrencyInfo> currencies = GetCurrencyInfo();
 
-            List<WalletEntry> wallet = new List<WalletEntry>();
+            var wallet = new List<WalletEntry>();
             foreach(WalletCurrencyInfo currency in currencies) {
                 WalletEntry entry = new WalletEntry();
                 entry.ID = currency.ID;
@@ -87,7 +87,7 @@ namespace GuildWars2API
         }
 
         private static List<ItemStack> GetInventory(List<Bag> bags) {
-            List<ItemStack> items = new List<ItemStack>();
+            var items = new List<ItemStack>();
             foreach(Bag bag in bags) {
                 if(bag != null) {
                     bag.Inventory.Where(i => i != null)
@@ -99,7 +99,7 @@ namespace GuildWars2API
         }
 
         private static List<ItemStack> GetEquiment(List<Equipment> equiment) {
-            List<ItemStack> items = new List<ItemStack>();
+            var items = new List<ItemStack>();
             foreach(Equipment item in equiment) {
                 items.Add(new ItemStack() {
                     ID = item.ID,
@@ -110,7 +110,7 @@ namespace GuildWars2API
         }
 
         private static List<ItemValue> GetItemValues(List<ItemStack> itemStacks, List<ItemListing> itemListings, List<Item> items) {
-            List<ItemValue> itemValues = new List<ItemValue>();
+            var itemValues = new List<ItemValue>();
             foreach(ItemStack itemStack in itemStacks) {
                 if(itemStack == null)
                     continue;
@@ -149,7 +149,7 @@ namespace GuildWars2API
         }
 
         private static List<TransactionValue> GetTransactionValues(List<ItemListing> itemListings, List<Transaction> transactions) {
-            List<TransactionValue> transactionValues = new List<TransactionValue>();
+            var transactionValues = new List<TransactionValue>();
             foreach(Transaction transaction in transactions) {
                 if(itemListings.Any(i => i.ID == transaction.ItemID)) {
                     transactionValues.Add(new TransactionValue() {
@@ -162,7 +162,7 @@ namespace GuildWars2API
         }
 
         private static HashSet<int> GetIDs(List<Item> items) {
-            HashSet<int> itemIDs = new HashSet<int>();
+            var itemIDs = new HashSet<int>();
             foreach(Item item in items) {
                 if(item != null) {
                     itemIDs.Add(item.ID);
@@ -172,7 +172,7 @@ namespace GuildWars2API
         }
 
         private static HashSet<int> GetIDs(List<ItemStack> items) {
-            HashSet<int> itemIDs = new HashSet<int>();
+            var itemIDs = new HashSet<int>();
             foreach(ItemStack itemStack in items) {
                 if(itemStack != null) {
                     itemIDs.Add(itemStack.ID);
@@ -182,7 +182,7 @@ namespace GuildWars2API
         }
 
         internal static HashSet<int> GetIDs(List<Transaction> transactions) {
-            HashSet<int> itemIDs = new HashSet<int>();
+            var itemIDs = new HashSet<int>();
             foreach(Transaction transaction in transactions) {
                 if(transaction != null) {
                     itemIDs.Add(transaction.ItemID);
@@ -206,9 +206,9 @@ namespace GuildWars2API
         }
 
         private static HashSet<int> GetAccountIDs(string APIKey, AccountInventory accountInv) {
-            HashSet<int> itemIDs = new HashSet<int>();
+            var itemIDs = new HashSet<int>();
 
-            Dictionary<Character, Dictionary<string, List<ItemStack>>> charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
+            var charactersInventory = new Dictionary<Character, Dictionary<string, List<ItemStack>>>();
             foreach(Character character in accountInv.Characters) {
                 itemIDs.UnionWith(GetIDs(GetInventory(character.Bags)));
                 itemIDs.UnionWith(GetIDs(GetEquiment(character.Equipment)));

@@ -3,34 +3,23 @@ using GuildWars2API.Network;
 using System.Collections.Generic;
 
 using static GuildWars2API.Network.NetworkManager;
-using static Newtonsoft.Json.JsonConvert;
 
 namespace GuildWars2API
 {
     public static class MarketAPI
     {
+#pragma warning disable CSE0003 
         public static GemExchange GetGemToGoldConversion() {
-            string response = UnauthorizedRequest(URLBuilder.GetGemToGoldConversion);
-            if(response.Length > 0) {
-                return DeserializeObject<GemExchange>(response);
-            }
-            return null;
+            return UnauthorizedRequest<GemExchange>(URLBuilder.GetGemToGoldConversion);
         }
 
         public static GemExchange GetGoldToGemConversion() {
-            string response = UnauthorizedRequest(URLBuilder.GetGoldToGemConversion);
-            if(response.Length > 0) {
-                return DeserializeObject<GemExchange>(response);
-            }
-            return null;
+            return UnauthorizedRequest<GemExchange>(URLBuilder.GetGoldToGemConversion);
         }
 
         public static List<WalletCurrencyInfo> GetCurrencyInfo() {
-            string response = UnauthorizedRequest(URLBuilder.GetCurrencies());
-            if(response.Length > 0) {
-                return DeserializeObject<List<WalletCurrencyInfo>>(response);
-            }
-            return null;
+            return UnauthorizedRequest<List<WalletCurrencyInfo>>(URLBuilder.GetCurrencies());
         }
+#pragma warning restore CSE0003
     }
 }

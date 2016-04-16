@@ -107,7 +107,10 @@
     <Compile Include="Events\PriceEvent\PriceTriggerManager.cs" />
     <Compile Include="Model\Value\TransactionValue.cs" />
     <Compile Include="Model\World.cs" />
+    <Compile Include="Network\HttpRequestHandler.cs" />
+    <Compile Include="Network\IWebHandler.cs" />
     <Compile Include="Network\NetworkManager.cs" />
+    <Compile Include="Network\WebRequestHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Network\URLBuilder.cs" />
     <Compile Include="Model\Value\ItemValue.cs" />

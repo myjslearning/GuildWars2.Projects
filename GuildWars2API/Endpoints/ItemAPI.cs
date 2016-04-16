@@ -4,46 +4,36 @@ using GuildWars2API.Network;
 using System.Collections.Generic;
 using System.Linq;
 using static GuildWars2API.Network.NetworkManager;
-using static Newtonsoft.Json.JsonConvert;
 
 namespace GuildWars2API
 {
     public static class ItemAPI {
         public static List<Item> SearchItem(string itemName) {
-            string response = UnauthorizedRequest(URLBuilder.GetItemByName(itemName));
-            if(response.Length > 0) {
-                List<ItemSearch> itemsFound = DeserializeObject<List<ItemSearch>>(response);
-                if(itemsFound != null) {
-                    HashSet<int> itemIDs = new HashSet<int>();
-                    itemsFound.ForEach(i => itemIDs.Add(i.ItemID));
+            List<ItemSearch> itemsFound = UnauthorizedRequest<List<ItemSearch>>(URLBuilder.GetItemByName(itemName));
+            if(itemsFound != null) {
+                HashSet<int> itemIDs = new HashSet<int>();
+                itemsFound.ForEach(i => itemIDs.Add(i.ItemID));
 
-                    return GetItem(itemIDs);
-                }
+                return GetItem(itemIDs);
             }
             return null;
         }
 
+#pragma warning disable CSE0003
         public static Item GetItem(int itemID) {
-            string response = UnauthorizedRequest(URLBuilder.GetItemByID(itemID));
-            if(response.Length > 0) {
-                return DeserializeObject<Item>(response);
-            }
-            return null;
+            return UnauthorizedRequest<Item>(URLBuilder.GetItemByID(itemID));
         }
 
         public static List<Item> GetItem(List<ItemStack> items) => GetItem(new HashSet<int>(items.Select(i => i.ID)));
 
-        public static List<Item> GetItem(HashSet<int> itemIDs) => GetLargeRequest<Item>(itemIDs, "items");
+        public static List<Item> GetItem(HashSet<int> itemIDs) => LargeRequest<Item>(itemIDs, "items");
 
         public static ItemListing GetItemListing(int itemID) {
-            string response = UnauthorizedRequest(URLBuilder.GetItemListing(itemID));
-            if(response.Length > 0) {
-                return DeserializeObject<ItemListing>(response);
-            }
-            return null;
+            return UnauthorizedRequest<ItemListing>(URLBuilder.GetItemListing(itemID));
         }
+#pragma warning restore CSE0003
 
-        public static List<ItemListing> GetItemListing(HashSet<int> itemIDs) => GetLargeRequest<ItemListing>(itemIDs, "commerce/prices");
+        public static List<ItemListing> GetItemListing(HashSet<int> itemIDs) => LargeRequest<ItemListing>(itemIDs, "commerce/prices");
 
         public static bool IsPromotionItem(int itemID) {
             List<int> promotionItemIDs = new List<int>() {

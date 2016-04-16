@@ -1,5 +1,4 @@
 ﻿using GuildWars2.Model;
-using GuildWars2DB;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -59,12 +58,13 @@ namespace GuildWars2.Collections
         #region Initialization
 
         private void InitCollection() {
-            List<DisplayWorldBoss> bosses = ParseWorldBosses(WorldBossDB.WorldBossTable, WorldBossDB.WorldBossTimeTable);
-            bosses.ToList().ForEach(b => this.Add(b));
+            var bosses = GuildWars2DB.SettingDB.GetWorldBosses();
+            var displayBosses = bosses.Cast<DisplayWorldBoss>().ToList();
+            displayBosses.ToList().ForEach(b => this.Add(b));
         }
 
         public static List<DisplayWorldBoss> ParseWorldBosses(DataTable worldBosses, DataTable times) {
-            List<DisplayWorldBoss> bosses = new List<DisplayWorldBoss>();
+            var bosses = new List<DisplayWorldBoss>();
             Dictionary<string, List<TimeSpan>> bossesTimes = ParseWorldBossTimes(times);
 
             foreach(DataRow row in worldBosses.Rows) {
@@ -88,7 +88,7 @@ namespace GuildWars2.Collections
         }
 
         private static Dictionary<string, List<TimeSpan>> ParseWorldBossTimes(DataTable times) {
-            Dictionary<string, List<TimeSpan>> result = new Dictionary<string, List<TimeSpan>>();
+            var result = new Dictionary<string, List<TimeSpan>>();
             bool DayLightSaving = TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.Now);
 
             foreach(DataRow row in times.Rows) {

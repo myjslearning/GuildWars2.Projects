@@ -1,4 +1,4 @@
-﻿using GuildWars2.Other;
+﻿using GuildWars2.Classes;
 using GuildWars2API.Model.Items;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

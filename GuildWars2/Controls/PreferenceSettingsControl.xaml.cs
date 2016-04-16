@@ -31,7 +31,7 @@ namespace GuildWars2.Controls
         }
 
         private string OpenFileDialog() {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var openFileDialog = new OpenFileDialog();
             if(openFileDialog.ShowDialog() == true) {
                 return openFileDialog.FileName;
             }

@@ -23,7 +23,7 @@ namespace GuildWars2.Windows.Pages
         #region BackgroundWorker
 
         private void StartBackgroundWorker() {
-            BackgroundWorker bg = new BackgroundWorker();
+            var bg = new BackgroundWorker();
             bg.DoWork += Bg_DoWork;
             bg.RunWorkerCompleted += Bg_RunWorkerCompleted;
             bg.RunWorkerAsync();

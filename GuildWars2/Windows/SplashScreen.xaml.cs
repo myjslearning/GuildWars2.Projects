@@ -9,7 +9,7 @@ namespace GuildWars2.Windows
     public partial class SplashScreen : MetroWindow
     {
         public SplashScreen() {
-            if(CheckForInternetConnection()) {
+            if(HasInternetConnection()) {
                 OpenMainWindow();
             }
             else {
@@ -17,7 +17,7 @@ namespace GuildWars2.Windows
             }
         }
 
-        private static bool CheckForInternetConnection() {
+        private static bool HasInternetConnection() {
             try {
                 using(var client = new WebClient()) {
                     using(var stream = client.OpenRead("http://www.google.com")) {
@@ -31,7 +31,7 @@ namespace GuildWars2.Windows
         }
 
         private void OpenMainWindow() {
-            new MainWindow().Show();
+            new MainMenu().Show();
             this.Close();
         }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Timers;
 
-namespace GuildWars2.Other.Notification
+namespace GuildWars2.Classes
 {
     public sealed class NotifyHandler : IDisposable
     {
@@ -78,5 +78,10 @@ namespace GuildWars2.Other.Notification
         public void Dispose() {
             _timer.Dispose();
         }
+    }
+
+    public class NotifyEventArgs : EventArgs
+    {
+        public string Notification { get; set; }
     }
 }

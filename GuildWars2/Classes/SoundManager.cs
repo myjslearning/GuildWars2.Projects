@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Media;
 
-namespace GuildWars2.Other
+namespace GuildWars2.Classes
 {
+    [Obsolete]
     internal class SoundManager
     {
         /// <summary>
@@ -10,7 +12,7 @@ namespace GuildWars2.Other
         /// </summary>
         /// <param name="type"></param>
         public static void PlaySound(SoundType type) {
-            SoundPlayer player = new SoundPlayer();
+            var player = new SoundPlayer();
             player.Stream = GetResourceStream(type);
             player.Play();
         }
@@ -26,6 +28,7 @@ namespace GuildWars2.Other
         }
     }
 
+    [Obsolete]
     public enum SoundType
     {
         WorldBoss,

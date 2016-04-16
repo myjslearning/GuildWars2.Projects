@@ -17,9 +17,9 @@
             <TextBlock DockPanel.Dock="Top" Text="Quaggan found error! oooOOooo" FontFamily="Cronos MM" FontSize="18.667" TextWrapping="Wrap" Margin="0,3,0,6" TextAlignment="Center"/>
             <TextBlock DockPanel.Dock="Top" Text="There is no internet connection found! This application is designed for use with an internet connection." FontFamily="Cronos MM" FontSize="18.667" TextWrapping="Wrap" Margin="0,0,0,-1" TextAlignment="Center"/>
             <TextBlock DockPanel.Dock="Top" Text="You can continu and use it, but alot of features will be unavailable" FontFamily="Cronos MM" FontSize="18.667" TextWrapping="Wrap" TextAlignment="Center"/>
-            <DockPanel DockPanel.Dock="Bottom" Margin="40,0,40,5" Width="Auto">
-                <Button Content="Yes please!" HorizontalAlignment="Left" Width="95" Click="ButtonYes_Click"/>
-                <Button Content="No, I'll wait" HorizontalAlignment="Right" Width="95" Click="ButtonNo_Click"/>
+            <DockPanel DockPanel.Dock="Bottom" Margin="30,0,30,5" Width="Auto">
+                <Button Content="Yes please!" HorizontalAlignment="Left" Width="120" Click="ButtonYes_Click"/>
+                <Button Content="No, I'll wait" HorizontalAlignment="Right" Width="120" Click="ButtonNo_Click"/>
             </DockPanel>
             <TextBlock DockPanel.Dock="Bottom" Text="Would you like to continue?" FontFamily="Cronos MM" FontSize="20" Foreground="#CCFFFFFF" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,4" TextDecorations="Underline"/>
         </DockPanel>

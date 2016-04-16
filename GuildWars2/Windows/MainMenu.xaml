@@ -5,7 +5,7 @@
         xmlns:UserControls="clr-namespace:GuildWars2.Controls"
         GlowBrush="{DynamicResource AccentColorBrush}" BorderThickness="0"
         WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" Title="Guild Wars Vault"
-        Height="576" Width="1024" UseLayoutRounding="True">
+        Height="576" Width="1024" UseLayoutRounding="True" DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Window.Resources>
         <VisualBrush x:Key="PlayIcon" Visual="{DynamicResource appbar_control_play}" />
         <VisualBrush x:Key="GitHubIcon" Stretch="Uniform" Visual="{DynamicResource appbar_github}" />
@@ -25,7 +25,8 @@
     </Controls:MetroWindow.IconTemplate>
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
-            <Rectangle />   <!--Used to trick the system to draw a seperator-->
+            <Rectangle />
+            <!--Used to trick the system to draw a seperator-->
             <Button ToolTip="Guild Wars Vault on GitHub">
                 <Rectangle Width="20" Height="20" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" OpacityMask="{DynamicResource GitHubIcon}"/>
             </Button>
@@ -33,32 +34,52 @@
     </Controls:MetroWindow.LeftWindowCommands>
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button>
+            <Button Click="MainGame_Click">
                 <StackPanel Orientation="Horizontal">
                     <Rectangle Width="8" Height="8" Margin="0,0,3,0" Fill="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}" OpacityMask="{DynamicResource PlayIcon}"/>
-                    <Label Content="LAUNCH GW2" Margin="0,0,8,0">
+                    <Label Content="LAUNCH GW2" Margin="0,0,8,0" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
                         <Label.Effect>
                             <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="White" />
                         </Label.Effect>
                     </Label>
                 </StackPanel>
             </Button>
+            <Controls:SplitButton x:Name="SplitButton_KeySelector" ItemsSource="{Binding Path=Keys}" DisplayMemberPath="Item1" SelectedIndex="0" Width="180" BorderBrush="{x:Null}" 
+                                  Background="{x:Null}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" ArrowBrush="{StaticResource GrayAccent}" />
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+            <Controls:Flyout x:Name="SettingsFlyout" Header="Settings" Position="Right" Theme="Accent" Width="425">
+                <UserControls:Settings x:Name="Settings" />
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*" MaxWidth="75" />
             <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="1" Background="{DynamicResource BackgroundDark}">
-            <Frame x:Name="ContentFrame" />
+            <Frame x:Name="ContentFrame" NavigationUIVisibility="Hidden" Navigated="ContentFrame_Navigated" />
+            <Controls:Tile Width="40" Height="40" Background="{DynamicResource AccentColorBrush}" Margin="0,0,0,50" Click="Settings_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+                <Controls:Tile.Effect>
+                    <DropShadowEffect Direction="180" Opacity="0.4" BlurRadius="10"/>
+                </Controls:Tile.Effect>
+                <Rectangle Fill="White" Width="25" Height="25">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Uniform" Visual="{StaticResource appbar_cog}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Controls:Tile>
+            <UserControls:NotificationBar />
         </Grid>
         <Grid Grid.Column="0" Background="{DynamicResource AccentColorBrush}">
             <StackPanel>
-                <UserControls:MenuItem Margin="6,4,6,4" Text="Account" Icon="{DynamicResource CharacterIcon}"/>
+                <UserControls:MenuItem Margin="6,6,6,4" Text="Account" Icon="{DynamicResource CharacterIcon}"/>
                 <UserControls:MenuItem Margin="6,4,6,4" Text="Crafting" Icon="{DynamicResource CraftingIcon}"/>
                 <UserControls:MenuItem Margin="6,4,6,4" Text="Market" Icon="{DynamicResource MarketIcon}"/>
-                <UserControls:MenuItem Margin="6,4,6,4" Text="Tools" Icon="{DynamicResource ToolsIcon}"/>
+                <UserControls:MenuItem Margin="6,4,6,4" Text="Tools" Icon="{DynamicResource ToolsIcon}" MouseLeftButtonUp="Tools_Click"/>
                 <UserControls:MenuItem Margin="6,4,6,4" Text="Event Timers" Icon="{DynamicResource TimerIcon}"/>
             </StackPanel>
         </Grid>

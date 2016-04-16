@@ -44,6 +44,14 @@
       <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=1.5.0.523, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.1.5.0.523\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -67,8 +75,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\Logger\ConsoleLogger.cs" />
+    <Compile Include="Classes\Logger\FileLogger.cs" />
+    <Compile Include="Classes\Logger\ILogger.cs" />
+    <Compile Include="Classes\Palette\SwatchesProvider.cs" />
     <Compile Include="Collections\PropChangedObservableCollection.cs" />
-    <Compile Include="Collections\TreeViewObservableCollection.cs" />
     <Compile Include="Collections\WorldBossObservableCollection.cs" />
     <Compile Include="Controls\AccountSettingsControl.xaml.cs">
       <DependentUpon>AccountSettingsControl.xaml</DependentUpon>
@@ -79,33 +90,40 @@
     <Compile Include="Controls\MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NotificationBar.xaml.cs">
+      <DependentUpon>NotificationBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Palette.xaml.cs">
+      <DependentUpon>Palette.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PaletteSelector.xaml.cs">
+      <DependentUpon>PaletteSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\PreferenceSettingsControl.xaml.cs">
       <DependentUpon>PreferenceSettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DisplayCharacter.cs" />
     <Compile Include="Model\DisplayItem.cs" />
     <Compile Include="Model\DisplayRecipeTree.cs" />
     <Compile Include="Model\DisplayWorldBoss.cs" />
     <Compile Include="Model\OldDisplayTreeItemRecipe.cs" />
-    <Compile Include="Other\ColorManager.cs" />
-    <Compile Include="Other\ErrorHandler.cs" />
-    <Compile Include="Other\Notification\NotifyEventArgs.cs" />
-    <Compile Include="Other\Notification\NotifyHandler.cs" />
-    <Compile Include="Other\SoundManager.cs" />
+    <Compile Include="Classes\ColorManager.cs" />
+    <Compile Include="Model\Converter\ToUpperCasingColors.cs" />
+    <Compile Include="Classes\Logger\LogManager.cs" />
+    <Compile Include="Classes\NotifyHandler.cs" />
+    <Compile Include="Classes\Palette\CommandImplementation.cs" />
+    <Compile Include="Classes\SoundManager.cs" />
     <Compile Include="Windows\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Pages\Crafting.xaml.cs">
       <DependentUpon>Crafting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Pages\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\Pages\WorldBosses.xaml.cs">
       <DependentUpon>WorldBosses.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Windows\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
@@ -122,7 +140,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\NotificationBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Palette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PaletteSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\PreferenceSettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -146,15 +180,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Pages\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\Pages\WorldBosses.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

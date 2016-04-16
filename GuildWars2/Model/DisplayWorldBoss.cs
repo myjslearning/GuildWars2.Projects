@@ -1,17 +1,39 @@
-﻿using GuildWars2.Other;
+﻿using GuildWars2.Classes;
 using GuildWars2API.Model.Event;
-using GuildWars2DB;
 using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace GuildWars2.Model
 {
-    public class DisplayWorldBoss : WorldBoss
+    public class DisplayWorldBoss : WorldBoss, INotifyPropertyChanged
     {
+        private bool _isDone;
         private bool _isTracking;
 
+        public bool IsDone
+        {
+            get { return this._isDone; }
+            set
+            {
+                if(_isDone != value) {
+                    _isDone = value;
+                    NotifyPropertyChanged("IsDone");
+                }
+            }
+        }
+
+        public bool IsDoneNoNotify
+        {
+            set
+            {
+                _isDone = value;
+            }
+        }
+
         public DisplayWorldBoss() {
-            base.PropertyChanged += (sender, e) => {
+            PropertyChanged += (sender, e) => {
                 if(e.PropertyName.Equals("IsDone")) {
                     NotifyPropertyChanged("IsDoneIcon");
                 }
@@ -19,10 +41,10 @@ namespace GuildWars2.Model
                     NotifyPropertyChanged("IsTrackingIcon");
                 }
                 else if(e.PropertyName.Equals("IsDoneIcon")) {
-                    WorldBossDB.Update("IsDone", IsDone, "EventID", EventID);
+                    //WorldBossDB.Update("IsDone", IsDone, "EventID", EventID);
                 }
                 else if(e.PropertyName.Equals("IsTrackingIcon")) {
-                    WorldBossDB.Update("IsTracking", IsTracking, "EventID", EventID);
+                    //WorldBossDB.Update("IsTracking", IsTracking, "EventID", EventID);
                 }
             };
         }
@@ -129,5 +151,13 @@ namespace GuildWars2.Model
         public string NextTimeString => NextTime.ToString(@"hh\:mm");
 
         private TimeSpan Now => new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "") {
+            if(PropertyChanged != null) {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
     }
 }
