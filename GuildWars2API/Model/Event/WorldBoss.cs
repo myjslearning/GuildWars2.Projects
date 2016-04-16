@@ -6,8 +6,8 @@ namespace GuildWars2API.Model.Event
 {
     public class WorldBoss : Event
     {
-        private static TimeSpan DAILY_RESET = new TimeSpan(2, 0, 0);    //2:00am
-        
+        public TimeSpan DailyReset => new TimeSpan(2, 0, 0);
+
         public List<TimeSpan> Times { get; set; }
 
         public int DragoniteLootMinimum { get; set; }
