@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GuildWars2.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="26" d:DesignWidth="450">
     <UserControl.Resources>
         <Storyboard x:Key="ShowNotification">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="TextBlock_Notification">
@@ -22,9 +22,9 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </UserControl.Resources>
-    <Grid Height="30" Background="{DynamicResource AccentColorBrush}" VerticalAlignment="Bottom">
+    <Grid Height="26" Background="{DynamicResource PrimaryHueDarkBrush}" VerticalAlignment="Bottom">
         <Viewbox HorizontalAlignment="Right" VerticalAlignment="Center" >
-            <TextBlock x:Name="TextBlock_Notification" Text="Test notification displayed here" RenderTransformOrigin="0.5,0.5" Margin="3"
+            <TextBlock x:Name="TextBlock_Notification" Text="Test notification displayed here" RenderTransformOrigin="0.5,0.5" Margin="3,3,8,3"
                                Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
                 <TextBlock.RenderTransform>
                     <TransformGroup>
@@ -34,9 +34,6 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </TextBlock.RenderTransform>
-                <TextBlock.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="1" Color="White" />
-                </TextBlock.Effect>
             </TextBlock>
         </Viewbox>
     </Grid>

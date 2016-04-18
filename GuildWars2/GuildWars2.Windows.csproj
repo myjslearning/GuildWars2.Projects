@@ -81,9 +81,6 @@
     <Compile Include="Classes\Palette\SwatchesProvider.cs" />
     <Compile Include="Classes\Collections\PropChangedObservableCollection.cs" />
     <Compile Include="Classes\Collections\WorldBossObservableCollection.cs" />
-    <Compile Include="Controls\CurrentWorldBossControl.xaml.cs">
-      <DependentUpon>CurrentWorldBossControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\MenuItem.xaml.cs">
       <DependentUpon>MenuItem.xaml</DependentUpon>
     </Compile>
@@ -98,6 +95,9 @@
     </Compile>
     <Compile Include="Controls\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WorldBossCard.xaml.cs">
+      <DependentUpon>WorldBossCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\DisplayCharacter.cs" />
     <Compile Include="Model\DisplayItem.cs" />
@@ -115,16 +115,9 @@
     <Compile Include="Windows\Pages\Crafting.xaml.cs">
       <DependentUpon>Crafting.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Pages\WorldBosses.xaml.cs">
-      <DependentUpon>WorldBosses.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\SplashScreen.xaml.cs">
       <DependentUpon>SplashScreen.xaml</DependentUpon>
     </Compile>
-    <Page Include="Controls\CurrentWorldBossControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\MenuItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -142,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WorldBossCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,10 +162,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Pages\WorldBosses.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\SplashScreen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,18 +178,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\Obsolete\menu_gradient.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Obsolete\menu_background.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\Icons\copper_coin.png" />
     <Resource Include="Resources\Images\Icons\gold_coin.png" />
     <Resource Include="Resources\Images\Icons\silver_coin.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Obsolete\menu_selector.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GuildWars2API\GuildWars2.API.csproj">
@@ -207,13 +191,6 @@
       <Project>{1cbe8ea2-e5ff-454f-9af6-365cc15eec31}</Project>
       <Name>GuildWars2.DB</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Obsolete\header_top.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Images\Obsolete\button_exit_hover.png" />
-    <Resource Include="Resources\Images\Obsolete\button_exit.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Icons\check_green.png" />

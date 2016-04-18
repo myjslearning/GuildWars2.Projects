@@ -13,7 +13,7 @@
         <CheckBox Content='"Remember my saved event trackings"' Margin="10,5" />
         <StackPanel Orientation="Horizontal">
             <TextBox x:Name="TextBox_MainGame" Margin="10,10,5,10" Width="345" Height="40" Controls:TextBoxHelper.ClearTextButton="True" Controls:TextBoxHelper.IsWaitingForData="True" VerticalContentAlignment="Center"
-                         Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Guild Wars 2 Application path" Style="{StaticResource MetroTextBox}" />
+                         Controls:TextBoxHelper.UseFloatingWatermark="True" Controls:TextBoxHelper.Watermark="Guild Wars 2 Application path" Style="{StaticResource MetroTextBox}" KeyDown="TextBox_MainGame_KeyDown" />
             <Button Content=". . ." Height="40" Style="{StaticResource MaterialDesignRaisedButton}" Background="{DynamicResource SecondaryAccentBrush}" BorderBrush="{DynamicResource SecondaryAccentBrush}"
                     BorderThickness="1" Click="MainGameButton_Click" Controls:ControlsHelper.ContentCharacterCasing="Normal" Width="55" Foreground="{DynamicResource SecondaryAccentForegroundBrush}"/>
         </StackPanel>

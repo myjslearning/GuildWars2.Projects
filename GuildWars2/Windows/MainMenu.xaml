@@ -72,7 +72,6 @@
                     </Rectangle.OpacityMask>
                 </Rectangle>
             </Controls:Tile>
-            <UserControls:NotificationBar />
         </Grid>
         <Grid Grid.Column="0" Background="{DynamicResource AccentColorBrush}">
             <StackPanel>
@@ -83,5 +82,6 @@
                 <UserControls:MenuItem Margin="6,4,6,4" Text="Event Timers" Icon="{DynamicResource TimerIcon}"/>
             </StackPanel>
         </Grid>
+        <UserControls:NotificationBar Grid.ColumnSpan="2" VerticalAlignment="Bottom" />
     </Grid>
 </Controls:MetroWindow>

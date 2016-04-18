@@ -74,6 +74,10 @@ namespace GuildWars2.Controls
             return null;
         }
 
+        private void TextBox_MainGame_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) {
+            e.Handled = true;
+        }
+
         #endregion Events
     }
 
