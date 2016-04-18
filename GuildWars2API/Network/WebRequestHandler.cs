@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 
@@ -32,7 +31,7 @@ namespace GuildWars2API.Network
                 }
             }
             catch(WebException ex) {
-                Debug.WriteLine(GetWebExDetail(ex));
+                Console.WriteLine(GetWebExDetail(ex));
                 return default(T);
             }
             catch(Exception) {

@@ -48,3 +48,29 @@ namespace GuildWars2API.Network
         }
     }
 }
+
+/*
+ private static string GetResponse(string url, string apiKey = null) {
+            try {
+                using(WebClient client = new WebClient()) {
+                    if(apiKey != null) {
+                        client.Headers.Add("Authorization", $"Bearer {apiKey}");
+                    }
+
+                    Console.WriteLine("[INFO] Loading... " + url);
+                    DateTime start = DateTime.Now;
+
+                    string result = client.DownloadString(url);
+
+                    Console.WriteLine("[INFO] Response Time " + (DateTime.Now - start).TotalSeconds + "sec");
+
+                    return result;
+                }
+            }
+            catch(Exception ex) {
+                Console.WriteLine("[ERROR] " + ex.Message);
+                return string.Empty;
+            }
+        }
+
+    */

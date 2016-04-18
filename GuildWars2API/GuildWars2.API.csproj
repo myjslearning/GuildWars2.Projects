@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Endpoints\AccountAPI.cs" />
+    <Compile Include="Endpoints\GuildAPI.cs" />
     <Compile Include="Endpoints\MarketAPI.cs" />
     <Compile Include="Endpoints\RecipeAPI.cs" />
     <Compile Include="Endpoints\ItemAPI.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Model\Achievements\Tier.cs" />
     <Compile Include="Model\Commerce\GemExchange.cs" />
     <Compile Include="Model\Guild\Emblem.cs" />
+    <Compile Include="Model\Guild\GuildDetails.cs" />
     <Compile Include="Model\Guild\LogEntry.cs" />
     <Compile Include="Model\Guild\Member.cs" />
     <Compile Include="Model\Guild\Permission.cs" />

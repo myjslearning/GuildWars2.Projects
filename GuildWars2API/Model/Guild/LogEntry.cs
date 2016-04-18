@@ -3,7 +3,7 @@ using System;
 
 namespace GuildWars2API.Model.Guild
 {
-    class LogEntry
+    public class LogEntry
     {
         [JsonProperty("id")]
         public int ID { get; set; }
@@ -32,6 +32,9 @@ namespace GuildWars2API.Model.Guild
 
         [JsonProperty("count")]
         public int Count { get; set; }
+
+        [JsonProperty("coins")]
+        public int Coins { get; set; }
 
         [JsonProperty("motd")]
         public string MOTD { get; set; }
