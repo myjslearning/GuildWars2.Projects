@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2.DB", "GuildWars2
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GuildWars2.Web", "GuildWars2.Web\GuildWars2.Web.xproj", "{94C2DD4C-7CBA-429C-A45E-519352EC8B17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuildWars2.Guild", "GuildWars2.Guild\GuildWars2.Guild.csproj", "{8C6912B1-9359-4B6F-8BDD-62C2B4FC0750}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{94C2DD4C-7CBA-429C-A45E-519352EC8B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94C2DD4C-7CBA-429C-A45E-519352EC8B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94C2DD4C-7CBA-429C-A45E-519352EC8B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C6912B1-9359-4B6F-8BDD-62C2B4FC0750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C6912B1-9359-4B6F-8BDD-62C2B4FC0750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C6912B1-9359-4B6F-8BDD-62C2B4FC0750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C6912B1-9359-4B6F-8BDD-62C2B4FC0750}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

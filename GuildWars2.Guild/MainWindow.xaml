@@ -1,0 +1,18 @@
+﻿<Controls:MetroWindow   x:Class="GuildWars2Guild.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="{DynamicResource AccentColorBrush}" BorderThickness="0"
+        WindowStartupLocation="CenterScreen" ShowIconOnTitleBar="True" Title="Guild Wars Vault"
+        Height="576" Width="1024" UseLayoutRounding="True">
+    <Controls:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <Image Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Margin="25,2,6,2" 
+                   Source="/GuildWars2Guild;component\Resources\Images\guild_wars_icon.png"
+                    RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased"/>
+        </DataTemplate>
+    </Controls:MetroWindow.IconTemplate>
+    <Grid>
+        
+    </Grid>
+</Controls:MetroWindow >
