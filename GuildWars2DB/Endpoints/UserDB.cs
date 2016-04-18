@@ -20,3 +20,5 @@ namespace GuildWars2DB.EndPoints
         public static Dictionary<string, string> GetUser(string username) {
             throw new NotImplementedException();
         }
+    }
+}
